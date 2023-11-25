@@ -12,7 +12,7 @@ git push --set-upstream origin master
 git clone https://yourusername:yourpassword@github.com/yourproject.git
 
 wskazanie zdalnego repo gita
-git remote add origin https://github.com/waldiw/dostawca.git
+git remote add origin https://github.com/waldiw/sklep_laravel.git
 zmiana zdalnego repo gita
 git remote set-url origin https://github.com/waldiw/dostawca_laravel.git
 sprawdzenie repo
