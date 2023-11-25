@@ -1,0 +1,22 @@
+inicjalizacja gita na localhost
+git init
+
+git status
+dodajemy do lokalnego repo wszystko
+git add .
+wysyłamy do lokalnego repo z nazwą
+git commit -m "pierwsza zmiana"
+wysyłamy do GitHub lokalne repo
+git push --set-upstream origin master
+
+git clone https://yourusername:yourpassword@github.com/yourproject.git
+
+wskazanie zdalnego repo gita
+git remote add origin https://github.com/waldiw/dostawca.git
+zmiana zdalnego repo gita
+git remote set-url origin https://github.com/waldiw/dostawca_laravel.git
+sprawdzenie repo
+git remote -v
+
+aktualizacja aplikacji na serwerze hosting2355171.online.pro
+git pull

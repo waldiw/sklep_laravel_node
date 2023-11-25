@@ -1,0 +1,16 @@
+<nav class="main-menu">
+    <ul>
+        <li>
+            <a href="#">Zamówienia</a>
+        </li>
+        <li>
+            <a href="#">Artykuły</a>
+        </li>
+        <li>
+            <a href="#">Administracja</a>
+        </li>
+        <li>
+            <a class="koszyk" href="#" onclick="document.getElementById('logout-form').submit();" >{{ __('Logout') }}</a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,13 @@
+kontroler zwraca widok z plikiem config zawierajacym tytuł i url do powrotu:
+admin.adminAdministracja
+
+w pliku dołączamy plik z szablonem okna administartora i przekazujemy zmienne:
+<x-adminContainer :config="$config" :users="$users" />
+
+w pliku adminContainer sprawdzamy w config klucz title i wstawiamy odpowiedni kontener
+@if($config['title'] == 'Administrator dostawy')
+                    <x-adminContainerDostawy :config="$config" :test2="$test2" />
+
+w pliku adminContainerDostawy renderujemy wnętrze ramki z tytułem i linkiem do poprzedniej strony i wylogowania
+
+adminAdministracja->adminContainer(tutaj wybieramy jaki kontener jest w ramce)->np.: adminContainerAdministracja

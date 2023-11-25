@@ -1,0 +1,85 @@
+--------- nowy projekt laravel --------------------
+composer create-project --prefer-dist laravel/laravel blog
+następnie konfiguracja .env
+
+
+
+-----------instalacja logowania -------------------
+composer require laravel/ui
+php artisan ui bootstrap --auth
+npm install
+npm run dev
+---------------------------------------------------
+
+php artisan route:clear
+php artisan route:cache
+
+php artisan migrate
+
+php artisan make:model badania
+
+php artisan make:controller UserController
+
+------------- dodanie admina do bazy -------------------
+w pliku .env dopisujemy dane admina:
+ADMIN_NAME="admin"
+ADMIN_PASSWORD="admin"
+czyścimy cache:
+php artisan cache:clear
+
+w katalogu config tworzymy plik admin.php z loginem i hasłem:
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default admin user
+    |--------------------------------------------------------------------------
+    |
+    | Default user will be created at project installation/deployment
+    |
+    */
+
+    'admin_name' => env('ADMIN_NAME', ''),
+    'admin_password' =>env('ADMIN_PASSWORD', '')
+];
+
+tworzymy seeder do wysłania danych do bazy:
+php artisan make:seeder UsersTableSeeder
+
+w funkcji run() wstawiamy:
+if(config('admin.admin_name')) {
+            User::firstOrCreate(
+                [
+                    'numer' => config('admin.admin_name'),
+                    'role' => UserRole::ADMIN,
+                    'password' => bcrypt(config('admin.admin_password')),
+                ]
+            );
+        }
+
+do database\seeder\DatabaseSeeser.php w funmcji run() dodajemy linię:
+$this->call(UsersTableSeeder::class);
+
+wysyłamy admina do bazy
+php artisan db:seed --force
+
+--------------- dodanie middlewere --------------------------------
+php artisan make:middleware PreventBackHistory
+w dodanym middlewere zmieniamy funkcję handle
+
+dodajemy middlewere do app/http/kernel.php
+'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class
+
+dodajemy utworzonu middlewere do routingów w web.php
+
+-------------------- paginacja kolekcji ---------------------------
+composer require spatie/laravel-collection-macros
+
+
+----------- nieszyfrowane ciasteczka ------------------------------
+w pliku http\Middleware\EncryptCookies.php dodajemy wyjątek nieszyfrowanego ciasteczka
+
+protected $except = [
+        'my_cookie'
+    ];
+}

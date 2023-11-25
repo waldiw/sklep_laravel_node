@@ -1,0 +1,20 @@
+dodajemy migrację wstawiającą role do dazy z użytkownikami:
+php artisan make:migration add_role_column_to_user_table
+w katalogu app dodajemy nowy katalog Enums a w nim klasę UserRole, która przechowuje zdefiniowane role użytkowników
+i zwraca je do migracji, w modelu user dodajemy kolumnę role za kolumną email
+
+w migracji definiujemy dodanie pola role w tabeli User
+
+wykonujemy migrację
+php artisan migrate
+cofnięcie migracji
+php artisan migration:rollback
+
+w pliku app/Providers/AuthServiceProvider definiujemy gate
+Gate::define('isAdministrator', function (User $user) {
+            return $user->role == UserRole::ADMINISTRATOR;
+        });
+
+w web i widokach możemy dodać can:isAdministrator
+
+

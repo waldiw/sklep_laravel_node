@@ -1,0 +1,275 @@
+body {
+    background-image: url(body.gif);
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    /* background: #bd2121 ; */
+
+}
+
+.containerW {
+    width: 80%;
+    border: 1px solid black;
+    margin: auto;
+    min-height: 650px;
+    background-color: white;
+
+}
+
+footer {
+  width: 80%;
+  margin: auto;
+  margin-top: 10px;
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: space-between;
+}
+
+.Cend {
+    justify-content: end;
+}
+
+h1, h2, footer > div > a {
+  color: #00254d !important;
+    text-decoration: none;
+}
+
+footer > div > a:hover {
+    color: silver !important;
+}
+
+.containerWrap {
+  padding: 20px 10% 10px 10%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.wrapW {
+  width: 200px;
+  border: 1px solid rgb(12, 7, 118);
+  margin-bottom: 10px;
+}
+
+.foto, .opisTowaru, .dodaj {
+  text-align: center;
+}
+
+.opisTowaru, .dodaj, .cena {
+  padding: 5px 15px 5px 15px;
+}
+
+.cena {
+  text-align: right;
+  font-weight: bold;
+  color: darkred;
+}
+
+.dodaj {
+  background: #00458e; /* Old browsers */
+  background: -moz-linear-gradient(top,  #00458e 0%,#0056b3 8%,#00254d 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00458e), color-stop(8%,#0056b3), color-stop(100%,#00254d)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #00458e 0%,#0056b3 8%,#00254d 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #00458e 0%,#0056b3 8%,#00254d 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #00458e 0%,#0056b3 8%,#00254d 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #00458e 0%,#0056b3 8%,#00254d 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
+  /* border-radius: 4px; */
+  border: 1px;
+  /* width: 70%; */
+  /* margin: auto; */
+  /* margin-bottom: 5px; */
+  color: white;
+  font-size: 0.8em;
+}
+
+.shadow
+{
+  	position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3);
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3);
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3);
+}
+.shadow:before, .shadow:after
+{
+	content:"";
+    position:absolute;
+    z-index:-1;
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    box-shadow:0 0 20px rgba(0,0,0,0.8);
+    top:10px;
+    bottom:10px;
+    left:0;
+    right:0;
+    -moz-border-radius:100px / 10px;
+    border-radius:100px / 10px;
+}
+.shadow:after
+{
+	right:10px;
+    left:auto;
+    -webkit-transform:skew(8deg) rotate(3deg);
+       -moz-transform:skew(8deg) rotate(3deg);
+        -ms-transform:skew(8deg) rotate(3deg);
+         -o-transform:skew(8deg) rotate(3deg);
+            transform:skew(8deg) rotate(3deg);
+}
+
+/* --------------------- nawigacja ------------------------------- */
+
+
+.navbarW {
+  background: #00458e; /* Old browsers */
+  background: -moz-linear-gradient(top,  #00458e 0%,#0056b3 8%,#00254d 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00458e), color-stop(8%,#0056b3), color-stop(100%,#00254d)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #00458e 0%,#0056b3 8%,#00254d 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #00458e 0%,#0056b3 8%,#00254d 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #00458e 0%,#0056b3 8%,#00254d 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #00458e 0%,#0056b3 8%,#00254d 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
+  border-radius: 0px;
+  border: 0px;
+  /* margin-bottom: 0px; */
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: -4px;
+  position: -webkit-sticky;
+  position: sticky;
+
+}
+
+.main-menu {
+    height: 40px;
+}
+
+.main-menu > ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: start;
+    padding: 0px;
+    margin: 0px;
+    height: 40px !important;
+}
+
+.main-menu > ul > li > a {
+    color: white !important;
+    text-decoration: none !important;
+    padding: 5px 15px;
+    display: inline-block;
+    height: 40px;
+}
+
+.main-menu > ul > li > a:hover {
+    color: silver !important;
+    background-color: midnightblue;
+    height: 40px;
+}
+
+div.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 5px;
+
+
+}
+
+.koszyk {
+   /*color: white !important;*/
+  padding-right: 5%;
+  /* margin: 3px; */
+}
+
+.koszyk > a, .dodaj > a {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.koszyk > a:hover, .dodaj > a:hover {
+  color: silver !important;
+
+}
+
+.opis {
+  text-align: justify;
+  padding: 20px 10% 10px 10%;
+}
+/* .navbar-default .navbar-nav > li > a {
+  color: white;
+}
+
+.navbar li a:hover {
+  color: black;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover {
+  color: #79c3ff;
+  background: transparent;
+}
+.affix {
+  top:0;
+  width: 100%;
+  z-index: 9999 !important;
+}
+
+.affix ~ .container-fluid {
+  position: relative;
+  top: 50px;
+} */
+/*
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+color: #FF0000;  /*kolor po najechaniu*/
+
+
+/* ----------- end nawigacja ------------------- */
+
+/* ------------- formularz logowania -----------*/
+input {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(20, 0, 153, 0.637);
+    border-radius: 0.25rem;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+    padding: 5px 10px;
+    margin: 1px 0 8px;
+}
+
+input:focus {
+    box-shadow: 0 0 2px rgba(20, 0, 153, 0.5);
+}
+.error {
+    border-color: red !important;
+}
+/*input::before {*/
+/*    background-color: yellow;*/
+/*}*/
+
+/*---------------------------------------*/
+
+.p20 {
+    padding-top: 20px;
+}
+
+.pb20 {
+    padding-bottom: 20px;
+}
+
+.responsive {
+    max-width: 100%;
+    height: auto;
+  }
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+      .container {
+        width: 90%;
+       }
+
+       footer {
+        display: block;
+       }
+    }
