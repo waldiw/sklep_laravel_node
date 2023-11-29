@@ -1,0 +1,11 @@
+php artisan make:migration create_article_table
+
+php artisan migrate
+
+php artisan migrate:rollback
+
+ $table->string('name');
+ $table->text('description');
+ $table->integer('price');
+
+ $table->text('description')->nullable()->default('tekst');

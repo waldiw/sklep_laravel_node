@@ -4,7 +4,7 @@
             <a href="#">Zamówienia</a>
         </li>
         <li>
-            <a href="#">Artykuły</a>
+            <a href="{{ route('articles') }}">Artykuły</a>
         </li>
         <li>
             <a href="#">Administracja</a>
