@@ -20,3 +20,6 @@ git remote -v
 
 aktualizacja aplikacji na serwerze hosting2355171.online.pro
 git pull
+
+przed pobraniem wersji z gta bez łączenia
+git reset --hard
