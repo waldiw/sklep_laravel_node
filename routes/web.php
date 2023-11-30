@@ -34,6 +34,8 @@ Route::post('/loginPanel', [App\Http\Controllers\Auth\LoginController::class, 'l
 Route::middleware(['can:isAdministrator'])->group(function() {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/artykuły', [ArticleController::class, 'index'])->name('articles');
+    Route::get('/dodaj', [ArticleController::class, 'create'])->name('createArticles');
+    Route::post('/dodaj', [ArticleController::class, 'store']);
 });
 
 

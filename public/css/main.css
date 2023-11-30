@@ -82,6 +82,56 @@ footer > div > a:hover {
   font-size: 0.8em;
 }
 
+/*-------- button dodania artykułu ---------*/
+.addArticle {
+  display: flex;
+  justify-content: flex-end;
+}
+.addArticle > .dodaj {
+  width: 130px;
+}
+
+/*-------- formularz dodania artykułu ---------*/
+.article {
+  width: 70%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.articleFormLabel {
+  margin-top: 10px;
+}
+
+.btnAddArticle {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btnDodaj {
+   border: 1px;
+  /* width: 70%; */
+  /* margin: auto; */
+  /* margin-bottom: 5px; */
+  color: white;
+  font-size: 0.8em;
+  background-color: #00254d;
+  height: 30px;
+}
+
+.btnDodaj:hover {
+  color: silver;
+  background-color: midnightblue;
+  /* height: 40px; */
+}
+
+.articleContent {
+  /* margin-top: 20px; */
+  width: 100%;
+
+}
+
+/*----------------------------------------------*/
 .shadow
 {
   	position:relative;
@@ -226,7 +276,7 @@ color: #FF0000;  /*kolor po najechaniu*/
 /* ----------- end nawigacja ------------------- */
 
 /* ------------- formularz logowania -----------*/
-input {
+input, textarea {
     width: 100%;
     box-sizing: border-box;
     border: 1px solid rgba(20, 0, 153, 0.637);
@@ -238,8 +288,8 @@ input {
     margin: 1px 0 8px;
 }
 
-input:focus {
-    box-shadow: 0 0 2px rgba(20, 0, 153, 0.5);
+input:focus, textarea:focus {
+    box-shadow: 0 0 3px rgba(20, 0, 153, 0.5);
 }
 .error {
     border-color: red !important;

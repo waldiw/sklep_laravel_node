@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Article;
 
 class ArticleController extends Controller
 {
@@ -18,7 +19,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('articles');
+        $articles = Article::all();
+        // $articles = Article::orderBy('nazwa', 'desc')->get(); // pobieranie wszystkich artukułow posortowanyc wg nazwy , dokumentacja - Database: Query Builder   
+        return view('articles', compact('articles'));
     }
 
     /**
@@ -26,7 +29,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.create');
     }
 
     /**
@@ -34,7 +37,19 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        $data = $request->validate([
+             'name' => 'required|max:255',
+             'description' => 'required',
+             'price' => 'required',   
+             'image' => 'nullable'
+        ]);
+        //$data['price'] = '1111';
+        $temp = preg_replace("~\D~", "", $data['price'] ); // usuwa zestringa wszystko co nie jest cyrą - czyli precinek z ceny
+        $data['price'] = $temp;
+
+        //dd($data);
+        $article = Article::create($data);
     }
 
     /**
