@@ -8,6 +8,7 @@
         <h3>Brak artykułów</h3>
     @endif
     <div class="addArticle">
-        <div class="dodaj"><a href="{{ route('createArticles') }}">Nowy artykuł</a></div>
+        <button class="btnDodaj" onclick="window.location.href='{{ route('createArticles') }}';">Nowy artykuł</a></button>
     </div>
+    
 @endsection

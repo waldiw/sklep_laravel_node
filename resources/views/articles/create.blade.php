@@ -5,8 +5,8 @@
     <div class="article">
     <form method="post" action="{{ route('createArticles') }}">
     @csrf
-        <div class="">
-            <input type="text" name="name" placeholder="Nazwa artykułu">
+        <div class="form-field">
+            <input class="form-field{{ $errors->has('title') ? ' is-invalid' : '' }}" type="text" name="name" placeholder="Nazwa artykułu">
         </div>
         
         <div class="">

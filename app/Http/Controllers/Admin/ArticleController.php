@@ -50,6 +50,10 @@ class ArticleController extends Controller
 
         //dd($data);
         $article = Article::create($data);
+
+        session()->flash('message', 'Artykuł został dodany do bazy');
+
+        return redirect(route('articles'));
     }
 
     /**

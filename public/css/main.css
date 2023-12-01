@@ -120,8 +120,8 @@ footer > div > a:hover {
 }
 
 .btnDodaj:hover {
-  color: silver;
-  background-color: midnightblue;
+  /* color: silver; */
+  background: #0056b3;
   /* height: 40px; */
 }
 
@@ -129,6 +129,36 @@ footer > div > a:hover {
   /* margin-top: 20px; */
   width: 100%;
 
+}
+
+::file-selector-button {
+  background: #00254d;
+  color: white;
+  /* border: 1px solid orangered; */
+  /* border-radius: 1px; */
+  border: none;
+  padding: 0px 10px;
+  height: 100%;
+}
+
+::file-selector-button:hover {
+  cursor: pointer;
+  background: #0056b3;
+
+}
+
+input[type=file] {
+  /* border: 1px solid orangered; */
+  color: rgb(124, 115, 111);
+  border-radius: 5px;
+  height: 36px;
+  /* font-size: 120%; */
+  text-transform: lowercase;
+  padding: 0px;
+}
+
+input[type=file]:hover {
+  cursor: pointer;
 }
 
 /*----------------------------------------------*/
@@ -212,8 +242,8 @@ footer > div > a:hover {
 }
 
 .main-menu > ul > li > a:hover {
-    color: silver !important;
-    background-color: midnightblue;
+    /* color: silver !important; */
+    background: #0056b3;
     height: 40px;
 }
 
@@ -232,7 +262,7 @@ div.sticky {
   /* margin: 3px; */
 }
 
-.koszyk > a, .dodaj > a {
+.koszyk > a, .dodaj > a, .addArticle > a {
   color: white !important;
   text-decoration: none !important;
 }
