@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>E-sklep</title>
+    <title>@yield('title', 'E-sklep')</title>
     {{--        <link rel="stylesheet" href="css\main.css">--}}
     <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css" >
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,6 +23,7 @@
 {{--    @vite(['resources/sass/app.scss', 'resources/js/app.js'])--}}
 </head>
 <body>
+@include('Components.message')
 <div class="containerW shadow">
     <!-- <div class="image"> -->
     <img src="img/baner1.jpg" alt="Nature" class="responsive">

@@ -1,14 +1,17 @@
 @extends('layouts.app')
 
+@section('title', 'E-sklep Administracja')
+
+{{--@php dd($errors) @endphp--}}
 @section('content')
     <h2>Dodaj artykuł:</h2>
     <div class="article">
     <form method="post" action="{{ route('createArticles') }}">
     @csrf
         <div class="form-field">
-            <input class="form-field{{ $errors->has('title') ? ' is-invalid' : '' }}" type="text" name="name" placeholder="Nazwa artykułu">
+            <input class="form-field @error('name') is-invalid error @enderror" value="{{ old('name') }}" type="text" name="name" placeholder="Nazwa artykułu">
         </div>
-        
+
         <div class="">
             <label class="articleFormLabel">Obraz:</label>
             <input type="file" name="image">
