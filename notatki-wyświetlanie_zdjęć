@@ -1,0 +1,25 @@
+w .env dodajemy
+
+FILESYSTEM_DRIVER=public
+
+w kontrolerze ArticleController dodajemy w metodzie store
+
+if(isset($data['image'])) {
+            $path = $request->file('image')->store('photos');
+            $data['image'] = $path;
+        }
+
+w modelu Article dodajemy
+
+// pobieranie linka do zdjęcia - w widoku dzięki getPhotoAtribute pobieramy zdjęcie $article->photos
+    public function getPhotoAttribute()
+    {
+        return Str::startsWith($this->image, 'http') ? $this->image : Storage::url($this->image);
+        //return Storage::url($this->image);
+    }
+
+
+
+konfigurujemy na serweze katalog do przechowywania zdjęć
+
+php artisan storage:link

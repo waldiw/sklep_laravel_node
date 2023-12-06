@@ -82,4 +82,11 @@ w pliku http\Middleware\EncryptCookies.php dodajemy wyjątek nieszyfrowanego cia
 protected $except = [
         'my_cookie'
     ];
-}
+
+
+------------ dodanie języka polskiego ----------------------------
+lokalizacja pl: https://laravel-lang.com/installation/
+composer require laravel-lang/common --dev
+php artisan lang:add pl
+php artisan lang:update
+sprawdzić klucz locale w pliku config/app.php

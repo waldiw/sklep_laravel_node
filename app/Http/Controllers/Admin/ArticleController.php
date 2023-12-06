@@ -42,12 +42,16 @@ class ArticleController extends Controller
              'name' => 'required|max:255',
              'description' => 'required',
              'price' => 'required',   
-             'image' => 'nullable'
+             'image' => 'nullable|image|max:1024'
         ]);
         //$data['price'] = '1111';
-        $temp = preg_replace("~\D~", "", $data['price'] ); // usuwa zestringa wszystko co nie jest cyrą - czyli precinek z ceny
+        $temp = preg_replace("~\D~", "", $data['price'] ); // usuwa ze stringa wszystko co nie jest cyrą - czyli precinek z ceny
         $data['price'] = $temp;
 
+        if(isset($data['image'])) {
+            $path = $request->file('image')->store('photos');
+            $data['image'] = $path;
+        }
         //dd($data);
         $article = Article::create($data);
 
