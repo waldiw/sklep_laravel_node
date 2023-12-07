@@ -41,20 +41,31 @@ footer > div > a:hover {
   padding: 20px 10% 10px 10%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
 }
+
+/* .containerWrap::after {
+  
+  content: '';
+  flex: auto;
+  } */
 
 .wrapW {
   width: 200px;
   border: 1px solid rgb(12, 7, 118);
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
+  margin: 10px;
 }
 
-.foto, .opisTowaru, .dodaj {
+.foto, .nazwaTowaru, .dodaj {
   text-align: center;
 }
 
-.opisTowaru, .dodaj, .cena {
+.opisTowaru {
+  text-align: justify;
+}
+
+.nazwaTowaru, .opisTowaru, .dodaj, .cena {
   padding: 5px 15px 5px 15px;
 }
 

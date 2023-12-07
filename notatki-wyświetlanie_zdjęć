@@ -1,3 +1,14 @@
+w pliku hosts 
+127.0.0.1 e-sklep.test
+
+startowanie serwera artisan
+php artisan serve --host=e-sklep.test
+
+w .env
+APP_URL=http://e-sklep.test:8000
+
+
+
 w .env dodajemy
 
 FILESYSTEM_DRIVER=public
