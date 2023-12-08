@@ -36,6 +36,7 @@ Route::middleware(['can:isAdministrator'])->group(function() {
     Route::get('/artykuły', [ArticleController::class, 'index'])->name('articles');
     Route::get('/dodaj', [ArticleController::class, 'create'])->name('createArticles');
     Route::post('/dodaj', [ArticleController::class, 'store']);
+    Route::get('/zmień/{id}', [ArticleController::class, 'edit'])->name('editArticle');
 });
 
 

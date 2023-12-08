@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Rules\Price;
 
 class ArticleController extends Controller
 {
@@ -41,7 +42,7 @@ class ArticleController extends Controller
         $data = $request->validate([
              'name' => 'required|max:255',
              'description' => 'required',
-             'price' => 'required',   
+             'price' => ['required', new Price],   
              'image' => 'nullable|image|max:1024'
         ]);
         //$data['price'] = '1111';
@@ -73,7 +74,9 @@ class ArticleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $article = Article::findOrFail($id);
+
+        return view('articles.edit', compact('article'));
     }
 
     /**

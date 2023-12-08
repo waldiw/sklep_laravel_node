@@ -102,6 +102,19 @@ footer > div > a:hover {
   width: 130px;
 }
 
+/*---------- strona z artykułami ------------*/
+.containerButton {
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+  
+}
+
+.buttonA {
+  width: 45%;
+  margin: 0px 2px 0px 2px;
+}
+
 /*-------- formularz dodania artykułu ---------*/
 .article {
   width: 70%;

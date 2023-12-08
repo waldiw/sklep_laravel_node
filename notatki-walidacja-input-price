@@ -1,0 +1,20 @@
+sprawdzanie, czy srting ma format np $str = 123,30
+
+if (preg_match('#^\d+(?:\,\d{2})?$#', $str))
+
+dodanie nowej walidacji:
+
+php artisan make:rule Price
+
+tworzy się nowy plik w : app/Rules/Price.php
+
+w nim dodajemy warunek do sprawdzenia i podajemy komunikat w razie błędu, np.:
+
+$temp = preg_match('#^\d+(?:\,\d{2})?$#', $value);
+    if($temp == 0) {
+        $fail(':attribute musi mieć postać np.: 20,00');
+    }
+
+w kontrolerze ArticleController.php w walidacji zapisywanych danych dodajemy nasz warunek:
+
+'price' => ['required', new Price],

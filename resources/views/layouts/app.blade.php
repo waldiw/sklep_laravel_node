@@ -26,7 +26,7 @@
 @include('Components.message')
 <div class="containerW shadow">
     <!-- <div class="image"> -->
-    <img src="img/baner1.jpg" alt="Nature" class="responsive">
+    <img src=" {{asset('img/baner1.jpg') }}" alt="Nature" class="responsive">
     <!-- </div> -->
     <div class="navbarW sticky">
         @auth

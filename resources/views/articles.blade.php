@@ -13,9 +13,14 @@
                     <div class="foto"><img src="{{ $article->photo }}" alt="Cukierki" class="responsive"></div>
                     {{--  <div class="opisTowaru">{{ $article->description }}</div>  --}}
                     <div class="cena">Cena: {{ number_format($article->price / 100, 2, ',', ' ') }} zł</div>
-                    {{--  <div class="dodaj"><a href="#">Dodaj do koszyka</a>&nbsp;
-                        <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
-                    </div>  --}}
+                    <div class="containerButton">
+                        <div class="dodaj buttonA"><a href="{{ Route('editArticle', $article->id) }}">Edycja</a>&nbsp;
+                            <i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
+                        </div>
+                        <div class="dodaj buttonA"><a href="{{ Route('editArticle', $article->id) }}">Usuń</a>&nbsp;
+                            <i class="fa-regular fa-trash-can" style="color: #ffffff;"></i>
+                        </div>
+                    </div>
                 </div>
 
             @endforeach
