@@ -20,6 +20,13 @@ php artisan make:model badania
 
 php artisan make:controller UserController
 
+----------- przekierowanie na stronę logowania ---------
+przy próbie przejścia do strony tylko dla zalogowanych użytkowników przekierowujemy do strony logowania
+dostosowujemy app/Http/Middleware/Authenticate.php
+
+return $request->expectsJson() ? null : route('login');
+
+
 ------------- dodanie admina do bazy -------------------
 w pliku .env dopisujemy dane admina:
 ADMIN_NAME="admin"

@@ -45,7 +45,7 @@ footer > div > a:hover {
 }
 
 /* .containerWrap::after {
-  
+
   content: '';
   flex: auto;
   } */
@@ -107,12 +107,12 @@ footer > div > a:hover {
   display: flex;
   /* flex-wrap: wrap; */
   justify-content: center;
-  
+
 }
 
 .buttonA {
-  width: 45%;
-  margin: 0px 2px 0px 2px;
+  width: 80px;
+  margin: 0px 5px 0px 5px;
 }
 
 /*-------- formularz dodania artykułu ---------*/
@@ -147,6 +147,18 @@ footer > div > a:hover {
   /* color: silver; */
   background: #0056b3;
   /* height: 40px; */
+}
+
+.btnDelete {
+    border: 1px;
+    color: white;
+    font-size: 0.8em;
+    background-color: #be0024;
+    height: 30px;
+}
+
+.btnDelete:hover {
+    background: #fc0028;
 }
 
 .articleContent {
