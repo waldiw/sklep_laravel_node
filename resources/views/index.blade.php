@@ -11,10 +11,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    {{--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>  --}}
 
     <script src="https://kit.fontawesome.com/9449ff78fb.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
 </head>
@@ -47,13 +48,19 @@
             @foreach($articles as $article)
                 {{--  <img src="{{ $article->photo }}" alt="">  --}}
                 <div class="wrapW articleDetails">
-                    <div class="nazwaTowaru">{{ $article->name }}</div>
-                    <div class="foto"><img src="{{ $article->photo }}" alt="Cukierki" class="responsive"></div>
-                    {{--  <div class="opisTowaru">{{ $article->description }}</div>  --}}
-                    <div class="cena">Cena: {{ number_format($article->price / 100, 2, ',', ' ') }} zł</div>
-                    {{--  <div class="dodaj"><a href="#">Dodaj do koszyka</a>&nbsp;
-                        <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
-                    </div>  --}}
+                    <div id="{{ $article->id }}" onClick="clickArt('{{ route('showArticle', $article->id) }}')">
+
+
+                        <div class="nazwaTowaru">{{ $article->name }}</div>
+                        <div class="foto"><img src="{{ $article->photo }}" alt="Cukierki" class="responsive"></div>
+                        {{--  <div class="opisTowaru">{{ $article->description }}</div>  --}}
+                        <div class="cena">Cena: {{ number_format($article->price / 100, 2, ',', ' ') }} zł</div>
+                        {{--  <div class="dodaj"><a href="#">Dodaj do koszyka</a>&nbsp;
+                            <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
+                        </div>  --}}
+
+
+                    </div>
                     <button class="btnAddCart" onclick="window.location.href='';">Dodaj do koszyka <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></button>
                     {{--  <div class="containerButton">
                         
@@ -88,6 +95,7 @@
 </div>
 
 
+
 <footer>
     <div>
         <a href="https://osmolecko.pl">O nas</a>&nbsp;
@@ -99,6 +107,78 @@
 </footer>
 <br>
 
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modalHeader">
+        <div id="modalPhoto" class="modalPhoto"></div>
+        <span class="close">&times;</span>
+    </div>
+    <p id="articleId"></p>
+
+  </div>
+
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("articleBtn");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    {{--  btn.onclick = function() {
+      modal.style.display = "block";
+    }  --}}
+            {{--  var el_up = document.getElementById("GFG_UP");
+            var el_down = document.getElementById("GFG_DOWN");
+            el_up.innerHTML = "Click on button to get ID";  --}}
+            
+            var idArt = document.getElementById("articleId");
+            var photo = document.getElementById('modalPhoto');
+            //var userURL = "{{ route('showArticle', 8) }}";
+            
+            function clickArt(userURL) {
+                
+                $.get(userURL, function (dane) {
+                    //document.getElementById("dateDelete").value = dane.id;
+                    //document.getElementById("dat").value = dane.numer;
+                    console.log(dane);
+                    idArt.innerHTML = dane.id + " " + dane.name;
+                    photo.innerHTML = "<img src=\"" + dane.image + "\">";
+                    modal.style.display = "block";
+                })
+    
+                
+                //idArt.innerHTML = userURL;
+                //photo.innerHTML = "<img src=\"{{ $articles->find(8)->image }}\">";
+                //photo.innerHTML = "<img src=\""+clicked+"\">";
+    
+            }        
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+      idArt.innerHTML = "";
+      photo.innerHTML = "";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+        photo.innerHTML = "";
+      }
+    }
+    
+    </script>
 
 </body>
 

@@ -13,7 +13,7 @@ class ArticleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['show']);
 //        $this->middleware('can:isAdministrator');
     }
 
@@ -82,7 +82,17 @@ class ArticleController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $article = Article::findOrFail($id);
+
+        // if(isset($article['image'])) {
+        //     $path = $request->file('image')->store('photos');
+        //     $article['image'] = $path;
+        // }
+        $path = '/storage/' . $article['image'];
+        $article['image'] = $path;
+        
+        return response()->json($article);
+        //return $path;;
     }
 
     /**
@@ -106,6 +116,11 @@ class ArticleController extends Controller
 
         $temp = preg_replace("~\D~", "", $data['price'] ); // usuwa ze stringa wszystko co nie jest cyrą - czyli precinek z ceny
         $data['price'] = $temp;
+
+        if(isset($data['image'])) {
+            $path = $request->file('image')->store('photos');
+            $data['image'] = $path;
+        }
 
         $article->update($data);
 
