@@ -76,6 +76,7 @@ footer > div > a:hover {
 .btnAddCart:hover {
   /* color: silver; */
   background: #0056b3;
+  cursor: pointer;
   /* height: 40px; */
 }
 
@@ -459,12 +460,17 @@ input:focus, textarea:focus {
 }
 
 /* Modal Content */
-.modal-content {
+.modalContent {
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
   width: 30%;
+}
+
+.modalBody {
+  padding: 0% 10% 0% 10%;
+  text-align: justify;
 }
 
 /* The Close Button */
@@ -485,7 +491,12 @@ input:focus, textarea:focus {
 .modalPhoto {
   margin-top: -40px;
   margin-left: -40px;
+  
+}
 
+.modalImg {
+  /* box-shadow: 0 -5px 3px -3px black, 0 5px 3px -3px black; */
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.8);
 }
 
 .modalHeader {
@@ -493,7 +504,10 @@ input:focus, textarea:focus {
   justify-content: space-between;
 }
 
-
+.modalFooter {
+  width: 50%;
+  margin: auto;
+}
 @keyframes appear {
   0%{
     opacity: 0;
@@ -533,5 +547,9 @@ input:focus, textarea:focus {
 
        footer {
         display: block;
+       }
+
+       .modalContent {
+        width: 80%;
        }
     }

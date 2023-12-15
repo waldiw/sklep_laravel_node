@@ -82,17 +82,7 @@ class ArticleController extends Controller
      */
     public function show(string $id)
     {
-        $article = Article::findOrFail($id);
-
-        // if(isset($article['image'])) {
-        //     $path = $request->file('image')->store('photos');
-        //     $article['image'] = $path;
-        // }
-        $path = '/storage/' . $article['image'];
-        $article['image'] = $path;
-        
-        return response()->json($article);
-        //return $path;;
+      
     }
 
     /**

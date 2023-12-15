@@ -112,12 +112,20 @@
 <div id="myModal" class="modal">
     
   <!-- Modal content -->
-  <div class="modal-content">
+  <div class="modalContent">
     <div class="modalHeader">
         <div id="modalPhoto" class="modalPhoto"></div>
+        <div id="articleName"></div>
         <span class="close">&times;</span>
     </div>
-    <p id="articleId"></p>
+    <div class="modalBody">
+        <p id="articleDescription"></p>
+        <div id="articlePrice" class="cena"></div>
+    </div>
+    <div class="modalFooter">
+        <button class="btnAddCart" onclick="window.location.href='';">Dodaj do koszyka <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></button>
+
+    </div>
 
   </div>
 
@@ -141,18 +149,22 @@
             var el_down = document.getElementById("GFG_DOWN");
             el_up.innerHTML = "Click on button to get ID";  --}}
             
-            var idArt = document.getElementById("articleId");
+            var art = document.getElementById('articleDescription');
             var photo = document.getElementById('modalPhoto');
+            var artN = document.getElementById('articleName');
+            var artP = document.getElementById('articlePrice');
             //var userURL = "{{ route('showArticle', 8) }}";
             
             function clickArt(userURL) {
                 
                 $.get(userURL, function (dane) {
-                    //document.getElementById("dateDelete").value = dane.id;
-                    //document.getElementById("dat").value = dane.numer;
-                    console.log(dane);
-                    idArt.innerHTML = dane.id + " " + dane.name;
-                    photo.innerHTML = "<img src=\"" + dane.image + "\">";
+                    //console.log(dane);
+                    artN.innerHTML = dane.name;
+                    art.innerHTML = dane.description;
+                    var price = (dane.price / 100).toLocaleString('pl-PL', {minimumFractionDigits: 2});
+                    //console.log(plPrice);
+                    artP.innerHTML = "Cena: " + price + " zł";
+                    photo.innerHTML = "<img src=\"" + dane.image + "\" class=\"modalImg\">";
                     modal.style.display = "block";
                 })
     
@@ -166,15 +178,14 @@
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
       modal.style.display = "none";
-      idArt.innerHTML = "";
-      photo.innerHTML = "";
+      
     }
     
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
       if (event.target == modal) {
         modal.style.display = "none";
-        photo.innerHTML = "";
+        
       }
     }
     

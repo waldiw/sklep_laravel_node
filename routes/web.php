@@ -30,7 +30,7 @@ Auth::routes([
 
 Route::get('/loginPanel', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/loginPanel', [App\Http\Controllers\Auth\LoginController::class, 'login']);
-Route::get('/showArticle/{id}', [ArticleController::class, 'show'])->name('showArticle');
+Route::get('/showArticle/{id}', [ShopController::class, 'show'])->name('showArticle');
 
 Route::middleware(['auth'])->group(function() {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
