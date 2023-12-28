@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-sklep</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 {{--        <link rel="stylesheet" href="css\main.css">--}}
     <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css" >
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,9 +62,9 @@
 
 
                     </div>
-                    <button class="btnAddCart" onclick="window.location.href='';">Dodaj do koszyka <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></button>
+                    <button class="btnAddCart" onclick="">Dodaj do koszyka <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></button>
                     {{--  <div class="containerButton">
-                        
+
                         <button class="btnDodaj buttonA" onclick="window.location.href='{{ route('editArticle', $article->id) }}';">Edytuj <i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i></button>
                         <form method="post" action="{{ Route('deleteArticle', $article->id) }}">
                             @csrf
@@ -90,7 +91,7 @@
             </div>
         </div>  --}}
 
- 
+
     </div>
 </div>
 
@@ -110,7 +111,7 @@
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
-    
+
   <!-- Modal content -->
   <div class="modalContent">
     <div class="modalHeader">
@@ -134,29 +135,28 @@
 <script>
     // Get the modal
     var modal = document.getElementById("myModal");
-    
+
     // Get the button that opens the modal
     var btn = document.getElementById("articleBtn");
-    
+
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
-    
-    // When the user clicks the button, open the modal 
+
+    // When the user clicks the button, open the modal
     {{--  btn.onclick = function() {
       modal.style.display = "block";
     }  --}}
             {{--  var el_up = document.getElementById("GFG_UP");
             var el_down = document.getElementById("GFG_DOWN");
             el_up.innerHTML = "Click on button to get ID";  --}}
-            
+
             var art = document.getElementById('articleDescription');
             var photo = document.getElementById('modalPhoto');
             var artN = document.getElementById('articleName');
             var artP = document.getElementById('articlePrice');
-            //var userURL = "{{ route('showArticle', 8) }}";
-            
+
             function clickArt(userURL) {
-                
+
                 $.get(userURL, function (dane) {
                     //console.log(dane);
                     artN.innerHTML = dane.name;
@@ -167,28 +167,24 @@
                     photo.innerHTML = "<img src=\"" + dane.image + "\" class=\"modalImg\">";
                     modal.style.display = "block";
                 })
-    
-                
-                //idArt.innerHTML = userURL;
-                //photo.innerHTML = "<img src=\"{{ $articles->find(8)->image }}\">";
-                //photo.innerHTML = "<img src=\""+clicked+"\">";
-    
-            }        
-    
+            }
+
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
       modal.style.display = "none";
-      
+
     }
-    
+
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
-      if (event.target == modal) {
+      if (event.target === modal) {
         modal.style.display = "none";
-        
+
       }
     }
-    
+
+    // click button add to cart
+
     </script>
 
 </body>
