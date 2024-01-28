@@ -18,12 +18,12 @@
         </div>
 
         <div class="">
-        <label class="articleFormLabel">Opis:</label>
-            <textarea class="articleContent @error('description') is-invalid error @enderror" name="description" placeholder="Opis">{{ old('description') }}</textarea>
+        <label for="articleContent" class="articleFormLabel">Opis:</label>
+            <textarea id="articleContent" class="articleContent @error('description') is-invalid error @enderror" name="description" placeholder="Opis">{{ old('description') }}</textarea>
         </div>
         <div class="">
-        <label class="articleFormLabel">Cena zł:</label>
-            <input class="@error('price') is-invalid error @enderror" value="{{ old('price') }}" type="text" name="price" placeholder="00,00">
+        <label for="price" class="articleFormLabel">Cena zł:</label>
+            <input id="price" class="@error('price') is-invalid error @enderror" value="{{ old('price') }}" type="text" name="price" placeholder="00,00">
         </div>
         <div class="btnAddArticle">
             <button type="submit" class="btnDodaj">Dodaj artykuł <i class="fa-regular fa-square-plus" style="color: #ffffff;"></i></button>

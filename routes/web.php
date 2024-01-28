@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +21,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ShopController::class, 'index'])->name('shop');
 
+Route::post('/add-to-cart',[CartController::class, 'addToCart'])->name('dodaj');
+Route::get('/load-cart-data',[CartController::class, 'cartLoadByAjax']);
+Route::get('/cart',[CartController::class, 'index'])->name('cart');
+Route::post('/update-cart',[CartController::class, 'updateCart'])->name('update');
+Route::post('/delete-cart',[CartController::class, 'deleteFromCart'])->name('delete');
+Route::post('/clear-cart',[CartController::class, 'clearCart'])->name('clear');
+
+Route::get('/zamówienie',[OrderController::class, 'index'])->name('order');
+Route::post('/zamówienie',[OrderController::class, 'order']);
+Route::get('/podsumowanie',[OrderController::class, 'summary'])->name('summary');
 
 Auth::routes([
     'login' => false,
@@ -34,6 +46,8 @@ Route::get('/showArticle/{id}', [ShopController::class, 'show'])->name('showArti
 
 Route::middleware(['auth'])->group(function() {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/administracja', [HomeController::class, 'admin'])->name('admin');
+    Route::put('/administracja/{id}', [HomeController::class, 'update'])->name('adminUpdate');
     Route::get('/artykuły', [ArticleController::class, 'index'])->name('articles');
     Route::get('/dodaj', [ArticleController::class, 'create'])->name('createArticle');
     Route::post('/dodaj', [ArticleController::class, 'store']);
@@ -41,7 +55,7 @@ Route::middleware(['auth'])->group(function() {
     Route::put('/zmień/{id}', [ArticleController::class, 'update']);
     Route::delete('/usuń/{id}', [ArticleController::class, 'destroy'])->name('deleteArticle');
     Route::middleware(['can:isAdministrator'])->group(function () {
-        Route::get('/sadmin', [AdminController::class, 'index'])->name('admin');
+        Route::get('/sadmin', [AdminController::class, 'index'])->name('sadmin');
     });
 //    Route::get('/dodaj', [ArticleController::class, 'create'])->name('createArticle')->middleware('can:isOperator');
 });

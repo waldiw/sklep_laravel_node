@@ -1,0 +1,38 @@
+tworzymy plik helpers.php w katalogu app
+
+w pliku dodajemy nasze funkcje, np:
+
+function allUpper($str){
+    return strtoupper($str);
+  }
+
+w pliku compser.json wstawiamy odniesienie do pliku helpers.php:
+
+"autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        },
+           "files": [
+
+            "app/helpers.php"
+
+        ]
+    },
+
+przeładowujemy compsera:
+
+composer dump-autoload
+
+użycie funkcji z helpers w kontrolerze:
+
+public function index()
+    {
+        $data['title'] = toUpper('Title');
+        return view('view', $data);
+    }
+
+użycie funkcji z helpers w widoku blade:
+
+<h2><?php echo allUpper('I am from tutsmake.com') ?></h2>

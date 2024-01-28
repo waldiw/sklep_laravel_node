@@ -23,7 +23,7 @@ class Article extends Model
         'image',
     ];
 
-    // pobieranie linka do zdjęcia - w widoku dzięki getPhotoAtribute pobieramy zdjęcie $article->photos
+    // pobieranie linka do zdjęcia - w widoku dzięki getPhotoAtribute pobieramy zdjęcie $article->photo
     public function getPhotoAttribute()
     {
         return Str::startsWith($this->image, 'http') ? $this->image : Storage::url($this->image);

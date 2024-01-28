@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
+use App\Models\Parameters;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
@@ -11,26 +13,12 @@ class CartController extends Controller
 {
     public function index()
     {
-        $cart = [];
 
-        if (Cookie::get('shopping_cart'))
-        {
-            $cookieData = stripslashes(Cookie::get('shopping_cart'));
-            $cartData = json_decode($cookieData, true);
-
-            foreach ($cartData as $key => $value)
-            {
-                $a = [
-                    'articleId' => $key,
-                    'quantity' => $value
-                ];
-                array_push($cart, $a);
-            }
-        }
-        return view('index')->with('cart_data',$cart);
+        $cart = cart(); // cart() funkcja z helpers.php
+        return view('cart')->with('cart_data', $cart);
     }
 
-    public function addtocart(Request $request)
+    public function addToCart(Request $request)
     {
 
         $prodId = $request->input('product_id');
@@ -59,19 +47,14 @@ class CartController extends Controller
         Cookie::queue(Cookie::make('shopping_cart', $itemData, 60));
     }
 
-    public function cartloadbyajax()
+    public function cartLoadByAjax()
     {
-        if(Cookie::get('shopping_cart'))
-        {
-            $cookieData = stripslashes(Cookie::get('shopping_cart'));
-            $cartData = json_decode($cookieData, true);
-            $totalCart = count($cartData);
-        }
-        else
-        {
-            $totalCart = '0';
-        }
-        return json_encode(array('totalCart' => $totalCart));
+
+        $totalCart = totalCart(); // totalCart() - funkcja z helpers.php
+        $param = Parameters::all();
+        $shipping = $param[0]->shipping;
+        $toPay = $shipping + $totalCart;
+        return json_encode(array('totalCart' => $totalCart, 'shipping' => $shipping, 'toPay' => $toPay));
 
     }
 
@@ -87,6 +70,10 @@ class CartController extends Controller
         $itemData = json_encode($cartData);
 
         Cookie::queue(Cookie::make('shopping_cart', $itemData, 60));
+
+        $article = Article::findOrFail($prodId);
+        $subtotal = $article['price'] * $quantity;
+        return json_encode(array('subtotal' => $subtotal, 'id' => $prodId));
     }
 
     public function deleteFromCart(Request $request)
@@ -109,5 +96,11 @@ class CartController extends Controller
             Cookie::queue(Cookie::make('shopping_cart', $itemData, 60));
         }
         //return view('index')->with('cart_data',$cartData);
+    }
+
+    public function clearCart()
+    {
+        Cookie::queue(Cookie::forget('shopping_cart'));
+        Cookie::queue(Cookie::forget('shopping_uuid'));
     }
 }

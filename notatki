@@ -97,3 +97,14 @@ composer require laravel-lang/common --dev
 php artisan lang:add pl
 php artisan lang:update
 sprawdzić klucz locale w pliku config/app.php
+
+
+// Middleware example: Check if the user is active
+public function handle($request, Closure $next)
+{
+    if (!$request->user() || !$request->user()->isActive()) {
+        return response('Account is inactive', 403);
+    }
+
+    return $next($request);
+}-

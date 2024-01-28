@@ -8,6 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 {{--        <link rel="stylesheet" href="css\main.css">--}}
     <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css" >
+    <link href="{{ asset('css/iao-alert.min.css') }}" rel="stylesheet" type="text/css" >
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
@@ -18,6 +20,7 @@
     <script src="https://kit.fontawesome.com/9449ff78fb.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+    <script src="{{ asset('js/iao-alert.jquery.min.js') }}"></script>
 
 </head>
 
@@ -26,12 +29,8 @@
     <!-- <div class="image"> -->
     <img src="img/baner1.jpg" alt="Nature" class="responsive">
     <!-- </div> -->
-    <div class="navbarW sticky">
-        <div class="koszyk">
-            <a href="">Koszyk</a>&nbsp;
-            <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
-        </div>
-    </div>
+    @include('Components.navbar')
+
     <div class="opis">
         <h1>Cukierki Krówka</h1>
         Kremowe cukierki Krówka produkowane według tradycyjnej receptury bez użycia maszyn przemysłowych, formowane
@@ -49,13 +48,13 @@
             @foreach($articles as $article)
                 {{--  <img src="{{ $article->photo }}" alt="">  --}}
                 <div class="wrapW articleDetails">
-                    <div id="{{ $article->id }}" onClick="clickArt('{{ route('showArticle', $article->id) }}')">
+                    <div id="{{ $article->id }}" data-article="{{ route('showArticle', $article->id) }}" class="showArticle">
 
-
+                        <input type="hidden" class="productId" value="{{ $article->id }}">
                         <div class="nazwaTowaru">{{ $article->name }}</div>
                         <div class="foto"><img src="{{ $article->photo }}" alt="Cukierki" class="responsive"></div>
                         {{--  <div class="opisTowaru">{{ $article->description }}</div>  --}}
-                        <div class="cena">Cena: {{ number_format($article->price / 100, 2, ',', ' ') }} zł</div>
+                        <div class="cena">Cena: {{ numberFormat($article->price) }} zł</div>
                         {{--  <div class="dodaj"><a href="#">Dodaj do koszyka</a>&nbsp;
                             <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
                         </div>  --}}
@@ -96,16 +95,8 @@
 </div>
 
 
+@include('Components.footer')
 
-<footer>
-    <div>
-        <a href="https://osmolecko.pl">O nas</a>&nbsp;
-        <a href="regulamin.html">Regulamin</a>&nbsp;
-        <a href="#">Kontakt</a>&nbsp;
-        <a href="home.html">Sklep</a>&nbsp;
-    </div>
-    <div><i class="fa-regular fa-copyright"></i>&nbsp;OSM Olecko</div>
-</footer>
 <br>
 
 
@@ -113,18 +104,19 @@
 <div id="myModal" class="modal">
 
   <!-- Modal content -->
-  <div class="modalContent">
+  <div class="modalContent articleDetails">
     <div class="modalHeader">
         <div id="modalPhoto" class="modalPhoto"></div>
         <div id="articleName"></div>
         <span class="close">&times;</span>
     </div>
     <div class="modalBody">
+        <input id="articleId" type="hidden" class="productId" value="5">
         <p id="articleDescription"></p>
         <div id="articlePrice" class="cena"></div>
     </div>
     <div class="modalFooter">
-        <button class="btnAddCart" onclick="window.location.href='';">Dodaj do koszyka <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></button>
+        <button class="btnAddCart" >Dodaj do koszyka <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></button>
 
     </div>
 
@@ -133,59 +125,97 @@
 </div>
 
 <script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("articleBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal
-    {{--  btn.onclick = function() {
-      modal.style.display = "block";
-    }  --}}
-            {{--  var el_up = document.getElementById("GFG_UP");
-            var el_down = document.getElementById("GFG_DOWN");
-            el_up.innerHTML = "Click on button to get ID";  --}}
-
-            var art = document.getElementById('articleDescription');
-            var photo = document.getElementById('modalPhoto');
-            var artN = document.getElementById('articleName');
-            var artP = document.getElementById('articlePrice');
-
-            function clickArt(userURL) {
-
-                $.get(userURL, function (dane) {
-                    //console.log(dane);
-                    artN.innerHTML = dane.name;
-                    art.innerHTML = dane.description;
-                    var price = (dane.price / 100).toLocaleString('pl-PL', {minimumFractionDigits: 2});
-                    //console.log(plPrice);
-                    artP.innerHTML = "Cena: " + price + " zł";
-                    photo.innerHTML = "<img src=\"" + dane.image + "\" class=\"modalImg\">";
-                    modal.style.display = "block";
-                })
+    $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+        });
+        // Get the modal
+        var modal = document.getElementById("myModal");
 
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-      modal.style.display = "none";
+        // Get the button that opens the modal
+        var btn = document.getElementById("articleBtn");
 
-    }
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target === modal) {
-        modal.style.display = "none";
+        // When the user clicks the button, open the modal
+        var art = document.getElementById('articleDescription');
+        var photo = document.getElementById('modalPhoto');
+        var artN = document.getElementById('articleName');
+        var artP = document.getElementById('articlePrice');
 
-      }
-    }
+        cartload();
 
-    // click button add to cart
+        $('.showArticle').click(function (e) {
+            e.preventDefault();
 
-    </script>
+            userURL = this.getAttribute('data-article');
+            $.ajax({
+                url: userURL,
+                method: "GET"
+            }).done(function (response) {
+                artN.innerHTML = response.name;
+                art.innerHTML = response.description;
+                var price = (response.price / 100).toLocaleString('pl-PL', {minimumFractionDigits: 2});
+                artP.innerHTML = "Cena: " + price + " zł";
+                $("#articleId").val(response.id);
+                photo.innerHTML = "<img src=\"" + response.image + "\" class=\"modalImg\">";
+                modal.style.display = "block";
+            });
+        });
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+
+            }
+        }
+
+        // click button add to cart
+        $('.btnAddCart').click(function (e) {
+            e.preventDefault();
+
+            var productId = $(this).closest('.articleDetails').find('.productId').val();
+            var quantity = 1;
+            $.ajax({
+                url: "/add-to-cart",
+                method: "POST",
+                data: {
+                    'quantity': quantity,
+                    'product_id': productId,
+                }
+            }).done(function (response) {
+                cartload();
+                $.iaoAlert({
+                    msg: "Produkt został dodany do koszyka.",
+                    mode: "dark",
+                    position: 'top-left'
+                })
+            });
+        });
+
+        function cartload() {
+
+            $.ajax({
+                url: '/load-cart-data',
+                method: "GET"
+            }).done(function (response) {
+                var value = jQuery.parseJSON(response); //Single Data Viewing
+                $('.basketItemCount').html((value['totalCart'] / 100).toLocaleString('pl-PL', {minimumFractionDigits: 2}) + " zł");
+
+            });
+        }
+    });
+</script>
 
 </body>
 

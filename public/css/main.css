@@ -5,6 +5,10 @@ body {
     /* background: #bd2121 ; */
 
 }
+.alignRight {
+    text-align: right;
+
+}
 
 .containerW {
     width: 80%;
@@ -58,9 +62,11 @@ footer > div > a:hover {
   margin: 10px;
 }
 
-.articleDetails:hover {
+.wrapW.articleDetails:hover {
   cursor: pointer;
 }
+
+
 
 .btnAddCart {
   border: 1px;
@@ -172,7 +178,7 @@ footer > div > a:hover {
   /* height: 40px; */
 }
 
-.btnDelete {
+.btnDelete, .btnDeleteCart {
     border: 1px;
     color: white;
     font-size: 0.8em;
@@ -180,7 +186,7 @@ footer > div > a:hover {
     height: 30px;
 }
 
-.btnDelete:hover {
+.btnDelete:hover, .btnDeleteCart:hover {
     background: #fc0028;
 }
 
@@ -374,6 +380,11 @@ div.sticky {
   /* margin: 3px; */
 }
 
+.basketItemCount {
+    margin-left: 5px;
+    color: white;
+}
+
 .koszyk > a, .dodaj > a, .addArticle > a {
   color: white !important;
   text-decoration: none !important;
@@ -491,7 +502,7 @@ input:focus, textarea:focus {
 .modalPhoto {
   margin-top: -40px;
   margin-left: -40px;
-  
+
 }
 
 .modalImg {
@@ -515,16 +526,149 @@ input:focus, textarea:focus {
   }
 }
 
-#myModal {
+#myModal, #confirmModal {
   animation: appear 200ms ease-in 1;
-  
+
 }
 
+#confirmModal .modalBody {
+    padding: 10% 10% 5% 10%;
+    text-align: center;
+}
 
+#confirmModal .modalFooter {
+    display: flex;
+    justify-content: flex-end;
+    width: 90%;
+}
 
+#confirmModal .modalContent {
+    padding: unset;
+    width: 300px;
+}
+
+#confirmModal .modalHeader {
+    padding: 5px 20px 5px 20px;
+    background-color: rgba(252, 0, 0, 0.93);
+    font-size: 1.3em;
+    color: white;
+    border-bottom: 2px solid black;
+}
+
+#confirmModal .close {
+    color: white;
+}
+
+#confirmModal button {
+    width: 60px;
+    margin: 10px;
+}
 /*-----------------------------------*/
 
+/*-------- cart ---------------------*/
+.shoppingCart {
+    width: 100%;
+}
 
+.cartTable {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    /*border: 1px solid #ddd;*/
+}
+
+.cartTable > th, td {
+    text-align: center;
+    /*padding: 8px;*/
+
+}
+
+.tableHead, .tableRow {
+    border-bottom: 1px solid #ddd;
+}
+
+.articleQuantity::-webkit-outer-spin-button, .articleQuantity::-webkit-inner-spin-button {
+    opacity: 1;
+}
+
+.articleQuantity {
+    width: 70px;
+}
+
+.clearCart {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: 2em;
+}
+
+.order {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+}
+
+.subtotal {
+    width:  5em;
+}
+
+.btnContinueShopping {
+    border: 1px;
+    color: white;
+    font-size: 0.8em;
+    background-color: #00254d;
+    height: 30px;
+}
+
+.btnContinueShopping:hover {
+    background: #0056b3;
+}
+/*-----------------------------------*/
+
+/*---- order ------------------------*/
+.containerOrder {
+    padding: 20px 20% 10px 20%;
+    justify-content: center;
+}
+
+.orderTable {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 450px;
+    margin: auto;
+}
+
+.orderForm {
+    display: flex;
+    margin-top: 25px;
+}
+
+.adressForm, .vatForm {
+    width: 50%;
+    padding-right: 20px;
+}
+
+.checkVat {
+    display: flex;
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+
+#check {
+    margin: unset;
+    width: 20px;
+    margin-right: 10px;
+}
+
+#check:hover {
+    cursor: pointer;
+}
+
+.displayVat {
+    display: none;
+}
+
+/*-----------------------------------*/
 
 .p20 {
     padding-top: 20px;

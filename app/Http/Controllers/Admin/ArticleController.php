@@ -37,7 +37,7 @@ class ArticleController extends Controller
     {
         $articles = Article::all();
         // $articles = Article::orderBy('nazwa', 'desc')->get(); // pobieranie wszystkich artukułow posortowanyc wg nazwy , dokumentacja - Database: Query Builder
-        return view('articles', compact('articles'));
+        return view('articles.articles', compact('articles'));
     }
 
     /**
@@ -82,7 +82,7 @@ class ArticleController extends Controller
      */
     public function show(string $id)
     {
-      
+
     }
 
     /**

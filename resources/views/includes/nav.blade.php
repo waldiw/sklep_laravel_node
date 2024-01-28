@@ -7,7 +7,7 @@
             <a href="{{ route('articles') }}">Artykuły</a>
         </li>
         <li>
-            <a href="#">Administracja</a>
+            <a href="{{ route('admin') }}">Administracja</a>
         </li>
         <li>
             <a class="koszyk" href="#" onclick="document.getElementById('logout-form').submit();" >{{ __('Logout') }}</a>

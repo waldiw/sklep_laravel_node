@@ -148,6 +148,7 @@ return [
     'url'                  => 'Format pola :attribute jest nieprawidłowy.',
     'uuid'                 => 'Pole :attribute musi być poprawnym identyfikatorem UUID.',
     'attributes'           => [
+        'account'                  => 'numer konta',
         'address'                  => 'adres',
         'age'                      => 'wiek',
         'amount'                   => 'ilość',
@@ -192,6 +193,7 @@ return [
         'password_confirmation'    => 'potwierdzenie hasła',
         'phone'                    => 'numer telefonu',
         'photo'                    => 'zdjęcie',
+        'post'                     => 'poczta',
         'postal_code'              => 'kod pocztowy',
         'price'                    => 'cena',
         'province'                 => 'prowincja',
@@ -200,6 +202,7 @@ return [
         'restored_at'              => 'odtworzono',
         'result_text_under_image'  => 'wynikowy tekst pod obrazkiem',
         'role'                     => 'rola',
+        'shipping'                 => 'koszt wysyłki',
         'second'                   => 'sekunda',
         'sex'                      => 'płeć',
         'short_text'               => 'krótki tekst',
@@ -219,5 +222,9 @@ return [
         'updated_at'               => 'zaktualizowano',
         'username'                 => 'nazwa użytkownika',
         'year'                     => 'rok',
+        'vatName'                  => 'nazwa',
+        'vatNumber'                => 'numer Nip',
+        'vatCity'                  => 'miasto',
+        'vatPost'                  => 'poczta',
     ],
 ];

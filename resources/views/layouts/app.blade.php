@@ -35,7 +35,7 @@
         @endauth
             @guest
         <div class="koszyk">
-            <a href="">Koszyk</a>&nbsp;
+            <a href="{{ route('cart') }}">Koszyk</a>&nbsp;
             <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
 
         </div>
