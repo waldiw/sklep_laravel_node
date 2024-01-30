@@ -30,7 +30,7 @@ class HomeController extends Controller
     {
         return Validator::make($data, [
             'account' => ['required', new Account],
-            'shipping' => ['required', new Price],
+            //'shipping' => ['required', new Price],
             'email' => 'required|email:rfc,dns',
         ]);
     }
@@ -62,8 +62,8 @@ class HomeController extends Controller
         $param = Parameters::findOrFail($id);
         $data = $this->validator($request->all())->validate();
 
-        $temp = preg_replace("~\D~", "", $data['shipping'] ); // usuwa ze stringa wszystko co nie jest cyrą - czyli precinek z ceny
-        $data['shipping'] = $temp;
+        //$temp = preg_replace("~\D~", "", $data['shipping'] ); // usuwa ze stringa wszystko co nie jest cyrą - czyli precinek z ceny
+        //$data['shipping'] = $temp;
 
 
         $param->update($data);

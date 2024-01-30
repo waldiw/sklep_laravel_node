@@ -13,10 +13,10 @@
                 <input id="account" class="form-field @error('account') is-invalid error @enderror" value="{{ $param->account }}" type="text" name="account" placeholder="Numer konta">
             </div>
 
-              <div class="">
-                <label for="shipping" class="articleFormLabel">Koszt wysyłki:</label>
-                <input id="shipping" class="@error('shipping') is-invalid error @enderror" value="{{ number_format($param->shipping / 100, 2, ',', ' ') }}" type="text" name="shipping" placeholder="00,00">
-            </div>
+{{--              <div class="">--}}
+{{--                <label for="shipping" class="articleFormLabel">Koszt wysyłki:</label>--}}
+{{--                <input id="shipping" class="@error('shipping') is-invalid error @enderror" value="{{ number_format($param->shipping1 / 100, 2, ',', ' ') }}" type="text" name="shipping" placeholder="00,00">--}}
+{{--            </div>--}}
             <div>
                 <label for="email" class="articleFormLabel">Adres e-mail do wysyłania potwierdzenia:</label>
                 <input id="email" type="text" class=" @error('email') is-invalid error @enderror" name="email" value="{{ $param->email }}" >
