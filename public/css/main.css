@@ -631,12 +631,13 @@ input:focus, textarea:focus {
     justify-content: center;
 }
 
-.orderTable {
+.orderTable, .shippingPrice {
     border-collapse: collapse;
     border-spacing: 0;
     width: 450px;
     margin: auto;
 }
+
 
 .orderForm {
     display: flex;
@@ -649,15 +650,18 @@ input:focus, textarea:focus {
 }
 
 .checkVat {
-    display: flex;
-    margin-top: 25px;
-    margin-bottom: 30px;
+  display: flex;
+  margin-top: -7px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
-#check {
+#check, #prepaid, #cashOnDelivery {
     margin: unset;
     width: 20px;
     margin-right: 10px;
+    margin-left: 10px;
 }
 
 #check:hover {

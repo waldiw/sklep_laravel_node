@@ -86,7 +86,7 @@
                             <td class="basketTotal alignRight"></td>
                             <td></td>
                         </tr>
-                        <tr>
+                        {{--  <tr>
                             <td></td>
                             <td></td>
                             <td class="alignRight">Wysyłka:</td>
@@ -99,7 +99,7 @@
                             <td class="alignRight">Do zapłaty:</td>
                             <td class="toPay alignRight"></td>
                             <td></td>
-                        </tr>
+                        </tr>  --}}
                         @endif
                         </tfoot>
                     </table>
@@ -217,8 +217,8 @@
                 // $('.basket-item-count').html($('<span class="badge badge-pill red">'+ value['totalcart'] +'</span>'));
                 $('.basketItemCount').html(numberFormat(value['totalCart']) + ' zł');
                 $('.basketTotal').html(numberFormat(value['totalCart']) + ' zł');
-                $('.shipping').html(numberFormat(value['shipping']) + ' zł');
-                $('.toPay').html(numberFormat(value['toPay']) + ' zł');
+                //$('.shipping').html(numberFormat(value['shipping']) + ' zł');
+                //$('.toPay').html(numberFormat(value['toPay']) + ' zł');
                 if (value['totalCart'] === 0)
                 {
                     $(tfoot).remove();

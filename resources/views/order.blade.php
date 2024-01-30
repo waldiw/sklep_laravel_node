@@ -70,7 +70,7 @@
                     <td class="alignRight">Razem:</td>
                     <td class="basketTotal alignRight">{{ numberFormat($totalCart) }} zł</td>
                  </tr>
-                <tr>
+                {{--  <tr>
                     <td></td>
                     <td></td>
                     <td class="alignRight">Wysyłka:</td>
@@ -81,13 +81,39 @@
                     <td></td>
                     <td class="alignRight">Do zapłaty:</td>
                     <td class="toPay alignRight">{{ numberFormat($toPay) }} zł</td>
-                </tr>
+                </tr>  --}}
             </tfoot>
         </table>
 
         <div id="containerForm" class="containerForm">
-            <form id="orderForm" class="orderForm" method="post" action="{{ route('order') }}">
+            <form id="orderForm" class="" method="post" action="{{ route('order') }}">
                 @csrf
+                <p>Koszt wysyłki:</p>
+                
+                    <table class="shippingPrice">
+                        <tbody>
+                        <tr>
+                            <td>
+                    <input type="radio" id="prepaid" name="shippingType" value="przedpłata" checked>
+                    <label for="prepaid">Przedpłata</label><br>
+                            </td>
+                            <td>
+                    <input type="radio" id="cashOnDelivery" name="shippingType" value="przy_odbiorze">
+                    <label for="cashOnDelivery">Płatność przy odbiorze</label>
+                            </td>
+                            <td>25,00 zł</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Do zapłaty</td>
+                            <td>40,55 zł</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                
+
+            <div class="orderForm">
+
                 <div class="adressForm">
 {{--                    <div class="form-field">--}}
                         <label for="name" >Imię i nazwisko zamawiającego:</label>
@@ -125,6 +151,9 @@
                         <input id="vatPost" class="form-field @error('vatPost') is-invalid error @enderror" value="{{ old('vatPost') }}" type="text" name="vatPost" placeholder="00-000 poczta">
                     </div>
                 </div>
+
+            </div>
+                
             </form>
             <div id="order" class="order">
                 <button type="submit" class="btnContinueShopping" form="orderForm">Potwierdź zamówienie &nbsp;<i class="fa-solid fa-check" style="color: #ffffff;"></i></button>
