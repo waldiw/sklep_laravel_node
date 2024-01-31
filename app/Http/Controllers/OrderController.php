@@ -6,6 +6,7 @@ use App\Mail\ConfirmMail;
 use App\Models\Cart;
 use App\Models\Orders;
 use App\Models\Parameters;
+use App\Models\Shippings;
 use App\Rules\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -22,9 +23,9 @@ class OrderController extends Controller
         $cart = cart(); // cart() funkcja z helpers.php
         $totalCart = totalCart(); // totalCart() - funkcja z helpers.php
 
-        $shipping = shipping(); //funkcja z helpers.php
-        $toPay = $shipping + $totalCart;
-        return view('order', compact('cart', 'totalCart', 'shipping', 'toPay'));
+        $shippings = Shippings::all(); 
+        //$toPay = $shipping + $totalCart;
+        return view('order', compact('cart', 'totalCart', 'shippings'));
     }
 
     public function order(Request $request)

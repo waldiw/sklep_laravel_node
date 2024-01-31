@@ -32,6 +32,7 @@ class Orders extends Model
         'vatPost',
         'status',
         'uuid',
+        'shipping_id',
     ];
 
     // w widoku dzięki getAdressAttribute pobieramy cały adres $order->adress
@@ -50,6 +51,12 @@ class Orders extends Model
         // orderUuid - klucz z klasy Orders, uuid - klucz z klasy Cart
         // czyli w klasie Cart do klucza uuid odnosi się klucz orderUuid z klasy Orders
         return $this->hasMany(Cart::class, 'orderUuid', 'uuid');
+    }
+
+    // relacja one to one
+    public function shipping()
+    {
+        return $this->belongsTo(Shippings::class);
     }
 
     public function id()

@@ -13,4 +13,10 @@ class Shippings extends Model
         'name',
         'shipping',
     ];
+
+    // relacja one to one - shipping_id w klasie Orders
+    public function order()
+    {
+        return $this->hasOne(Orders::class);
+    }
 }

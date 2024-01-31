@@ -54,7 +54,7 @@
             </tr>
             </thead>
             <tbody id="tableBody">
-            @foreach ($cart as $data)
+                @foreach ($cart as $data)
                 <tr id="tr{{ $data['articleId'] }}" class="tableRow">
                     <td>{{ $data['articleName'] }}</td>
                     <td>{{ numberFormat($data['articlePrice']) }} zł</td>
@@ -88,25 +88,36 @@
         <div id="containerForm" class="containerForm">
             <form id="orderForm" class="" method="post" action="{{ route('order') }}">
                 @csrf
-                <p>Koszt wysyłki:</p>
+               
                 
                     <table class="shippingPrice">
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <td class="tdShipping"><p>Koszt wysyłki:</p></td>
+                            </tr>
+                        </thead>
                         <tbody>
+                            @foreach ($shippings as $shipping)
                         <tr>
-                            <td>
-                    <input type="radio" id="prepaid" name="shippingType" value="przedpłata" checked>
-                    <label for="prepaid">Przedpłata</label><br>
+                            <td class="offset"></td>
+                            <td class="tdShipping">
+                                <label for="{{ $shipping->id }}">{{ $shipping->name }}</label>
+                    <input type="radio" id="{{ $shipping->id }}" name="shippingType" value="{{ $shipping->id }}" @if ($loop->first) checked @endif>
+                    <input class="ship" type="hidden" name="" value="{{ $shipping->shipping }}"
                             </td>
-                            <td>
+                            {{--  <td>
                     <input type="radio" id="cashOnDelivery" name="shippingType" value="przy_odbiorze">
                     <label for="cashOnDelivery">Płatność przy odbiorze</label>
-                            </td>
-                            <td>25,00 zł</td>
+                            </td>  --}}
+                            <td class="tdShipping">{{ numberFormat($shipping->shipping) }} zł</td>
                         </tr>
+                        @endforeach
                         <tr>
-                            <td></td>
-                            <td>Do zapłaty</td>
-                            <td>40,55 zł</td>
+                            
+                            <td class="offset"></td>
+                            <td class="tdShipping">Do zapłaty</td>
+                            <td class="tdShipping">40,55 zł</td>
                         </tr>
                         </tbody>
                     </table>
@@ -205,9 +216,9 @@
                 $('#vatPost').val('');
             }
 
-            });
+        });
 
-         function cartload() {
+        function cartload() {
             $.ajax({
                 url: '/load-cart-data',
                 method: "GET"
@@ -228,6 +239,14 @@
 
             });
         }
+
+        $("input[type='radio']").click(function(){
+            var radioValue = $("input[name='shippingType']:checked").val();
+            var productId = $(this).closest('tr').find('.ship').val();
+            if(radioValue){
+                console.log(productId);
+            }
+        });
 
     });
 </script>

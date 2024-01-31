@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Parameters;
+use App\Models\Shippings;
 use App\Rules\Account;
 use App\Rules\Price;
 use Illuminate\Http\Request;
@@ -48,10 +49,11 @@ class HomeController extends Controller
     public function admin()
     {
         $parameters = Parameters::all();
-
         $param = $parameters[0];
 
-        return view('admin.admin', compact('param'));
+        $shippings = Shippings::all();
+
+        return view('admin.admin', compact('param', 'shippings'));
     }
 
     /**

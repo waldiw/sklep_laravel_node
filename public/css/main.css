@@ -638,6 +638,20 @@ input:focus, textarea:focus {
     margin: auto;
 }
 
+.offset {
+  width: 100px;
+}
+
+.tdShipping {
+  
+  text-align: end !important;
+}
+
+input[type=radio] {
+    width: 15px;
+    margin: unset;
+}
+
 
 .orderForm {
     display: flex;
@@ -657,7 +671,7 @@ input:focus, textarea:focus {
   align-items: center;
 }
 
-#check, #prepaid, #cashOnDelivery {
+#check {
     margin: unset;
     width: 20px;
     margin-right: 10px;
@@ -673,6 +687,28 @@ input:focus, textarea:focus {
 }
 
 /*-----------------------------------*/
+
+/*------- administracja ------------*/
+
+#shippingTable {
+  width: 100%;
+}
+
+#shippingTable tr {
+  border-bottom: 1px solid !important;
+}
+
+#shippingName {
+  width: 50%;
+}
+
+#addShipping {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/*------------------------------------*/
 
 .p20 {
     padding-top: 20px;

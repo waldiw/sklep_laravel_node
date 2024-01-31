@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,12 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/zmień/{id}', [ArticleController::class, 'edit'])->name('editArticle');
     Route::put('/zmień/{id}', [ArticleController::class, 'update']);
     Route::delete('/usuń/{id}', [ArticleController::class, 'destroy'])->name('deleteArticle');
+    Route::get('/dodaj-płatność', [ShippingController::class, 'create'])->name('createShipping');
+    Route::post('/dodaj-płatność', [ShippingController::class, 'store']);
+    Route::get('/zmień-płatność/{id}', [ShippingController::class, 'edit'])->name('editShipping');
+    Route::put('/zmień-płatność/{id}', [ShippingController::class, 'update']);
+    Route::delete('/usuń-płatność/{id}', [ShippingController::class, 'destroy'])->name('deleteShipping');
+
     Route::middleware(['can:isAdministrator'])->group(function () {
         Route::get('/sadmin', [AdminController::class, 'index'])->name('sadmin');
     });

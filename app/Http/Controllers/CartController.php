@@ -51,10 +51,10 @@ class CartController extends Controller
     {
 
         $totalCart = totalCart(); // totalCart() - funkcja z helpers.php
-        $param = Parameters::all();
-        $shipping = $param[0]->shipping;
-        $toPay = $shipping + $totalCart;
-        return json_encode(array('totalCart' => $totalCart, 'shipping' => $shipping, 'toPay' => $toPay));
+        //$param = Parameters::all();
+        //$shipping = $param[0]->shipping;
+        //$toPay = $shipping + $totalCart;
+        return json_encode(array('totalCart' => $totalCart));
 
     }
 
