@@ -23,9 +23,10 @@ class OrderController extends Controller
         $cart = cart(); // cart() funkcja z helpers.php
         $totalCart = totalCart(); // totalCart() - funkcja z helpers.php
 
-        $shippings = Shippings::all(); 
-        //$toPay = $shipping + $totalCart;
-        return view('order', compact('cart', 'totalCart', 'shippings'));
+        $shippings = Shippings::all();
+        $shipCost = $shippings[0]->shipping;
+        $toPay = $shipCost + $totalCart;
+        return view('order', compact('cart', 'totalCart', 'shippings', 'toPay'));
     }
 
     public function order(Request $request)
@@ -36,6 +37,8 @@ class OrderController extends Controller
 //        }else{
 //            return 'not vat';
 //        }
+        //return $request;
+
         if ($request->hasCookie('shopping_uuid')) {
 
             $data = $this->validator($request->all());
@@ -112,6 +115,7 @@ class OrderController extends Controller
                 'vatCity' => 'required|max:255',
                 //'vatPost' => ['required_if:vat,1', new Post],
                 'vatPost' => ['required', new Post],
+                'shipping_id' => 'required',
             ],
                 [
                     'phone.numeric' => 'Numer telefonu powinien zawierać tylko cyfry',
@@ -131,6 +135,7 @@ class OrderController extends Controller
                 'phone' => 'required|numeric',
                 'comments' => 'nullable',
                 'vat' => 'boolean',
+                'shipping_id' => 'required',
             ],
                 [
                     'phone.numeric' => 'Numer telefonu powinien zawierać tylko cyfry',

@@ -12,6 +12,7 @@ class Shippings extends Model
     protected $fillable = [
         'name',
         'shipping',
+        'type',
     ];
 
     // relacja one to one - shipping_id w klasie Orders

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Parameters;
+use App\Models\Shippings;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
@@ -52,8 +54,8 @@ class CartController extends Controller
 
         $totalCart = totalCart(); // totalCart() - funkcja z helpers.php
         //$param = Parameters::all();
-        //$shipping = $param[0]->shipping;
-        //$toPay = $shipping + $totalCart;
+//        $shipping = Shippings::first()->shipping;
+//        $toPay = $shipping + $totalCart;
         return json_encode(array('totalCart' => $totalCart));
 
     }

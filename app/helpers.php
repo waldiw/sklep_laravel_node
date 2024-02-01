@@ -83,8 +83,10 @@ function summaryOrder($uuid): string
 //    }
 //
 //    $html .= '</ul>';
-
-    $orderCart = Orders::where('uuid', $uuid)->first()->carts; // pobiera zamówienie numer uuid  i z niego pozycje koszyka
+    $order = Orders::where('uuid', $uuid)->first();
+    $orderCart = $order->carts; // pobiera zamówienie numer uuid  i z niego pozycje koszyka
+    //$shipping = $order->shipping->shipping;
+    $totlOrder = totalOrder($orderCart);
 
     $table = '<table id="orderTable" class="orderTable">
             <thead>
@@ -113,19 +115,19 @@ function summaryOrder($uuid): string
                     <td></td>
                     <td></td>
                     <td class="alignRight">Razem:</td>
-                    <td class="basketTotal alignRight">' . numberFormat(totalOrder($orderCart)) . ' zł</td>
+                    <td class="basketTotal alignRight">' . numberFormat($totlOrder) . ' zł</td>
                  </tr>
                 <tr>
                     <td></td>
                     <td></td>
-                    <td class="alignRight">Wysyłka:</td>
-                    <td class="shipping alignRight">' . numberFormat(shipping()) . ' zł</td>
+                    <td class="alignRight">' . $order->shipping->name . ':</td>
+                    <td class="shipping alignRight">' . numberFormat($order->shipping->shipping) . ' zł</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td></td>
                     <td class="alignRight">Do zapłaty:</td>
-                    <td class="toPay alignRight">' . numberFormat(totalOrder($orderCart) + shipping()) . ' zł</td>
+                    <td class="toPay alignRight">' . numberFormat($order->shipping->shipping + $totlOrder) . ' zł</td>
                 </tr>
             </tfoot>
         </table>';
@@ -154,7 +156,7 @@ function confirmMail($uuid)
     $body = '';
     $email = email(); // funkcja zwraca emaila z parametrów
     $view = '';
-    Mail::to($email)->send(new ConfirmMail($body, $subject, $view));
+    //Mail::to($email)->send(new ConfirmMail($body, $subject, $view));
 }
 
 //function emailOrder($uuid)
@@ -179,11 +181,11 @@ function account()
 //    $order = Orders::where('uuid', $uuid)->first(); // pobiera zamówienie numer uuid
 //    return $order->id;
 //}
-function shipping()
-{
-    $param = Parameters::all();
-    return $param[0]->shipping;
-}
+//function shipping()
+//{
+//    $param = Parameters::all();
+//    return $param[0]->shipping;
+//}
 
 function totalOrder($cart)
 {

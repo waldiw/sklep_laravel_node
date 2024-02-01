@@ -69,6 +69,7 @@
                     <td></td>
                     <td class="alignRight">Razem:</td>
                     <td class="basketTotal alignRight">{{ numberFormat($totalCart) }} zł</td>
+
                  </tr>
                 {{--  <tr>
                     <td></td>
@@ -88,8 +89,8 @@
         <div id="containerForm" class="containerForm">
             <form id="orderForm" class="" method="post" action="{{ route('order') }}">
                 @csrf
-               
-                
+
+                <input class="totalCart" type="hidden" name="" value="{{ $totalCart }}">
                     <table class="shippingPrice">
                         <thead>
                             <tr>
@@ -98,30 +99,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($shippings as $shipping)
-                        <tr>
-                            <td class="offset"></td>
-                            <td class="tdShipping">
-                                <label for="{{ $shipping->id }}">{{ $shipping->name }}</label>
-                    <input type="radio" id="{{ $shipping->id }}" name="shippingType" value="{{ $shipping->id }}" @if ($loop->first) checked @endif>
-                    <input class="ship" type="hidden" name="" value="{{ $shipping->shipping }}"
-                            </td>
-                            {{--  <td>
-                    <input type="radio" id="cashOnDelivery" name="shippingType" value="przy_odbiorze">
-                    <label for="cashOnDelivery">Płatność przy odbiorze</label>
-                            </td>  --}}
-                            <td class="tdShipping">{{ numberFormat($shipping->shipping) }} zł</td>
+                        @foreach ($shippings as $shipping)
+                            <tr>
+                                <td class="offset"></td>
+                                <td class="tdShipping">
+                                    <label for="{{ $shipping->id }}">{{ $shipping->name }}</label>
+                                    <input type="radio" id="{{ $shipping->id }}" name="shipping_id"
+                                           value="{{ $shipping->id }}" @if ($loop->first) checked @endif>
+                                    <input class="ship" type="hidden" name="" value="{{ $shipping->shipping }}">
+
+                                </td>
+                             <td class="tdShipping">{{ numberFormat($shipping->shipping) }} zł</td>
                         </tr>
                         @endforeach
                         <tr>
-                            
+
                             <td class="offset"></td>
                             <td class="tdShipping">Do zapłaty</td>
-                            <td class="tdShipping">40,55 zł</td>
+                            <td id="toPay" class="tdShipping">{{ numberFormat($toPay) }} zł</td>
                         </tr>
                         </tbody>
                     </table>
-                
+
 
             <div class="orderForm">
 
@@ -164,7 +163,7 @@
                 </div>
 
             </div>
-                
+
             </form>
             <div id="order" class="order">
                 <button type="submit" class="btnContinueShopping" form="orderForm">Potwierdź zamówienie &nbsp;<i class="fa-solid fa-check" style="color: #ffffff;"></i></button>
@@ -230,7 +229,7 @@
                 $('.basketItemCount').html((value['totalCart'] / 100).toLocaleString('pl-PL', {minimumFractionDigits: 2}) + ' zł');
                 // $('.basketTotal').html((value['totalCart'] / 100).toLocaleString('pl-PL', {minimumFractionDigits: 2}) + ' zł');
                 // $('.shipping').html((value['shipping'] / 100).toLocaleString('pl-PL', {minimumFractionDigits: 2}) + ' zł');
-                // $('.toPay').html((value['toPay'] / 100).toLocaleString('pl-PL', {minimumFractionDigits: 2}) + ' zł');
+                //$('.toPay').html((value['toPay'] / 100).toLocaleString('pl-PL', {minimumFractionDigits: 2}) + ' zł');
                 if (value['totalCart'] === 0)
                 {
                     $('#orderTable').remove();
@@ -241,11 +240,12 @@
         }
 
         $("input[type='radio']").click(function(){
-            var radioValue = $("input[name='shippingType']:checked").val();
-            var productId = $(this).closest('tr').find('.ship').val();
-            if(radioValue){
-                console.log(productId);
-            }
+            var totalCart = $('.totalCart').val();
+            //var radioValue = $("input[name='shippingType']:checked").val();
+            var shippingCost = $(this).closest('tr').find('.ship').val();
+            var total = parseInt(totalCart) + parseInt(shippingCost);
+            $('#toPay').html((total / 100).toLocaleString('pl-PL', {minimumFractionDigits: 2}) + ' zł');
+            //console.log(total);
         });
 
     });

@@ -27,6 +27,7 @@ class ShippingController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'shipping' => ['required', new Price],
+            'type' => 'required',
         ]);
     }
 
