@@ -51,7 +51,7 @@
 <div class="container">
 
     <div class="message">
-        <p>Masz nowe zamówienie.</p>
+
         <p>{!! $body !!}</p>
 
 

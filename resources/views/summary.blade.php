@@ -48,11 +48,7 @@
         @if (Cookie::get('shopping_uuid'))
             {!! $summaryOrder !!}
 
-            <p>Należność za zamówienie prosimy przelać na konto Okręgowej Spóldzielni Mleczarskiej w Olecku:</p>
-            <p>{{ $account }}</p>
-            <p>W tytule przelewu proszę wpisać: <b>Należność za zamówienie numer {{ $orderId }}</b></p>
-            <p>Zamówienie zostanie zrealizowane po zaksięgowaniu należności na naszym koncie.</p>
-
+            {!! $summary !!}
         @endif
     </div>
 

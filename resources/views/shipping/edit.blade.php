@@ -16,8 +16,21 @@
         </div>
 
              <div class="">
-        <label class="articleFormLabel">Cena zł:</label>
-            <input class="@error('shipping') is-invalid error @enderror" value="{{ number_format($shipping->shipping / 100, 2, ',', ' ') }}" type="text" name="shipping" placeholder="00,00">
+        <label for="shipping" class="articleFormLabel">Cena zł:</label>
+            <input id="shipping" class="@error('shipping') is-invalid error @enderror" value="{{ number_format($shipping->shipping / 100, 2, ',', ' ') }}" type="text" name="shipping" placeholder="00,00">
+        </div>
+        <div class="{{ $errors->has('type') ? ' is-invalid' : '' }}">
+            <label for="type" class="articleFormLabel">Typ płatności:</label>
+            <select id="type" name="type">
+                <option value="" disabled>Wybierz typ</option>
+                @foreach(\App\Enums\ShippingType::TYPES as $type)
+                    <option value="{{ $type }}"{{ $shipping->type === $type ? ' selected' : '' }}>{{ $type }}</option>
+                @endforeach
+            </select>
+            <div class="checkActive">
+                <input type="checkbox" id="checkActive" name="active" value="1" {{ $shipping->active === 1 ? 'checked' : '' }}/>
+                <label for="checkActive"> Aktywny</label>
+            </div>
         </div>
         <div class="btnAddArticle">
             <button type="submit" class="btnDodaj">Zmień metodę płatności <i class="fa-solid fa-repeat" style="color: #ffffff;"></i></button>

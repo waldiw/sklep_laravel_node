@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+/**
+ * @method static where(string $string, int $int)
+ */
 class Article extends Model
 {
     use HasFactory;
@@ -21,6 +24,7 @@ class Article extends Model
         'description',
         'price',
         'image',
+        'active',
     ];
 
     // pobieranie linka do zdjęcia - w widoku dzięki getPhotoAtribute pobieramy zdjęcie $article->photo

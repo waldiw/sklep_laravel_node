@@ -25,6 +25,12 @@
         <label for="price" class="articleFormLabel">Cena zł:</label>
             <input id="price" class="@error('price') is-invalid error @enderror" value="{{ old('price') }}" type="text" name="price" placeholder="00,00">
         </div>
+
+        <div class="checkActive">
+            <input type="checkbox" id="checkActive" name="active" value="1" {{ old('active') ? 'checked' : '' }}/>
+            <label for="checkActive"> Aktywny</label>
+        </div>
+
         <div class="btnAddArticle">
             <button type="submit" class="btnDodaj">Dodaj artykuł <i class="fa-regular fa-square-plus" style="color: #ffffff;"></i></button>
         </div>

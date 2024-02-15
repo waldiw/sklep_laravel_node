@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ShippingType;
 use App\Mail\ConfirmMail;
 use App\Models\Cart;
 use App\Models\Orders;
@@ -23,7 +24,7 @@ class OrderController extends Controller
         $cart = cart(); // cart() funkcja z helpers.php
         $totalCart = totalCart(); // totalCart() - funkcja z helpers.php
 
-        $shippings = Shippings::all();
+        $shippings = Shippings::where('active', 1)->get();
         $shipCost = $shippings[0]->shipping;
         $toPay = $shipCost + $totalCart;
         return view('order', compact('cart', 'totalCart', 'shippings', 'toPay'));
@@ -44,6 +45,7 @@ class OrderController extends Controller
             $data = $this->validator($request->all());
             $uuid = stripslashes(Cookie::get('shopping_uuid'));
             $data['uuid'] = $uuid;
+
             Orders::create($data);
 
 //        'name',
@@ -84,13 +86,19 @@ class OrderController extends Controller
             $summaryOrder = summaryOrder($uuid); // summaryOrder() - funkcja z helpers.php
 
             //$orderId = orderId($uuid); // funkcja z helpers.php
-            $orderId = Orders::where('uuid', $uuid)->first()->id;
+            //$orderId = Orders::where('uuid', $uuid)->first()->id;
+            if(Orders::where('uuid', $uuid)->first()->shipping->type === ShippingType::PRZELEW)
+                $summary = summaryAccount($uuid);
+            else
+            {
+                $summary = summaryCash($uuid);
+            }
 
             Cookie::queue(Cookie::forget('shopping_uuid'));
 
-            $account = account();
+            //$account = account();
 
-            return view('summary', compact('summaryOrder', 'account', 'orderId'));
+            return view('summary', compact('summaryOrder', 'summary'));
         }
         return redirect()->route('shop');
     }
@@ -142,6 +150,7 @@ class OrderController extends Controller
                 ])->validate();
         }
         $validated = Arr::add($validated, 'vat', 0);
+        $validated = Arr::add($validated, 'delete', 0);
 
         return $validated;
     }

@@ -33,12 +33,23 @@ class Orders extends Model
         'status',
         'uuid',
         'shipping_id',
+        'delete',
     ];
 
     // w widoku dzięki getAdressAttribute pobieramy cały adres $order->adress
     public function getAdressAttribute()
     {
-        $string = 'Adres: :street, :city, :post';
+        $string = ':street, :city, :post';
+
+        $replaced = preg_replace_array('/:[a-z_]+/', [$this->street, $this->city, $this->post], $string);
+        return $replaced;
+        //return Storage::url($this->image);
+    }
+
+    // w widoku dzięki getAdressVatAttribute pobieramy cały adres $order->adressVat
+    public function getvatAdressAttribute()
+    {
+        $string = ':street, :city, :post';
 
         $replaced = preg_replace_array('/:[a-z_]+/', [$this->street, $this->city, $this->post], $string);
         return $replaced;
@@ -57,6 +68,16 @@ class Orders extends Model
     public function shipping()
     {
         return $this->belongsTo(Shippings::class);
+    }
+
+    // this is the recommended way for declaring event handlers
+    public static function boot() {
+        parent::boot();
+        self::deleting(function($orders) { // before delete() method call this
+            $orders->carts()->each(function($cart) {
+                $cart->delete(); // <-- direct deletion
+            });
+         });
     }
 
     public function id()

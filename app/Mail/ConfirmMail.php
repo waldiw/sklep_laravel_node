@@ -42,6 +42,7 @@ class ConfirmMail extends Mailable
             view: $this->view,
             with: [
                 'body' => $this->body,
+
             ],
         );
     }

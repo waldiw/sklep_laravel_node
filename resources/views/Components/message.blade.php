@@ -11,3 +11,9 @@
         {{ session('message') }}
     </div>
 @endif
+
+@if(session('messageError'))
+    <div class="message messageError">
+        {{ session('messageError') }}
+    </div>
+@endif

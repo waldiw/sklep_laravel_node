@@ -141,7 +141,7 @@ footer > div > a:hover {
 
 .buttonA {
   width: 80px;
-  margin: 0px 5px 0px 5px;
+  margin: 0 5px 0 5px;
 }
 
 /*-------- formularz dodania artykułu ---------*/
@@ -202,7 +202,7 @@ footer > div > a:hover {
   /* border: 1px solid orangered; */
   /* border-radius: 1px; */
   border: none;
-  padding: 0px 10px;
+  padding: 0 10px;
   height: 100%;
 }
 
@@ -219,11 +219,16 @@ input[type=file] {
   height: 36px;
   /* font-size: 120%; */
   text-transform: lowercase;
-  padding: 0px;
+  padding: 0;
 }
 
 input[type=file]:hover {
   cursor: pointer;
+}
+
+.activeArticle {
+    text-align: right;
+    padding: 0 15px 5px 15px
 }
 
 /*------- komunikat -----------------*/
@@ -270,6 +275,13 @@ input[type=file]:hover {
     font-weight: bold;
     text-align: center;
     color: #14af13;
+}
+
+.messageError {
+    background-color: rgba(252, 0, 0, 0.93);
+    -webkit-animation-delay: 10s;
+    animation-delay: 10s;
+    color: #ffffff;
 }
 
 .message.is-error {
@@ -427,6 +439,12 @@ color: #FF0000;  /*kolor po najechaniu*/
 
 
 /* ----------- end nawigacja ------------------- */
+
+/*------------ regulamin ----------------------- */
+#showStatute {
+    width: 80%;
+    margin: auto;
+}
 
 /* ------------- formularz logowania -----------*/
 input, textarea {
@@ -634,17 +652,17 @@ input:focus, textarea:focus {
 .orderTable, .shippingPrice {
     border-collapse: collapse;
     border-spacing: 0;
-    width: 450px;
+    width: 500px;
     margin: auto;
 }
 
 .offset {
-  width: 100px;
+    width: 200px;
 }
 
 .tdShipping {
-  
-  text-align: end !important;
+
+    text-align: end !important;
 }
 
 input[type=radio] {
@@ -652,6 +670,9 @@ input[type=radio] {
     margin: unset;
 }
 
+input[type=radio]:hover {
+    cursor: pointer;
+}
 
 .orderForm {
     display: flex;
@@ -671,20 +692,35 @@ input[type=radio] {
   align-items: center;
 }
 
-#check {
+#check, #checkReg {
     margin: unset;
     width: 20px;
     margin-right: 10px;
     margin-left: 10px;
 }
 
-#check:hover {
+#check:hover, #checkReg:hover {
     cursor: pointer;
 }
 
 .displayVat {
     display: none;
 }
+
+.dissabled {
+    color: #e2e8f0;
+}
+
+.enabled {
+    color: #be0024;
+}
+
+.confirmReg {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+}
+
 
 /*-----------------------------------*/
 
@@ -699,13 +735,97 @@ input[type=radio] {
 }
 
 #shippingName {
-  width: 50%;
+  width: 40%;
 }
 
 #addShipping {
   margin-top: 10px;
   display: flex;
   justify-content: flex-end;
+}
+
+/*------------------------------------*/
+
+/*--------- shipping form ------------*/
+#typeSelect {
+    margin-top: 10px;
+}
+
+.checkActive {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 50%;
+    box-sizing: border-box;
+    border: 1px solid rgba(20, 0, 153, 0.637);
+    border-radius: 0.25rem;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+
+}
+
+/*padding: 5px 10px;*/
+/*margin: 1px 0 8px;*/
+
+#checkActive {
+    margin: unset;
+    width: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+#checkActive:hover {
+    cursor: pointer;
+}
+
+/*------------------------------------*/
+
+/*------ order list ------------------*/
+#orderList tr {
+    border-bottom: 1px solid !important;
+}
+
+#orderList td {
+    padding: 0 5px 0 5px;
+}
+
+.orderListId {
+    width: 80px;
+    text-align: center;
+}
+
+.orderListName {
+    width: 200px;
+    text-align: left;
+}
+
+.orderListAdress {
+    width: 350px;
+    text-align: left;
+}
+
+.orderListPhone {
+    width: 80px;
+    text-align: center;
+}
+
+.orderListStatus {
+    width: 100px;
+    text-align: center;
+}
+
+.orderListAction > a {
+    text-decoration: none;
+}
+
+/*--------- order edit admin ---------*/
+.orderDelete {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
 }
 
 /*------------------------------------*/

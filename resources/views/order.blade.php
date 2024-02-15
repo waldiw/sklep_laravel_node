@@ -109,13 +109,13 @@
                                     <input class="ship" type="hidden" name="" value="{{ $shipping->shipping }}">
 
                                 </td>
-                             <td class="tdShipping">{{ numberFormat($shipping->shipping) }} zł</td>
+                             <td class="tdShipping kolor dissabled @if ($loop->first) enabled @endif">{{ numberFormat($shipping->shipping) }} zł</td>
                         </tr>
                         @endforeach
                         <tr>
 
                             <td class="offset"></td>
-                            <td class="tdShipping">Do zapłaty</td>
+                            <td class="tdShipping"><p>Do zapłaty:</p></td>
                             <td id="toPay" class="tdShipping">{{ numberFormat($toPay) }} zł</td>
                         </tr>
                         </tbody>
@@ -165,8 +165,14 @@
             </div>
 
             </form>
+            <div class="confirmReg">
+                <p><input type="checkbox" id="checkReg" name="checkReg"/>
+                    <label for="checkReg"> Zapoznałem/am z <a href="regulamin.html">Regulaminem</a> sklepu OSM Olecko</label>
+                </p>
+
+            </div>
             <div id="order" class="order">
-                <button type="submit" class="btnContinueShopping" form="orderForm">Potwierdź zamówienie &nbsp;<i class="fa-solid fa-check" style="color: #ffffff;"></i></button>
+                <button id="btnSubmit" type="submit" class="btnContinueShopping" >Potwierdź zamówienie &nbsp;<i class="fa-solid fa-check" style="color: #ffffff;"></i></button>
             </div>
         </div>
 
@@ -246,6 +252,36 @@
             var total = parseInt(totalCart) + parseInt(shippingCost);
             $('#toPay').html((total / 100).toLocaleString('pl-PL', {minimumFractionDigits: 2}) + ' zł');
             //console.log(total);
+            $('.kolor').removeClass('enabled');
+            $(':radio').each(function () {
+                //var myval = $(this).val();
+                if ($(this).is(':checked'))
+                {
+                    //console.log('check');
+                    $(this).closest('tr').find('.kolor').addClass('enabled');
+                    //$(this).removeClass('enabled');
+                }
+                // else
+                // {
+                //     $(this).addClass('enabled');
+                // }
+            });
+        });
+
+        $("#btnSubmit").click(function(){
+            if ($('#checkReg').is(':checked'))
+            {
+                $("#orderForm").submit();
+            }
+            else
+            {
+                $.iaoAlert({
+                    msg: "Proszę potwierdzić postaniowienia regulaminu.",
+                    mode: "dark",
+                    type:"error",
+                    position: 'top-left'
+                })
+            }
         });
 
     });

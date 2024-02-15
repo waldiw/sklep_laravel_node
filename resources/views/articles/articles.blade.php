@@ -13,6 +13,7 @@
                     <div class="foto"><img src="{{ $article->photo }}" alt="Cukierki" class="responsive"></div>
                     {{--  <div class="opisTowaru">{{ $article->description }}</div>  --}}
                     <div class="cena">Cena: {{ number_format($article->price / 100, 2, ',', ' ') }} zł</div>
+                    <div class="activeArticle"> aktywny: {{ $article->active === 1 ? 'tak' : 'nie' }}</div>
                     <div class="containerButton">
 
                         <button class="btnDodaj buttonA" onclick="window.location.href='{{ route('editArticle', $article->id) }}';">Edytuj <i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i></button>

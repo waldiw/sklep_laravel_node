@@ -21,13 +21,19 @@
         </div>
 
         <div class="">
-        <label class="articleFormLabel">Opis:</label>
-            <textarea class="articleContent @error('description') is-invalid error @enderror" name="description" placeholder="Opis">{{ $article->description }}</textarea>
+        <label for="description" class="articleFormLabel">Opis:</label>
+            <textarea id="description" class="articleContent @error('description') is-invalid error @enderror" name="description" placeholder="Opis">{{ $article->description }}</textarea>
         </div>
         <div class="">
-        <label class="articleFormLabel">Cena zł:</label>
-            <input class="@error('price') is-invalid error @enderror" value="{{ number_format($article->price / 100, 2, ',', ' ') }}" type="text" name="price" placeholder="00,00">
+        <label for="price" class="articleFormLabel">Cena zł:</label>
+            <input id="price" class="@error('price') is-invalid error @enderror" value="{{ number_format($article->price / 100, 2, ',', ' ') }}" type="text" name="price" placeholder="00,00">
         </div>
+
+        <div class="checkActive">
+            <input type="checkbox" id="checkActive" name="active" value="1" {{ $article->active === 1 ? 'checked' : '' }}/>
+            <label for="checkActive"> Aktywny</label>
+        </div>
+
         <div class="btnAddArticle">
             <button type="submit" class="btnDodaj">Zmień artykuł <i class="fa-solid fa-repeat" style="color: #ffffff;"></i></button>
         </div>

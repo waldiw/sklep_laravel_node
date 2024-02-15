@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Orders;
 use App\Models\Parameters;
 use App\Models\Shippings;
 use App\Rules\Account;
@@ -12,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-class HomeController extends Controller
+class OperatorController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -43,7 +44,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        $orders = Orders::where('delete', 0)->get();
+        return view('admin.home', compact('orders'));
     }
 
     public function admin()
@@ -51,7 +53,7 @@ class HomeController extends Controller
         $parameters = Parameters::all();
         $param = $parameters[0];
 
-        $shippings = Shippings::all();
+        $shippings = Shippings::where('delete', 0)->get();
 
         return view('admin.admin', compact('param', 'shippings'));
     }
@@ -72,4 +74,52 @@ class HomeController extends Controller
 
         return back()->with('message', 'Parametry zostały zmienione!');
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function editOrder(string $id)
+    {
+        $order = Orders::findOrFail($id);
+        $totlOrder = totalOrder($order->carts);
+
+        return view('admin.order', compact('order', 'totlOrder'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function updateOrder(Request $request, string $id)
+    {
+        //dd($request);
+        $order = Orders::findOrFail($id);
+        $validated = $request->validate([
+           'status' => 'required|in:nowe, w realizacji, zrealizowane',
+        ]);
+
+        $order->update($validated);
+
+        return back()->with('message', 'Status zamówienia został zmieniony!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function deleteOrder(string $id)
+    {
+        $order = Orders::findOrFail($id);
+        if($order->status != 'zrealizowane')
+            return back()->with('messageError', 'Zamówienie nie może być usunięte! Nie ma statusu ZREALIZOWANE');
+        $temp = $order->toArray();
+        $temp['delete'] = 1;
+        $order->update($temp);
+
+        return redirect()->route('home')->with('message', 'Zamówienie zostało usunięte!');
+    }
+
+    public function statute()
+    {
+        return view('admin.statute');
+    }
+
 }

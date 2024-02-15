@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 
+use App\Enums\ShippingType;
+use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
+use App\Models\Orders;
 use Illuminate\Http\Request;
 use App\Models\Shippings;
 use App\Rules\Price;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -24,11 +28,27 @@ class ShippingController extends Controller
      */
     private function validator($data)
     {
-        return Validator::make($data, [
+        $type = 'required|in:';
+        $types = ShippingType::TYPES;
+        foreach ($types as $TYPE) {
+            $type .= $TYPE;
+            if( next($types) ) {
+                $type .= ',';
+            }
+        }
+        //dd($type);
+        $validated = Validator::make($data, [
             'name' => 'required|max:255',
             'shipping' => ['required', new Price],
-            'type' => 'required',
-        ]);
+            'type' => $type,
+            'active' => 'boolean',
+            'delete' => 'boolean'
+            //'type' => 'required|in:text,photo',
+        ])->validate();
+
+        $validated = Arr::add($validated, 'active', 0);
+        $validated = Arr::add($validated, 'delete', 0);
+        return $validated;
     }
 
     /**
@@ -52,7 +72,7 @@ class ShippingController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->validator($request->all())->validate();
+        $data = $this->validator($request->all());
         $temp = preg_replace("~\D~", "", $data['shipping'] ); // usuwa ze stringa wszystko co nie jest cyrą - czyli precinek z ceny
         $data['shipping'] = $temp;
 
@@ -88,15 +108,34 @@ class ShippingController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        //dd($request);
         $shipping = Shippings::findOrFail($id);
-        $data = $this->validator($request->all())->validate();
+        $oldPrice = $shipping['shipping'];
+        $oldName = $shipping['name'];
+        $oldType = $shipping['type'];
+        $oldAcitve = $shipping['active'];
+
+        $data = $this->validator($request->all());
 
         $temp = preg_replace("~\D~", "", $data['shipping'] ); // usuwa ze stringa wszystko co nie jest cyrą - czyli precinek z ceny
         $data['shipping'] = $temp;
+        if($oldAcitve != $data['active'] && $oldType == $data['type'] && $oldName == $data['name'] && $oldPrice == $data['shipping'])
+        {
+            $shipping->update($data); // zmiana tylko aktywności metody płatności
+        }
+        else
+        {
+            // dodanie nowej metody płatności z poprawionymi parametrami
+            Shippings::create($data);
+            //zmiana bieżącej płatności na nieaktywną i usuniętą
+            $data['shipping'] = $oldPrice;
+            $data['delete'] = 1;
+            $data['active'] = 0;
+            $shipping->update($data);
+        }
 
-        $shipping->update($data);
-
-        return back()->with('message', 'Metoda płatności została zmieniona!');
+        return redirect(route('admin'))->with('message', 'Metoda płatności została zmieniona.');
+        //return back()->with('message', 'Metoda płatności została zmieniona!');
     }
 
     /**
@@ -105,7 +144,18 @@ class ShippingController extends Controller
     public function destroy(string $id)
     {
         $shipping = Shippings::findOrFail($id);
-        $shipping->delete();
+//        $orders = Orders::where('shipping_id', $id)->get();
+//        if($orders->count() > 0)
+//        {
+//            return redirect(route('admin'))->with('messageError', 'Metoda płatności nie może zostać usunięta, zamówienia mają ustawioną tą metodę płatności!');
+//        }
+        // przy kasowaniu płatności nie usuwamy jej z bazy, zmieniamy delete na 1 i active na 0
+        // płatność nie jest widziana w składaniu zamówienia i panelu administratora
+        // płatność jest dostępna w wyświetlaniu szczegółw zamówienia u admina
+        $temp = $shipping->toArray();
+        $temp['delete'] = 1;
+        $temp['active'] = 0;
+        $shipping->update($temp);
 
         return redirect(route('admin'))->with('message', 'Metoda płatności została usunięta!');
     }

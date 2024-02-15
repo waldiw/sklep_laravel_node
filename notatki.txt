@@ -14,11 +14,15 @@ npm run dev
 php artisan route:clear
 php artisan route:cache
 
+php artisan optimize:clear
+
 php artisan migrate
 
 php artisan make:model badania
 
 php artisan make:controller UserController
+
+php artisan make:model statute -mcr  tworzy model, controller i migration
 
 ----------- przekierowanie na stronę logowania ---------
 przy próbie przejścia do strony tylko dla zalogowanych użytkowników przekierowujemy do strony logowania
@@ -26,6 +30,7 @@ dostosowujemy app/Http/Middleware/Authenticate.php
 
 return $request->expectsJson() ? null : route('login');
 
+route('login') zamiast abort(403)
 
 ------------- dodanie admina do bazy -------------------
 w pliku .env dopisujemy dane admina:

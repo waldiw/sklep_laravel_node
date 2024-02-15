@@ -14,10 +14,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://kit.fontawesome.com/9449ff78fb.js" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
 
     <!-- Scripts -->
 {{--    @vite(['resources/sass/app.scss', 'resources/js/app.js'])--}}
@@ -51,14 +56,11 @@
 </div>
 <footer @auth class="Cend" @endauth>
     @guest
-    <div>
-        <a href="https://osmolecko.pl">O nas</a>&nbsp;
-        <a href="regulamin.html">Regulamin</a>&nbsp;
-        <a href="#">Kontakt</a>&nbsp;
-        <a href="home.html">Sklep</a>&nbsp;
-    </div>
+        @include('Components.footer')
     @endguest
-    <div><i class="fa-regular fa-copyright"></i>&nbsp;OSM Olecko</div>
+    @auth
+        <div><i class="fa-regular fa-copyright"></i>&nbsp;OSM Olecko</div>
+    @endauth
 </footer>
 <br>
 
@@ -67,5 +69,8 @@
     @csrf
 </form>
 @endauth
+
+@yield('script')
+
 </body>
 </html>

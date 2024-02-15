@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Rules\Price;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -22,12 +23,16 @@ class ArticleController extends Controller
      */
     private function validator($data)
     {
-        return Validator::make($data, [
+        $validated =  Validator::make($data, [
             'name' => 'required|max:255',
             'description' => 'required',
             'price' => ['required', new Price],
-            'image' => 'nullable|image|max:1024'
-        ]);
+            'image' => 'nullable|image|max:1024',
+            'active' => 'boolean',
+        ])->validate();
+
+        $validated = Arr::add($validated, 'active', 0);
+        return $validated;
     }
 
     /**
@@ -60,7 +65,7 @@ class ArticleController extends Controller
 //             'price' => ['required', new Price],
 //             'image' => 'nullable|image|max:1024'
 //        ]);
-        $data = $this->validator($request->all())->validate();
+        $data = $this->validator($request->all());
         //$data['price'] = '1111';
         $temp = preg_replace("~\D~", "", $data['price'] ); // usuwa ze stringa wszystko co nie jest cyrą - czyli precinek z ceny
         $data['price'] = $temp;
@@ -102,7 +107,7 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($id);
         $oldImage = $article->image; // zmienna przechowuje scieżkę od zdjecia edytowanego wpisu
-        $data = $this->validator($request->all())->validate();
+        $data = $this->validator($request->all());
 
         $temp = preg_replace("~\D~", "", $data['price'] ); // usuwa ze stringa wszystko co nie jest cyrą - czyli precinek z ceny
         $data['price'] = $temp;

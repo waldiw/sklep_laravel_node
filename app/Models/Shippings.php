@@ -13,6 +13,8 @@ class Shippings extends Model
         'name',
         'shipping',
         'type',
+        'active',
+        'delete',
     ];
 
     // relacja one to one - shipping_id w klasie Orders
