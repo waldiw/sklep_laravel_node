@@ -7,8 +7,10 @@ use App\Models\Article;
 use App\Models\Orders;
 use App\Models\Shippings;
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -75,10 +77,30 @@ class AdminController extends Controller
     }
 
     /**
+     * Validate data to store or update.
+     */
+    private function validator($data)
+    {
+        $validated =  Validator::make($data, [
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],            
+        ])->validate();
+
+        $validated = Arr::add($validated, 'role', 'operator');
+
+        return $validated;
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function storeUser(Request $request)
     {
+        //dd($request);
+        $data = $this->validator($request->all());
+        //dd($data);
+        $user = User::create($data);
 
+        return redirect()->route('sadmin')->with('message', 'Operator został dodany!');
     }
 }

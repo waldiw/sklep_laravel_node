@@ -73,7 +73,7 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/sadmin', [AdminController::class, 'index'])->name('sadmin');
         Route::get('/sadmin-change-password/{id}', [AdminController::class, 'editPassword'])->name('editPassword');
         Route::put('/sadmin-change-password/{id}', [AdminController::class, 'updatePassword']);
-        Route::delete('/saddmin-delete-user/{id}', [AdminController::class, 'destroyUser'])->name('deleteUser');
+        Route::delete('/sadmin-delete-user/{id}', [AdminController::class, 'destroyUser'])->name('deleteUser');
         Route::get('/sadmin-add-user', [AdminController::class, 'createUser'])->name('createUser');
         Route::post('sadmin-add-user', [AdminController::class, 'storeUser']);
     });
