@@ -30,7 +30,7 @@ class AdminController extends Controller
         $users = User::all();
         $orders = Orders::all();
         $shippings = Shippings::all();
-        return view('admin.index', compact('users', 'orders', 'shippings'));
+        return view('sAdmin.index', compact('users', 'orders', 'shippings'));
     }
 
     /**
@@ -40,7 +40,7 @@ class AdminController extends Controller
     {
         $user = User::findOrFail($id);
         //$user = $user->toArray();
-        return view('admin.editPassword', compact('user'));
+        return view('sAdmin.editPassword', compact('user'));
     }
 
     /**
@@ -73,7 +73,7 @@ class AdminController extends Controller
      */
     public function createUser()
     {
-        return view('admin.createUser');
+        return view('sAdmin.createUser');
     }
 
     /**
@@ -83,7 +83,7 @@ class AdminController extends Controller
     {
         $validated =  Validator::make($data, [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],            
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ])->validate();
 
         $validated = Arr::add($validated, 'role', 'operator');
@@ -102,5 +102,52 @@ class AdminController extends Controller
         $user = User::create($data);
 
         return redirect()->route('sadmin')->with('message', 'Operator został dodany!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroyAllShippings()
+    {
+        Shippings::where('delete', 1)->delete();
+
+        return redirect(route('sadmin'))->with('message', 'Metody płatności zostały usunięte!');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function showOrder(string $id)
+    {
+        $order = Orders::findOrFail($id);
+        $totlOrder = totalOrder($order->carts);
+
+        return view('sAdmin.order', compact('order', 'totlOrder'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroyOrder(string $id)
+    {
+        $order = Orders::findOrFail($id);
+        $order->delete();
+
+        return redirect(route('sadmin'))->with('message', 'Zamówienie zostało usunięte!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroyAllOrders()
+    {
+        $orders = Orders::where('delete', 1)->get();
+//        foreach ($orders as $order){
+//            $order->delete();
+//        }
+        // skrócony zapis powyższej pętli
+        $orders->each->delete();
+
+        return redirect(route('sadmin'))->with('message', 'Zamówienia zostały usunięte!');
     }
 }

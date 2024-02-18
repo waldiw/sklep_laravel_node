@@ -25,7 +25,8 @@
                 <td class="orderListAdress">{{ $order->adress }}</td>
                 <td class="orderListPhone">{{ $order->phone }}</td>
                 <td class="orderListStatus">{{ $order->status }}</td>
-                <td class="orderListAction"><a href="{{ route('editOrder', $order->id) }}">szczegóły</a></td>
+{{--                <td class="orderListAction"><a href="{{ route('editOrder', $order->id) }}">szczegóły</a></td>--}}
+                <td><button class="btnUser info" onclick="window.location.href='{{ route('editOrder', $order->id ) }}';">Szczegóły</button></td>
             </tr>
         @endforeach
         </tbody>

@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StatuteController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,6 +53,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/zamówienie-szczegóły/{id}', [OperatorController::class, 'editOrder'])->name('editOrder');
     Route::put('/zamówienie-szczegóły/{id}', [OperatorController::class, 'updateOrder']);
     Route::delete('/zamówienie-szczegóły/{id}', [OperatorController::class, 'deleteOrder'])->name('deleteOrder');
+
     Route::get('/regulamin', [StatuteController::class, 'show'])->name('statute');
     Route::put('/regulamin', [StatuteController::class, 'update']);
 
@@ -75,7 +77,11 @@ Route::middleware(['auth'])->group(function() {
         Route::put('/sadmin-change-password/{id}', [AdminController::class, 'updatePassword']);
         Route::delete('/sadmin-delete-user/{id}', [AdminController::class, 'destroyUser'])->name('deleteUser');
         Route::get('/sadmin-add-user', [AdminController::class, 'createUser'])->name('createUser');
-        Route::post('sadmin-add-user', [AdminController::class, 'storeUser']);
+        Route::post('/sadmin-add-user', [AdminController::class, 'storeUser']);
+        Route::delete('/sadmin-delete-all-shippings', [AdminController::class, 'destroyAllShippings'])->name('deleteAllShippings');
+        Route::get('/sadmin-show-order/{id}', [AdminController::class, 'showOrder'])->name('showOrder');
+        Route::delete('/sadmin-show-order/{id}', [AdminController::class, 'destroyOrder']);
+        Route::delete('/sadmin-delete-all-orders', [AdminController::class, 'destroyAllOrders'])->name('deleteAllOrders');
     });
 //    Route::get('/dodaj', [ArticleController::class, 'create'])->name('createArticle')->middleware('can:isOperator');
 });

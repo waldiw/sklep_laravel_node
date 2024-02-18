@@ -5,30 +5,42 @@
 @section('content')
     <h2>Super admin:</h2>
     <div class="containerWrap">
-        <table class="table">
+        <table id="tUser">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Login</th>
-                <th scope="col" colspan="2" class="alignC">Akcja</th>
+                <td >#</td>
+                <td >Login</td>
+                <td colspan="2">Akcja</td>
             </tr>
             </thead>
             <tbody>
             @foreach($users as $user)
                 <tr>
-                    <th class="colorW" scope="row">{{ $loop->iteration }}</th>
+                    <td class="colorW">{{ $loop->iteration }}</td>
                     <td >{{ $user->email }}</td>
-
-                    <td class="alignC"><a href="{{ route('editPassword', $user->id ) }}">Zmień hasło</a></td>
+                    <td>
+                        <button class="btnUser info" onclick="window.location.href='{{ route('editPassword', $user->id ) }}';">Zmień hasło</button>
+                    </td>
+{{--                    <td class="alignC"><a href="{{ route('editPassword', $user->id ) }}">Zmień hasło</a></td>--}}
                     @if($user->role != \App\Enums\UserRole::ADMINISTRATOR)
-                        <td class="alignC"><a href="{{ route('deleteUser', $user->id) }}" id="show-user" data-url="#">Usuń</a></td>
+                        <td class="alignC">
+                            <form method="post" action="{{ route('deleteUser', $user->id) }}">
+                                @csrf
+                                {{ method_field('DELETE') }}
+{{--                            <a href="{{ route('deleteUser', $user->id) }}" id="show-user" data-url="#">Usuń</a>--}}
+{{--                                <button type="submit" onclick="return confirm('Usunąć operatora?')">Usuń</button>--}}
+                                <button type="submit" class="btnUser danger" onclick="return confirm('Usunąć operatora?')">Usuń</button>
+                            </form>
+                        </td>
                     @endif
                 </tr>
             @endforeach
             </tbody>
         </table>
-        <button class="btnDodaj" onclick="window.location.href='{{ route('createUser') }}';">Dodaj użytkownika <i class="fa-regular fa-square-plus" style="color: #ffffff;"></i></button>
-    </div>
+        <div class="btnAddUser">
+        <button class="btnDodaj " onclick="window.location.href='{{ route('createUser') }}';">Dodaj użytkownika <i class="fa-regular fa-square-plus" style="color: #ffffff;"></i></button>
+        </div>
+        </div>
 
 
     <h4>Metody płatności:</h4>
@@ -61,7 +73,7 @@
             </tbody>
         </table>
 
-        <form method="post" action="">
+        <form method="post" action="{{ route('deleteAllShippings') }}">
             @csrf
             {{ method_field('DELETE') }}
             <br>
@@ -95,13 +107,16 @@
 
                 <td class="orderListStatus">{{ $order->status }}</td>
                 <td class="{{ $order->delete === 1 ? 'enabled' : '' }}">{{ $order->delete === 1 ? 'tak' : 'nie' }}</td>
-                <td class="orderListAction"><a href="{{ route('editOrder', $order->id) }}">szczegóły</a></td>
+                <td class="orderListAction">
+                    <button class="btnUser info" onclick="window.location.href='{{ route('showOrder', $order->id ) }}';">Szczegóły</button>
+                </td>
+{{--                <td class="orderListAction"><a href="{{ route('editOrder', $order->id) }}">szczegóły</a></td>--}}
             </tr>
         @endforeach
         </tbody>
     </table>
 
-    <form method="post" action="">
+    <form method="post" action="{{ route('deleteAllOrders') }}">
         @csrf
         {{ method_field('DELETE') }}
         <br>

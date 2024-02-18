@@ -94,7 +94,8 @@ class OperatorController extends Controller
         //dd($request);
         $order = Orders::findOrFail($id);
         $validated = $request->validate([
-           'status' => 'required|in:nowe, w realizacji, zrealizowane',
+//           'status' => 'required|in:nowe, w realizacji, zrealizowane',
+            'status' => 'required',
         ]);
 
         $order->update($validated);

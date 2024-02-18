@@ -712,7 +712,7 @@ input[type=radio]:hover {
 }
 
 .enabled {
-    color: #be0024;
+    color: #fc0028;
 }
 
 .confirmReg {
@@ -730,8 +730,13 @@ input[type=radio]:hover {
   width: 100%;
 }
 
-#shippingTable tr {
-  border-bottom: 1px solid !important;
+#shippingTable > thead > tr:nth-of-type(1) {
+    border-bottom: 1px solid;
+    font-weight: bold;
+}
+
+#shippingTable > tbody > tr {
+    border-bottom: 1px solid #cecece;
 }
 
 #shippingName {
@@ -784,8 +789,13 @@ input[type=radio]:hover {
 /*------------------------------------*/
 
 /*------ order list ------------------*/
-#orderList tr {
-    border-bottom: 1px solid !important;
+#orderList > thead > tr:nth-of-type(1) {
+    border-bottom: 1px solid;
+    font-weight: bold;
+}
+
+#orderList > tbody > tr {
+    border-bottom: 1px solid #cecece;
 }
 
 #orderList td {
@@ -828,6 +838,55 @@ input[type=radio]:hover {
     justify-content: flex-end;
 }
 
+/*------------------------------------*/
+/*--------- sadmin -------------------*/
+
+
+#tUser {
+    width: 100%;
+}
+
+#tUser > thead > tr:nth-of-type(1) {
+    border-bottom: 1px solid;
+    font-weight: bold;
+}
+
+#tUser > tbody > tr {
+    border-bottom: 1px solid #cecece;
+}
+
+
+
+.btnUser {
+    border: none;
+    background-color: inherit;
+    padding: 0 10px;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.info {
+    color: dodgerblue;
+}
+
+.info:hover {
+    background: #2196F3;
+    color: white;
+}
+
+.danger {
+    color: red;
+}
+
+.danger:hover {
+    background: #f44336;
+    color: white;
+}
+
+.btnAddUser {
+    margin-top: 22px;
+}
 /*------------------------------------*/
 
 .p20 {
