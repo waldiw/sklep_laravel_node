@@ -175,16 +175,16 @@
                 <button id="btnSubmit" type="submit" class="btnContinueShopping" >Potwierdź zamówienie &nbsp;<i class="fa-solid fa-check" style="color: #ffffff;"></i></button>
             </div>
         </div>
-
+        <br>
     </div><!-- /.oontainerOrder -->
-
-
 
 </div>
 
+<footer>
+    @include('Components.footer')
+</footer>
 
-@include('Components.footer')
-<br>
+
 
 <script>
     $(document).ready(function () {

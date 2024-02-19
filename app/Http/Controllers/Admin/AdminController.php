@@ -109,8 +109,22 @@ class AdminController extends Controller
      */
     public function destroyAllShippings()
     {
-        Shippings::where('delete', 1)->delete();
+        //Shippings::where('delete', 1)->delete();
+        $error = [];
+        $shippings = Shippings::where('delete', 1)->get();
+        $shippings->each(function ($shipping) {
+            $order = Orders::where('shipping_id', $shipping->id);
+            if($ode->count == 0) 
+            {
+            $x = 1;//$shipping->delete()
+            }
+        else
+            {
+            $error = $shipping->name;
+            }
+        });
 
+        dd($error);
         return redirect(route('sadmin'))->with('message', 'Metody płatności zostały usunięte!');
     }
 

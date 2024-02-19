@@ -110,14 +110,14 @@
                 @endif
             </div>
         </div><!-- /.shopping-cart -->
-
+        <br>
     </div>
 
 </div>
 
-
+<footer>
 @include('Components.footer')
-<br>
+</footer>
 
 @include('Components.confirm')
 
