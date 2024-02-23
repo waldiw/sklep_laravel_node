@@ -7,7 +7,10 @@ body {
 }
 .alignRight {
     text-align: right;
+}
 
+.alignCenter {
+    text-align: center;
 }
 
 .containerW {
@@ -287,6 +290,19 @@ input[type=file]:hover {
 .message.is-error {
     background-color: #ff8799;
     color: #bf213c;
+}
+
+.alert {
+  width: 700px;
+  max-width: 100%;
+  padding: 20px 30px;
+  position: fixed !important;
+  top: 15%;
+  left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+  margin: auto;
+  z-index: 10 !important;
 }
 
 /*------------------------------------------*/

@@ -111,21 +111,33 @@ class AdminController extends Controller
     {
         //Shippings::where('delete', 1)->delete();
         $error = [];
+        $del = false;
         $shippings = Shippings::where('delete', 1)->get();
-        $shippings->each(function ($shipping) {
-            $order = Orders::where('shipping_id', $shipping->id);
-            if($ode->count == 0) 
+        //$shippings->each(function ($shipping) {
+            foreach($shippings as $shipping) {
+            $order = Orders::where('shipping_id', $shipping->id)->get();
+            if($order->count() == 0) 
             {
-            $x = 1;//$shipping->delete()
+            $shipping->delete();
+            $del = true;
             }
         else
             {
-            $error = $shipping->name;
+            array_push($error, $shipping->name);
             }
-        });
-
-        dd($error);
-        return redirect(route('sadmin'))->with('message', 'Metody płatności zostały usunięte!');
+        }
+        //});
+        //$error = ['aaa','bbb'];
+        //dd($error);
+        if($del == false && count($error) > 0)
+        {
+            return back()->with('warning', 'Metody płatności nie mogą być usunięte! Są użyte w istniejącym zamówieniu.<br>' . implode('<br>', $error));
+        }
+        if ($del == true && count($error) > 0)
+        {
+            return back()->with('warning', 'Nieaktywne metody płatności zostały usunięte!<br>' . 'Metody płatności nie mogą być usunięte! Są użyte w istniejącym zamówieniu.<br>' . implode('<b>', $error));
+        }
+        return back()->with('message', 'Nieaktywne metody płatności zostały usunięte!');
     }
 
     /**
