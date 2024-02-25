@@ -62,17 +62,7 @@
 
                     </div>
                     <button class="btnAddCart" onclick="">Dodaj do koszyka <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></button>
-                    {{--  <div class="containerButton">
-
-                        <button class="btnDodaj buttonA" onclick="window.location.href='{{ route('editArticle', $article->id) }}';">Edytuj <i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i></button>
-                        <form method="post" action="{{ Route('deleteArticle', $article->id) }}">
-                            @csrf
-                            {{ method_field('DELETE') }}
-                            <button class="btnDelete buttonA" onclick="return confirm('Usunąć artykuł?')">Usuń <i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
-                        </form>
-
-                    </div>  --}}
-                </div>
+                 </div>
 
             @endforeach
     </div>
@@ -81,14 +71,13 @@
     @endif
 
 
-        {{--  <div class="wrapW">
-            <div class="foto"><img src="img/art1_160.jpg" alt="Cukierki" class="responsive"></div>
-            <div class="opisTowaru">Cukierki Krówka pakowane hermetycznie</div>
-            <div class="cena">Cena: 35,00 zł</div>
-            <div class="dodaj"><a href="#">Dodaj do koszyka</a>&nbsp;
-                <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
-            </div>
-        </div>  --}}
+          <div class="wrapW">
+        <div class="nazwaTowaru">Cukierki Krówka reklamowe</div>
+            <div class="foto"><img src="img/cukierki_reklamowe.jpg" alt="Cukierki" class="responsive"></div>
+            <div class="opisTowaru">Cukierki Krówka zawijane w papierki z logo zamawiającego.<br>Zachęcamy do kontaktu.</div>
+
+              <button class="btnContact" onclick="">Kntakt z nami</button>
+        </div>
 
 
     </div>
@@ -123,6 +112,8 @@
   </div>
 
 </div>
+
+<script src="{{ asset('js/cookies.js') }}"></script>
 
 <script>
     $(document).ready(function () {

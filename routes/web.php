@@ -25,9 +25,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ShopController::class, 'index'])->name('shop');
 Route::get('/regulamin-sklepu', [ShopController::class, 'statute'])->name('showStatute');
 
+Route::get('/cart',[CartController::class, 'index'])->name('cart');
 Route::post('/add-to-cart',[CartController::class, 'addToCart'])->name('dodaj');
 Route::get('/load-cart-data',[CartController::class, 'cartLoadByAjax']);
-Route::get('/cart',[CartController::class, 'index'])->name('cart');
+
 Route::post('/update-cart',[CartController::class, 'updateCart'])->name('update');
 Route::post('/delete-cart',[CartController::class, 'deleteFromCart'])->name('delete');
 Route::post('/clear-cart',[CartController::class, 'clearCart'])->name('clear');

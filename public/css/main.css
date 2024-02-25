@@ -69,9 +69,16 @@ footer > div > a:hover {
   cursor: pointer;
 }
 
+.wrapFooter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
 
 
-.btnAddCart {
+
+.btnAddCart, .btnContact {
   border: 1px;
   width: 100%;
   /* margin: auto; */
@@ -82,7 +89,7 @@ footer > div > a:hover {
   height: 30px;
 }
 
-.btnAddCart:hover {
+.btnAddCart:hover, .btnContact:hover {
   /* color: silver; */
   background: #0056b3;
   cursor: pointer;
@@ -99,6 +106,10 @@ footer > div > a:hover {
 
 .nazwaTowaru, .opisTowaru, .dodaj, .cena {
   padding: 5px 15px 5px 15px;
+}
+
+.nazwaTowaru {
+    height: 55px;
 }
 
 .cena {
@@ -679,6 +690,10 @@ input:focus, textarea:focus {
 .tdShipping {
 
     text-align: end !important;
+}
+
+#toPay {
+    width: 85px;
 }
 
 input[type=radio] {
