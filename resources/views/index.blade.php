@@ -76,7 +76,7 @@
             <div class="foto"><img src="img/cukierki_reklamowe.jpg" alt="Cukierki" class="responsive"></div>
             <div class="opisTowaru">Cukierki Krówka zawijane w papierki z logo zamawiającego.<br>Zachęcamy do kontaktu.</div>
 
-              <button class="btnContact" onclick="">Kntakt z nami</button>
+              <button class="btnContact" onclick="location.href = '{{ route('showContact') }}'">Kntakt z nami</button>
         </div>
 
 

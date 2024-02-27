@@ -1,17 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 
 use App\Enums\ShippingType;
-use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
-use App\Models\Orders;
-use Illuminate\Http\Request;
 use App\Models\Shippings;
 use App\Rules\Price;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ShippingController extends Controller

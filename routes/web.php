@@ -1,18 +1,19 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\OperatorController;
 use App\Http\Controllers\Admin\ArticleController;
-// use App\Http\Controllers\Admin\ShippingController;
-// use App\Http\Controllers\Admin\StatuteController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\OperatorController;
+use App\Http\Controllers\Admin\ShippingController;
+use App\Http\Controllers\Admin\StatuteController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\ShopController;
-use App\Http\Controllers\StatuteController;
-use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+// use App\Http\Controllers\Admin\ShippingController;
+// use App\Http\Controllers\Admin\StatuteController;
 
 /*
 |--------------------------------------------------------------------------

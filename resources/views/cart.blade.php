@@ -25,7 +25,7 @@
 
     <script src="{{ asset('js/iao-alert.jquery.min.js') }}"></script>
 
-    
+
 
 </head>
 
@@ -42,7 +42,7 @@
             <div class="">
 
                     <div class="clearCart">
-                        <button class="btnContinueShopping" onclick="window.location.href='{{ route('shop') }}';">Kontynuj zakupy <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></button>
+                        <button class="btnContinueShopping" onclick="location.href='{{ route('shop') }}';">Kontynuj zakupy <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></button>
                         <button  id="confirm" class="btnDeleteCart">Wyczyść koszyk &nbsp;<i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
                     </div>
                     <table id="cartTable" class="cartTable">

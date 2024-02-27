@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\contact;
 use App\Models\statute;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -47,6 +48,9 @@ class ShopController extends Controller
 
     public function contact()
     {
-        return view('contact');
+        $temp = contact::all();
+        $contact = $temp[0]->contact;
+
+        return view('contact', compact('contact'));
     }
 }
