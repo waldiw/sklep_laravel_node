@@ -13,6 +13,9 @@
             <a href="{{ route('statute') }}">Regulamin</a>
         </li>
         <li>
+            <a href="{{ route('contact') }}">Kontakt</a>
+        </li>
+        <li>
             <a class="koszyk" href="#" onclick="document.getElementById('logout-form').submit();" >{{ __('Logout') }}</a>
         </li>
     </ul>

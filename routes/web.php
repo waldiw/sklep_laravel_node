@@ -3,11 +3,14 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\OperatorController;
 use App\Http\Controllers\Admin\ArticleController;
+// use App\Http\Controllers\Admin\ShippingController;
+// use App\Http\Controllers\Admin\StatuteController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StatuteController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,11 +27,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ShopController::class, 'index'])->name('shop');
 Route::get('/regulamin-sklepu', [ShopController::class, 'statute'])->name('showStatute');
+Route::get('/kontakt-z-nami', [ShopController::class, 'contact'])->name('showContact');
 
 Route::get('/cart',[CartController::class, 'index'])->name('cart');
 Route::post('/add-to-cart',[CartController::class, 'addToCart'])->name('dodaj');
 Route::get('/load-cart-data',[CartController::class, 'cartLoadByAjax']);
-
 Route::post('/update-cart',[CartController::class, 'updateCart'])->name('update');
 Route::post('/delete-cart',[CartController::class, 'deleteFromCart'])->name('delete');
 Route::post('/clear-cart',[CartController::class, 'clearCart'])->name('clear');
@@ -57,6 +60,9 @@ Route::middleware(['auth'])->group(function() {
 
     Route::get('/regulamin', [StatuteController::class, 'show'])->name('statute');
     Route::put('/regulamin', [StatuteController::class, 'update']);
+
+    Route::get('/kontakt', [ContactController::class, 'show'])->name('contact');
+    Route::put('/kontakt', [ContactController::class, 'update']);
 
     Route::get('/administracja', [OperatorController::class, 'admin'])->name('admin');
     Route::put('/administracja/{id}', [OperatorController::class, 'update'])->name('adminUpdate');

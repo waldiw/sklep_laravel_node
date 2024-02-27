@@ -44,4 +44,9 @@ class ShopController extends Controller
 
         return view('statute', compact('statute'));
     }
+
+    public function contact()
+    {
+        return view('contact');
+    }
 }

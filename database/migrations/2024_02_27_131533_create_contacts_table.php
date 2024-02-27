@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('shippings', function (Blueprint $table) {
-            $table->boolean('active')->default(0)->after('type');
+        Schema::create('contacts', function (Blueprint $table) {
+            $table->id();
+            $table->longText('contact')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('shippings', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('contacts');
     }
 };

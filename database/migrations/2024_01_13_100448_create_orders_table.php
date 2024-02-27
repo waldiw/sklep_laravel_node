@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string('vatCity', 40)->nullable();
             $table->string('vatPost', 40)->nullable();
             $table->enum('status', array('nowe', 'w realizacji', 'zrealizowane'))->default('nowe');
+            $table->bigInteger('shipping_id');
+            $table->boolean('delete')->default(0);
             $table->uuid('uuid');
 
             $table->timestamps();
