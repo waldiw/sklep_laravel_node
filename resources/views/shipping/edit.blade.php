@@ -14,7 +14,6 @@
         <div class="form-field">
             <input class="form-field @error('name') is-invalid error @enderror" value="{{ $shipping->name }}" type="text" name="name" placeholder="Nazwa metody płatności">
         </div>
-
              <div class="">
         <label for="shipping" class="articleFormLabel">Cena zł:</label>
             <input id="shipping" class="@error('shipping') is-invalid error @enderror" value="{{ number_format($shipping->shipping / 100, 2, ',', ' ') }}" type="text" name="shipping" placeholder="00,00">

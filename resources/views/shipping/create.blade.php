@@ -11,7 +11,6 @@
         <div class="form-field">
             <input class="form-field @error('name') is-invalid error @enderror" value="{{ old('name') }}" type="text" name="name" placeholder="Nazwa metody płatności">
         </div>
-
         <div class="">
         <label for="shipping" class="">Koszt wysyłki zł:</label>
             <input id="shipping" class="@error('shipping') is-invalid error @enderror" value="{{ old('shipping') }}" type="text" name="shipping" placeholder="00,00">
@@ -23,19 +22,12 @@
                 @foreach(\App\Enums\ShippingType::TYPES as $type)
                     <option value="{{ $type }}" @selected(old('type') == $type)>{{ $type }}</option>
                 @endforeach
-{{--                @foreach ($product->versions as $version)--}}
-{{--                    <option value="{{ $version }}" @selected(old('version') == $version)>--}}
-{{--                        {{ $version }}--}}
-{{--                    </option>--}}
-{{--                @endforeach--}}
             </select>
         </div>
-
         <div class="checkActive">
             <input type="checkbox" id="checkActive" name="active" value="1" {{ old('active') ? 'checked' : '' }}/>
             <label for="checkActive"> Aktywny</label>
         </div>
-
         <div class="btnAddArticle">
             <button type="submit" class="btnDodaj">Dodaj metodę płatności <i class="fa-regular fa-square-plus" style="color: #ffffff;"></i></button>
         </div>

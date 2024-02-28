@@ -41,7 +41,14 @@ class ShopController extends Controller
     public function statute()
     {
         $temp = statute::all();
-        $statute = $temp[0]->statute;
+        if($temp->count() > 0)
+        {
+            $statute = $temp[0]->contact;
+        }
+        else
+        {
+            $statute = "";
+        }
 
         return view('statute', compact('statute'));
     }
@@ -49,8 +56,15 @@ class ShopController extends Controller
     public function contact()
     {
         $temp = contact::all();
-        $contact = $temp[0]->contact;
-
+        if($temp->count() > 0)
+        {
+            $contact = $temp[0]->contact;
+        }
+        else
+        {
+            $contact = "";
+        }
+        
         return view('contact', compact('contact'));
     }
 }

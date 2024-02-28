@@ -12,9 +12,6 @@ use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-// use App\Http\Controllers\Admin\ShippingController;
-// use App\Http\Controllers\Admin\StatuteController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -91,7 +88,6 @@ Route::middleware(['auth'])->group(function() {
         Route::delete('/sadmin-show-order/{id}', [AdminController::class, 'destroyOrder']);
         Route::delete('/sadmin-delete-all-orders', [AdminController::class, 'destroyAllOrders'])->name('deleteAllOrders');
     });
-//    Route::get('/dodaj', [ArticleController::class, 'create'])->name('createArticle')->middleware('can:isOperator');
 });
 
 

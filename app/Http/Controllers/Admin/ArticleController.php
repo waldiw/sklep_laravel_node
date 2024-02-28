@@ -58,36 +58,19 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-//        $data = $request->validate([
-//             'name' => 'required|max:255',
-//             'description' => 'required',
-//             'price' => ['required', new Price],
-//             'image' => 'nullable|image|max:1024'
-//        ]);
         $data = $this->validator($request->all());
-        //$data['price'] = '1111';
-        $temp = preg_replace("~\D~", "", $data['price'] ); // usuwa ze stringa wszystko co nie jest cyrą - czyli precinek z ceny
+         $temp = preg_replace("~\D~", "", $data['price'] ); // usuwa ze stringa wszystko co nie jest cyrą - czyli precinek z ceny
         $data['price'] = $temp;
 
         if(isset($data['image'])) {
             $path = $request->file('image')->store('photos');
             $data['image'] = $path;
         }
-        //dd($data);
         $article = Article::create($data);
 
         session()->flash('message', 'Artykuł został dodany do bazy');
 
         return redirect(route('articles'));
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-
     }
 
     /**

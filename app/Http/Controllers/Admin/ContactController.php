@@ -24,7 +24,6 @@ class ContactController extends Controller
      */
     public function show()
     {
-        //dd($statute);
          $contacts = contact::all();
 
          if($contacts->count() > 0)

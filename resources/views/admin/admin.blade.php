@@ -12,12 +12,7 @@
                 <label for="account" class="articleFormLabel">Numer konta:</label>
                 <input id="account" class="form-field @error('account') is-invalid error @enderror" value="{{ $param->account }}" type="text" name="account" placeholder="Numer konta">
             </div>
-
-{{--              <div class="">--}}
-{{--                <label for="shipping" class="articleFormLabel">Koszt wysyłki:</label>--}}
-{{--                <input id="shipping" class="@error('shipping') is-invalid error @enderror" value="{{ number_format($param->shipping1 / 100, 2, ',', ' ') }}" type="text" name="shipping" placeholder="00,00">--}}
-{{--            </div>--}}
-            <div>
+           <div>
                 <label for="email" class="articleFormLabel">Adres e-mail do wysyłania potwierdzenia:</label>
                 <input id="email" type="text" class=" @error('email') is-invalid error @enderror" name="email" value="{{ $param->email }}" >
             </div>
@@ -27,7 +22,6 @@
         </form>
         <h4>Metody płatności:</h4>
         @if($shippings->count() > 0)
-
             <table id="shippingTable">
                 <thead>
                     <tr>
@@ -49,7 +43,6 @@
                                     onclick="window.location.href='{{ route('editShipping', $shipping->id) }}';">Edytuj
                                 <i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i></button>
                         </td>
-                        {{--  <td><button class="btnDodaj buttonA" onclick="window.location.href='{{ route('editArticle', $article->id) }}';">Edytuj <i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i></button></td>  --}}
                         <td>
                             <form method="post" action="{{ Route('deleteShipping', $shipping->id) }}">
                                 @csrf
@@ -59,7 +52,6 @@
                             </form>
                         </td>
                     </tr>
-
                 @endforeach
                 </tbody>
             </table>

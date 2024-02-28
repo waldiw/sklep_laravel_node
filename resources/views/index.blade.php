@@ -26,9 +26,9 @@
 
 <body>
 <div class="containerW shadow">
-    <!-- <div class="image"> -->
+    
     <img src="img/baner1.jpg" alt="Nature" class="responsive">
-    <!-- </div> -->
+    
     @include('Components.navbar')
 
     <div class="opis">
@@ -46,24 +46,15 @@
         @if($articles->count() > 0)
         <div class="containerWrap">
             @foreach($articles as $article)
-                {{--  <img src="{{ $article->photo }}" alt="">  --}}
                 <div class="wrapW articleDetails">
                     <div id="{{ $article->id }}" data-article="{{ route('showArticle', $article->id) }}" class="showArticle">
-
                         <input type="hidden" class="productId" value="{{ $article->id }}">
                         <div class="nazwaTowaru">{{ $article->name }}</div>
                         <div class="foto"><img src="{{ $article->photo }}" alt="Cukierki" class="responsive"></div>
-                        {{--  <div class="opisTowaru">{{ $article->description }}</div>  --}}
                         <div class="cena">Cena: {{ numberFormat($article->price) }} zł</div>
-                        {{--  <div class="dodaj"><a href="#">Dodaj do koszyka</a>&nbsp;
-                            <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
-                        </div>  --}}
-
-
-                    </div>
+                     </div>
                     <button class="btnAddCart" onclick="">Dodaj do koszyka <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></button>
                  </div>
-
             @endforeach
     </div>
     @else

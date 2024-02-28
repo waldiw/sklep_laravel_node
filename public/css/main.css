@@ -52,12 +52,6 @@ footer > div > a:hover {
   justify-content: center;
 }
 
-/* .containerWrap::after {
-
-  content: '';
-  flex: auto;
-  } */
-
 .wrapW {
   width: 200px;
   border: 1px solid rgb(12, 7, 118);

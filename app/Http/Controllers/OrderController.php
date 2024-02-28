@@ -110,7 +110,7 @@ class OrderController extends Controller
         if(array_key_exists('vat',$data)) {
             $validated = Validator::make($data, [
                 'name' => 'required|max:255',
-                'street' => 'nullable',
+                'street' => 'required',
                 'city' => 'required|max:255',
                 'post' => ['required', new Post],
                 'email' => 'required|email:rfc,dns',
@@ -119,7 +119,7 @@ class OrderController extends Controller
                 'vat' => 'boolean',
                 'vatNumber' => 'required|max:13',
                 'vatName' => 'required|max:225',
-                'vatStreet' => 'nullable',
+                'vatStreet' => 'required',
                 'vatCity' => 'required|max:255',
                 //'vatPost' => ['required_if:vat,1', new Post],
                 'vatPost' => ['required', new Post],
@@ -136,7 +136,7 @@ class OrderController extends Controller
         else{
             $validated = Validator::make($data, [
                 'name' => 'required|max:255',
-                'street' => 'nullable',
+                'street' => 'required',
                 'city' => 'required|max:255',
                 'post' => ['required', new Post],
                 'email' => 'required|email:rfc,dns',

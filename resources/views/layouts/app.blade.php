@@ -24,15 +24,14 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 
-    <!-- Scripts -->
 {{--    @vite(['resources/sass/app.scss', 'resources/js/app.js'])--}}
 </head>
 <body>
 @include('Components.message')
 <div class="containerW shadow">
-    <!-- <div class="image"> -->
+    
     <img src=" {{asset('img/baner1.jpg') }}" alt="Nature" class="responsive">
-    <!-- </div> -->
+    
     <div class="navbarW sticky">
         @auth
 
@@ -49,7 +48,7 @@
     <div class="opis">
 
         @yield('content')
-{{--        @include('includes.nav')--}}
+
 
     </div>
 
