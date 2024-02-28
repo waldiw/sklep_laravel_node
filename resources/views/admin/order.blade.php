@@ -27,15 +27,15 @@
         </tr>
         </thead>
         <tbody id="tableBody">
-    @foreach ($order->carts as $data)
-        <tr class="tableRow">
-            <td>{{ $data['name'] }}</td>
-            <td>{{ numberFormat($data['price']) }} zł</td>
-            <td>{{ $data['quantity'] }}</td>
-            <td class="subtotal alignRight">{{ numberFormat($data['price'] * $data['quantity']) }} zł</td>
-        </tr>
-    @endforeach
-    </tbody>
+        @foreach ($order->carts as $data)
+            <tr class="tableRow">
+                <td>{{ $data['name'] }}</td>
+                <td>{{ numberFormat($data['price']) }} zł</td>
+                <td>{{ $data['quantity'] }}</td>
+                <td class="subtotal alignRight">{{ numberFormat($data['price'] * $data['quantity']) }} zł</td>
+            </tr>
+        @endforeach
+        </tbody>
         <tfoot>
         <tr>
             <td></td>
@@ -67,21 +67,23 @@
             <label for="status" class="articleFormLabel">Status:</label>
             <select id="status" name="status">
                 <option value="" disabled>Wybierz status</option>
-{{--                @foreach(\App\Enums\ShippingType::TYPES as $type)--}}
                 <option value="nowe"{{ $order->status === 'nowe' ? ' selected' : '' }}>nowe</option>
-                <option value="w realizacji"{{ $order->status === 'w realizacji' ? ' selected' : '' }}>w realizacji</option>
-                <option value="zrealizowane"{{ $order->status === 'zrealizowane' ? ' selected' : '' }}>zrealizowane</option>
-{{--                @endforeach--}}
+                <option value="w realizacji"{{ $order->status === 'w realizacji' ? ' selected' : '' }}>w realizacji
+                </option>
+                <option value="zrealizowane"{{ $order->status === 'zrealizowane' ? ' selected' : '' }}>zrealizowane
+                </option>
             </select>
-            <button type="submit" class="btnDodaj">Zmień status <i class="fa-solid fa-repeat" style="color: #ffffff;"></i></button>
-         </form>
+            <button type="submit" class="btnDodaj">Zmień status <i class="fa-solid fa-repeat"
+                                                                   style="color: #ffffff;"></i></button>
+        </form>
     </div>
     <div class="orderDelete">
-    <form method="post" action="{{ Route('deleteOrder', $order->id) }}">
-        @csrf
-        {{ method_field('DELETE') }}
-        <button class="btnDelete orderDeleteBtn" onclick="return confirm('Usunąć zamówienie?')">Usuń zamówienie <i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
-    </form>
+        <form method="post" action="{{ Route('deleteOrder', $order->id) }}">
+            @csrf
+            {{ method_field('DELETE') }}
+            <button class="btnDelete orderDeleteBtn" onclick="return confirm('Usunąć zamówienie?')">Usuń zamówienie <i
+                    class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
+        </form>
     </div>
     <br>
 @endsection

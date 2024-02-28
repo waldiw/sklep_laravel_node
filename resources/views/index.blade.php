@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-sklep</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-{{--        <link rel="stylesheet" href="css\main.css">--}}
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css" >
-    <link href="{{ asset('css/iao-alert.min.css') }}" rel="stylesheet" type="text/css" >
+    {{--        <link rel="stylesheet" href="css\main.css">--}}
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/iao-alert.min.css') }}" rel="stylesheet" type="text/css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,9 +26,9 @@
 
 <body>
 <div class="containerW shadow">
-    
+
     <img src="img/baner1.jpg" alt="Nature" class="responsive">
-    
+
     @include('Components.navbar')
 
     <div class="opis">
@@ -44,64 +44,60 @@
     <div class="containerWrap">
 
         @if($articles->count() > 0)
-        <div class="containerWrap">
-            @foreach($articles as $article)
-                <div class="wrapW articleDetails">
-                    <div id="{{ $article->id }}" data-article="{{ route('showArticle', $article->id) }}" class="showArticle">
-                        <input type="hidden" class="productId" value="{{ $article->id }}">
-                        <div class="nazwaTowaru">{{ $article->name }}</div>
-                        <div class="foto"><img src="{{ $article->photo }}" alt="Cukierki" class="responsive"></div>
-                        <div class="cena">Cena: {{ numberFormat($article->price) }} zł</div>
-                     </div>
-                    <button class="btnAddCart" onclick="">Dodaj do koszyka <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></button>
-                 </div>
-            @endforeach
-    </div>
-    @else
-        <h3>Brak artykułów</h3>
-    @endif
+            <div class="containerWrap">
+                @foreach($articles as $article)
+                    <div class="wrapW articleDetails">
+                        <div id="{{ $article->id }}" data-article="{{ route('showArticle', $article->id) }}"
+                             class="showArticle">
+                            <input type="hidden" class="productId" value="{{ $article->id }}">
+                            <div class="nazwaTowaru">{{ $article->name }}</div>
+                            <div class="foto"><img src="{{ $article->photo }}" alt="Cukierki" class="responsive"></div>
+                            <div class="cena">Cena: {{ numberFormat($article->price) }} zł</div>
+                        </div>
+                        <button class="btnAddCart" onclick="">Dodaj do koszyka <i class="fa-solid fa-cart-shopping"
+                                                                                  style="color: #ffffff;"></i></button>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <h3>Brak artykułów</h3>
+        @endif
 
-
-          <div class="wrapW">
-        <div class="nazwaTowaru">Cukierki Krówka reklamowe</div>
+        <div class="wrapW">
+            <div class="nazwaTowaru">Cukierki Krówka reklamowe</div>
             <div class="foto"><img src="img/cukierki_reklamowe.jpg" alt="Cukierki" class="responsive"></div>
-            <div class="opisTowaru">Cukierki Krówka zawijane w papierki z logo zamawiającego.<br>Zachęcamy do kontaktu.</div>
-
-              <button class="btnContact" onclick="location.href = '{{ route('showContact') }}'">Kntakt z nami</button>
+            <div class="opisTowaru">Cukierki Krówka zawijane w papierki z logo zamawiającego.<br>Zachęcamy do kontaktu.
+            </div>
+            <button class="btnContact" onclick="location.href = '{{ route('showContact') }}'">Kntakt z nami</button>
         </div>
-
-
     </div>
 </div>
 
 <footer>
-@include('Components.footer')
+    @include('Components.footer')
 </footer>
 <br>
-
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
 
-  <!-- Modal content -->
-  <div class="modalContent articleDetails">
-    <div class="modalHeader">
-        <div id="modalPhoto" class="modalPhoto"></div>
-        <div id="articleName"></div>
-        <span class="close">&times;</span>
+    <!-- Modal content -->
+    <div class="modalContent articleDetails">
+        <div class="modalHeader">
+            <div id="modalPhoto" class="modalPhoto"></div>
+            <div id="articleName"></div>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modalBody">
+            <input id="articleId" type="hidden" class="productId" value="5">
+            <p id="articleDescription"></p>
+            <div id="articlePrice" class="cena"></div>
+        </div>
+        <div class="modalFooter">
+            <button class="btnAddCart">Dodaj do koszyka <i class="fa-solid fa-cart-shopping"
+                                                           style="color: #ffffff;"></i></button>
+        </div>
     </div>
-    <div class="modalBody">
-        <input id="articleId" type="hidden" class="productId" value="5">
-        <p id="articleDescription"></p>
-        <div id="articlePrice" class="cena"></div>
-    </div>
-    <div class="modalFooter">
-        <button class="btnAddCart" >Dodaj do koszyka <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></button>
-
-    </div>
-
-  </div>
-
 </div>
 
 <script src="{{ asset('js/cookies.js') }}"></script>

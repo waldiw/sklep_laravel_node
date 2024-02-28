@@ -5,7 +5,6 @@
 @section('content')
     <h2>Zamówienia:</h2>
 
-
     <table id="orderList">
         <thead id="orderListHead">
         <tr>
@@ -25,12 +24,14 @@
                 <td class="orderListAdress">{{ $order->adress }}</td>
                 <td class="orderListPhone">{{ $order->phone }}</td>
                 <td class="orderListStatus">{{ $order->status }}</td>
-{{--                <td class="orderListAction"><a href="{{ route('editOrder', $order->id) }}">szczegóły</a></td>--}}
-                <td><button class="btnUser info" onclick="window.location.href='{{ route('editOrder', $order->id ) }}';">Szczegóły</button></td>
+                <td>
+                    <button class="btnUser info"
+                            onclick="window.location.href='{{ route('editOrder', $order->id ) }}';">Szczegóły
+                    </button>
+                </td>
             </tr>
         @endforeach
         </tbody>
     </table>
-
 
 @endsection

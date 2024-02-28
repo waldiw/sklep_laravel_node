@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Rules\Price;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -21,7 +26,7 @@ class ArticleController extends Controller
     /**
      * Validate data to store or update.
      */
-    private function validator($data)
+    private function validator($data): array
     {
         $validated =  Validator::make($data, [
             'name' => 'required|max:255',
@@ -38,7 +43,7 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $articles = Article::all();
         // $articles = Article::orderBy('nazwa', 'desc')->get(); // pobieranie wszystkich artukułow posortowanyc wg nazwy , dokumentacja - Database: Query Builder
@@ -48,7 +53,7 @@ class ArticleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('articles.create');
     }
@@ -56,13 +61,13 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $data = $this->validator($request->all());
-         $temp = preg_replace("~\D~", "", $data['price'] ); // usuwa ze stringa wszystko co nie jest cyrą - czyli precinek z ceny
+        $temp = preg_replace("~\D~", "", $data['price']); // usuwa ze stringa wszystko co nie jest cyrą - czyli precinek z ceny
         $data['price'] = $temp;
 
-        if(isset($data['image'])) {
+        if (isset($data['image'])) {
             $path = $request->file('image')->store('photos');
             $data['image'] = $path;
         }
@@ -76,7 +81,7 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $article = Article::findOrFail($id);
 
@@ -86,7 +91,7 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): RedirectResponse
     {
         $article = Article::findOrFail($id);
         $oldImage = $article->image; // zmienna przechowuje scieżkę od zdjecia edytowanego wpisu
@@ -112,7 +117,7 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $article = Article::findOrFail($id);
         $article->delete();

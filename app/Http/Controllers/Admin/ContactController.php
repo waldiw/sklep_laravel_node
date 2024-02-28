@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\contact;
-use App\Models\statute;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -22,7 +25,7 @@ class ContactController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
          $contacts = contact::all();
 
@@ -40,7 +43,7 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
         $contacts = contact::all();
         $validated = $request->validate([

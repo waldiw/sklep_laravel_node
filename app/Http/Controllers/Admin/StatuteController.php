@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\statute;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class StatuteController extends Controller
@@ -21,7 +25,7 @@ class StatuteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         //dd($statute);
         $statutes = statute::all();
@@ -40,13 +44,13 @@ class StatuteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
         $statutes = statute::all();
         $validated = $request->validate([
             'statute' => 'required',
         ]);
-//dd($validated);
+
         if($statutes->count() == 0)
         {
             statute::create($validated);
@@ -55,7 +59,6 @@ class StatuteController extends Controller
         {
             $statutes[0]->update($validated);
         }
-        //$statute = statute::firstOrCreate($validated);
 
         return back()->with('message', 'Statut został zmieniony!');
     }

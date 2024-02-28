@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Shippings extends Model
 {
@@ -18,7 +19,7 @@ class Shippings extends Model
     ];
 
     // relacja one to one - shipping_id w klasie Orders
-    public function order()
+    public function order(): HasOne
     {
         return $this->hasOne(Orders::class);
     }

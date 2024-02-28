@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Article;
 use App\Models\Orders;
 use App\Models\Parameters;
 use App\Models\Shippings;
 use App\Rules\Account;
-use App\Rules\Price;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class OperatorController extends Controller
@@ -28,7 +30,7 @@ class OperatorController extends Controller
     /**
      * Validate data to store or update.
      */
-    private function validator($data)
+    private function validator($data): \Illuminate\Validation\Validator
     {
         return Validator::make($data, [
             'account' => ['required', new Account],
@@ -40,15 +42,15 @@ class OperatorController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
-    public function index()
+    public function index(): Renderable
     {
         $orders = Orders::where('delete', 0)->get();
         return view('admin.home', compact('orders'));
     }
 
-    public function admin()
+    public function admin(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $parameters = Parameters::all();
         $param = $parameters[0];
@@ -61,15 +63,10 @@ class OperatorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): RedirectResponse
     {
         $param = Parameters::findOrFail($id);
         $data = $this->validator($request->all())->validate();
-
-        //$temp = preg_replace("~\D~", "", $data['shipping'] ); // usuwa ze stringa wszystko co nie jest cyrą - czyli precinek z ceny
-        //$data['shipping'] = $temp;
-
-
         $param->update($data);
 
         return back()->with('message', 'Parametry zostały zmienione!');
@@ -78,7 +75,7 @@ class OperatorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function editOrder(string $id)
+    public function editOrder(string $id): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $order = Orders::findOrFail($id);
         $totlOrder = totalOrder($order->carts);
@@ -89,7 +86,7 @@ class OperatorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function updateOrder(Request $request, string $id)
+    public function updateOrder(Request $request, string $id): RedirectResponse
     {
         //dd($request);
         $order = Orders::findOrFail($id);
@@ -106,7 +103,7 @@ class OperatorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function deleteOrder(string $id)
+    public function deleteOrder(string $id): RedirectResponse
     {
         $order = Orders::findOrFail($id);
         if($order->status != 'zrealizowane')
@@ -118,7 +115,7 @@ class OperatorController extends Controller
         return redirect()->route('home')->with('message', 'Zamówienie zostało usunięte!');
     }
 
-    public function statute()
+    public function statute(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('admin.statute');
     }

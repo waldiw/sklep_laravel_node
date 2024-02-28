@@ -27,7 +27,6 @@ class ConfirmMail extends Mailable
      */
     public function envelope(): Envelope
     {
-
         return new Envelope(
             subject: $this->subject,
         );
@@ -42,7 +41,6 @@ class ConfirmMail extends Mailable
             view: $this->view,
             with: [
                 'body' => $this->body,
-
             ],
         );
     }

@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Article;
 use App\Models\Orders;
 use App\Models\Shippings;
 use App\Models\User;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
@@ -25,7 +28,7 @@ class AdminController extends Controller
         $this->middleware('can:isAdministrator');
     }
 
-    public function index()
+    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $users = User::all();
         $orders = Orders::all();
@@ -36,7 +39,7 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function editPassword(string $id)
+    public function editPassword(string $id): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $user = User::findOrFail($id);
         //$user = $user->toArray();
@@ -46,7 +49,7 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function updatePassword(Request $request, string $id)
+    public function updatePassword(Request $request, string $id): RedirectResponse
     {
         $user = User::findOrFail($id);
         $validated = $request->validate([
@@ -60,7 +63,7 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroyUser(string $id)
+    public function destroyUser(string $id): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $user = User::findOrFail($id);
         $user->delete();
@@ -71,7 +74,7 @@ class AdminController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function createUser()
+    public function createUser(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('sAdmin.createUser');
     }
@@ -79,7 +82,7 @@ class AdminController extends Controller
     /**
      * Validate data to store or update.
      */
-    private function validator($data)
+    private function validator($data): array
     {
         $validated =  Validator::make($data, [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -94,7 +97,7 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function storeUser(Request $request)
+    public function storeUser(Request $request): RedirectResponse
     {
         //dd($request);
         $data = $this->validator($request->all());
@@ -107,7 +110,7 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroyAllShippings()
+    public function destroyAllShippings(): RedirectResponse
     {
         $error = [];
         $del = false;
@@ -141,7 +144,7 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function showOrder(string $id)
+    public function showOrder(string $id): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $order = Orders::findOrFail($id);
         $totlOrder = totalOrder($order->carts);
@@ -152,7 +155,7 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroyOrder(string $id)
+    public function destroyOrder(string $id): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $order = Orders::findOrFail($id);
         $order->delete();
@@ -163,7 +166,7 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroyAllOrders()
+    public function destroyAllOrders(): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $orders = Orders::where('delete', 1)->get();
 //        foreach ($orders as $order){

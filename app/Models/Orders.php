@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -37,7 +39,7 @@ class Orders extends Model
     ];
 
     // w widoku dzięki getAdressAttribute pobieramy cały adres $order->adress
-    public function getAdressAttribute()
+    public function getAdressAttribute(): string
     {
         $string = ':street, :city, :post';
 
@@ -47,7 +49,7 @@ class Orders extends Model
     }
 
     // w widoku dzięki getAdressVatAttribute pobieramy cały adres $order->adressVat
-    public function getvatAdressAttribute()
+    public function getvatAdressAttribute(): string
     {
         $string = ':street, :city, :post';
 
@@ -57,7 +59,7 @@ class Orders extends Model
     }
 
     // relacja one to many
-    public function carts()
+    public function carts(): HasMany
     {
         // orderUuid - klucz z klasy Orders, uuid - klucz z klasy Cart
         // czyli w klasie Cart do klucza uuid odnosi się klucz orderUuid z klasy Orders
@@ -65,13 +67,14 @@ class Orders extends Model
     }
 
     // relacja one to one
-    public function shipping()
+    public function shipping(): BelongsTo
     {
         return $this->belongsTo(Shippings::class);
     }
 
     // this is the recommended way for declaring event handlers
-    public static function boot() {
+    public static function boot(): void
+    {
         parent::boot();
         self::deleting(function($orders) { // before delete() method call this
             $orders->carts()->each(function($cart) {

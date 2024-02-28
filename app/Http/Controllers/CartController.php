@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Models\Parameters;
-use App\Models\Shippings;
-use App\Models\User;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
@@ -13,16 +13,14 @@ use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
-    public function index()
+    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-
         $cart = cart(); // cart() funkcja z helpers.php
         return view('cart')->with('cart_data', $cart);
     }
 
-    public function addToCart(Request $request)
+    public function addToCart(Request $request): void
     {
-
         $prodId = $request->input('product_id');
         $quantity = $request->input('quantity');
 
@@ -32,7 +30,6 @@ class CartController extends Controller
             $cartData = json_decode($cookieData, true);
         } else {
             $cartData = array();
-            //Str::uuid()->toString();
             Cookie::queue(Cookie::make('shopping_uuid', Str::uuid()->toString(), 60));
         }
 
@@ -49,18 +46,13 @@ class CartController extends Controller
         Cookie::queue(Cookie::make('shopping_cart', $itemData, 60));
     }
 
-    public function cartLoadByAjax()
+    public function cartLoadByAjax(): bool|string
     {
-
         $totalCart = totalCart(); // totalCart() - funkcja z helpers.php
-        //$param = Parameters::all();
-//        $shipping = Shippings::first()->shipping;
-//        $toPay = $shipping + $totalCart;
         return json_encode(array('totalCart' => $totalCart));
-
     }
 
-    public function updateCart(Request $request)
+    public function updateCart(Request $request): bool|string
     {
         $prodId = $request->input('product_id');
         $quantity = $request->input('quantity');
@@ -78,7 +70,7 @@ class CartController extends Controller
         return json_encode(array('subtotal' => $subtotal, 'id' => $prodId));
     }
 
-    public function deleteFromCart(Request $request)
+    public function deleteFromCart(Request $request): void
     {
         $prodId = $request->input('product_id');
 
@@ -97,10 +89,9 @@ class CartController extends Controller
         {
             Cookie::queue(Cookie::make('shopping_cart', $itemData, 60));
         }
-        //return view('index')->with('cart_data',$cartData);
     }
 
-    public function clearCart()
+    public function clearCart(): void
     {
         Cookie::queue(Cookie::forget('shopping_cart'));
         Cookie::queue(Cookie::forget('shopping_uuid'));

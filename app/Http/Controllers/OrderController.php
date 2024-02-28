@@ -3,24 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ShippingType;
-use App\Mail\ConfirmMail;
 use App\Models\Cart;
 use App\Models\Orders;
-use App\Models\Parameters;
 use App\Models\Shippings;
 use App\Rules\Post;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
 
-    public function index()
+    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-
         $cart = cart(); // cart() funkcja z helpers.php
         $totalCart = totalCart(); // totalCart() - funkcja z helpers.php
 
@@ -30,16 +32,8 @@ class OrderController extends Controller
         return view('order', compact('cart', 'totalCart', 'shippings', 'toPay'));
     }
 
-    public function order(Request $request)
+    public function order(Request $request): Application|Response|RedirectResponse|\Illuminate\Contracts\Foundation\Application|ResponseFactory
     {
-        //$data = $this->validator($request->all())->validate();
-//        if($request->has('vat')){
-//            return $request->get('vat');
-//        }else{
-//            return 'not vat';
-//        }
-        //return $request;
-
         if ($request->hasCookie('shopping_uuid')) {
 
             $data = $this->validator($request->all());
@@ -48,10 +42,6 @@ class OrderController extends Controller
 
             Orders::create($data);
 
-//        'name',
-//        'orderUuid',
-//        'quantity',
-//        'price',
             $cart = cart(); // cart() funkcja z helpers.php
             foreach ($cart as $item) {
                 $cartElement = [];
@@ -79,14 +69,12 @@ class OrderController extends Controller
         return response('Strona wygasła.', 403);
     }
 
-    public function summary()
+    public function summary(): View|Application|Factory|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         if (Cookie::has('shopping_uuid')) {
             $uuid = stripslashes(Cookie::get('shopping_uuid'));
             $summaryOrder = summaryOrder($uuid); // summaryOrder() - funkcja z helpers.php
 
-            //$orderId = orderId($uuid); // funkcja z helpers.php
-            //$orderId = Orders::where('uuid', $uuid)->first()->id;
             if(Orders::where('uuid', $uuid)->first()->shipping->type === ShippingType::PRZELEW)
                 $summary = summaryAccount($uuid);
             else
@@ -96,8 +84,6 @@ class OrderController extends Controller
 
             Cookie::queue(Cookie::forget('shopping_uuid'));
 
-            //$account = account();
-
             return view('summary', compact('summaryOrder', 'summary'));
         }
         return redirect()->route('shop');
@@ -105,7 +91,7 @@ class OrderController extends Controller
     /**
      * Validate data to store or update.
      */
-    private function validator($data)
+    private function validator($data): array
     {
         if(array_key_exists('vat',$data)) {
             $validated = Validator::make($data, [

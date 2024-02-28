@@ -7,7 +7,12 @@ use App\Enums\ShippingType;
 use App\Http\Controllers\Controller;
 use App\Models\Shippings;
 use App\Rules\Price;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,7 +28,7 @@ class ShippingController extends Controller
     /**
      * Validate data to store or update.
      */
-    private function validator($data)
+    private function validator($data): array
     {
         $type = 'required|in:';
         $types = ShippingType::TYPES;
@@ -49,17 +54,9 @@ class ShippingController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('shipping.create');
     }
@@ -67,7 +64,7 @@ class ShippingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $data = $this->validator($request->all());
         $temp = preg_replace("~\D~", "", $data['shipping'] ); // usuwa ze stringa wszystko co nie jest cyrą - czyli precinek z ceny
@@ -82,28 +79,19 @@ class ShippingController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $shipping = shippings::findOrFail($id);
 
         return view('shipping.edit', compact('shipping'));
     }
 
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         //dd($request);
         $shipping = Shippings::findOrFail($id);
@@ -138,7 +126,7 @@ class ShippingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $shipping = Shippings::findOrFail($id);
 //        $orders = Orders::where('shipping_id', $id)->get();

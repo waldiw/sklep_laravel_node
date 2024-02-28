@@ -12,9 +12,8 @@ use Illuminate\Support\Facades\Mail;
  * helpers from cart with OrderController.
  *
  */
-function totalCart()
+function totalCart(): float|int
 {
-
     $totalCart = 0;
     if(Cookie::get('shopping_cart'))
     {
@@ -33,7 +32,7 @@ function totalCart()
  * helpers from cart with OrderController.
  *
  */
-function cart()
+function cart(): array
 {
     $cart = [];
 
@@ -56,7 +55,6 @@ function cart()
             ];
             array_push($cart, $a);
         }
-
         return $cart;
     }
     return $cart;
@@ -65,10 +63,9 @@ function cart()
  * helpers display number two decimal digits and decimal separator coma.
  *
  */
-function numberFormat($number)
+function numberFormat($number): string
 {
     return number_format($number / 100, 2, ',', ' ');
-
 }
 
 /**
@@ -77,16 +74,8 @@ function numberFormat($number)
  */
 function summaryOrder($uuid): string
 {
-//    $html = '<ul>';
-//
-//    foreach ($cart as $item) {
-//        $html .= '<li>' . $item . '</li>';
-//    }
-//
-//    $html .= '</ul>';
     $order = Orders::where('uuid', $uuid)->first();
     $orderCart = $order->carts; // pobiera zamówienie numer uuid  i z niego pozycje koszyka
-    //$shipping = $order->shipping->shipping;
     $totlOrder = totalOrder($orderCart);
 
     $table = '<table id="orderTable" class="orderTable">
@@ -132,11 +121,6 @@ function summaryOrder($uuid): string
                 </tr>
             </tfoot>
         </table>';
-
-    //$shippingType = $order->shipping->type;
-    //$table .= '<br>' . $shippingType;
-    //$message = $table . summaryAccount($uuid);
-
     return $table;
 }
 
@@ -155,11 +139,8 @@ function summaryAccount($uuid): string
 
 function summaryCash($uuid): string
 {
-    //$account = account();
     $order = Orders::where('uuid', $uuid)->first();
     $orderId = $order->id;
-    //$shipping = $order->shipping->name;
-
     $summary = '<br><p>Zamówienie numer <b>' . $orderId . '</b> zostało przyjęte w e-sklepie OSM Olecko.</p>';
 
     return $summary;
@@ -169,7 +150,7 @@ function summaryCash($uuid): string
  * send confirm email to customer and admin.
  *
  */
-function confirmMail($uuid)
+function confirmMail($uuid): void
 {
     // send email to customer
     $order = Orders::where('uuid', $uuid)->first(); // pobiera zamówienie numer uuid
@@ -200,12 +181,6 @@ function confirmMail($uuid)
     Mail::to($email)->send(new ConfirmMail($bodyAdmin, $subject, $view));
 }
 
-//function emailOrder($uuid)
-//{
-//    $order = Orders::where('uuid', $uuid)->first();
-//    return $order->email;
-//}
-
 function email()
 {
     $param = Parameters::all();
@@ -217,18 +192,8 @@ function account()
     $param = Parameters::all();
     return $param[0]->account;
 }
-//function orderId($uuid)
-//{
-//    $order = Orders::where('uuid', $uuid)->first(); // pobiera zamówienie numer uuid
-//    return $order->id;
-//}
-//function shipping()
-//{
-//    $param = Parameters::all();
-//    return $param[0]->shipping;
-//}
 
-function totalOrder($cart)
+function totalOrder($cart): float|int
 {
     $totalOrder = 0;
     foreach ($cart as $item)

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\contact;
 use App\Models\statute;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Article;
@@ -13,7 +16,7 @@ use App\Models\Article;
 class ShopController extends Controller
 {
 
-    public function index()
+    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $articles = Article::where('active', 1)->get();
         // $articles = Article::orderBy('nazwa', 'desc')->get(); // pobieranie wszystkich artukułow posortowanyc wg nazwy , dokumentacja - Database: Query Builder
@@ -38,7 +41,7 @@ class ShopController extends Controller
         //return $path;;
     }
 
-    public function statute()
+    public function statute(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $temp = statute::all();
         if($temp->count() > 0)
@@ -53,7 +56,7 @@ class ShopController extends Controller
         return view('statute', compact('statute'));
     }
 
-    public function contact()
+    public function contact(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $temp = contact::all();
         if($temp->count() > 0)
@@ -64,7 +67,7 @@ class ShopController extends Controller
         {
             $contact = "";
         }
-        
+
         return view('contact', compact('contact'));
     }
 }

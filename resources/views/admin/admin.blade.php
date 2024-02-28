@@ -10,26 +10,29 @@
 
             <div class="form-field">
                 <label for="account" class="articleFormLabel">Numer konta:</label>
-                <input id="account" class="form-field @error('account') is-invalid error @enderror" value="{{ $param->account }}" type="text" name="account" placeholder="Numer konta">
+                <input id="account" class="form-field @error('account') is-invalid error @enderror"
+                       value="{{ $param->account }}" type="text" name="account" placeholder="Numer konta">
             </div>
-           <div>
+            <div>
                 <label for="email" class="articleFormLabel">Adres e-mail do wysyłania potwierdzenia:</label>
-                <input id="email" type="text" class=" @error('email') is-invalid error @enderror" name="email" value="{{ $param->email }}" >
+                <input id="email" type="text" class=" @error('email') is-invalid error @enderror" name="email"
+                       value="{{ $param->email }}">
             </div>
             <div class="btnAddArticle">
-                <button type="submit" class="btnDodaj">Zapisz ustawienia <i class="fa-regular fa-square-plus" style="color: #ffffff;"></i></button>
+                <button type="submit" class="btnDodaj">Zapisz ustawienia <i class="fa-regular fa-square-plus"
+                                                                            style="color: #ffffff;"></i></button>
             </div>
         </form>
         <h4>Metody płatności:</h4>
         @if($shippings->count() > 0)
             <table id="shippingTable">
                 <thead>
-                    <tr>
-                        <td>Nazwa</td>
-                        <td>Cena</td>
-                        <td>Typ</td>
-                        <td>Aktywny</td>
-                    </tr>
+                <tr>
+                    <td>Nazwa</td>
+                    <td>Cena</td>
+                    <td>Typ</td>
+                    <td>Aktywny</td>
+                </tr>
                 </thead>
                 <tbody>
                 @foreach($shippings as $shipping)

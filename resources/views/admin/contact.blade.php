@@ -9,10 +9,11 @@
 
         {{ method_field('PUT') }}
 
-    <label for="statute"></label>
-    <textarea class="form-control" id="contact" placeholder="kontakt" name="contact">{{ $contact }}</textarea>
+        <label for="statute"></label>
+        <textarea class="form-control" id="contact" placeholder="kontakt" name="contact">{{ $contact }}</textarea>
         <div class="btnAddArticle">
-            <button type="submit" class="btnDodaj">Zapisz dane kontaktowe <i class="fa-regular fa-square-plus" style="color: #ffffff;"></i></button>
+            <button type="submit" class="btnDodaj">Zapisz dane kontaktowe <i class="fa-regular fa-square-plus"
+                                                                             style="color: #ffffff;"></i></button>
         </div>
     </form>
 @endsection

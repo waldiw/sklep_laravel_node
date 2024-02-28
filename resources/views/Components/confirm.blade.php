@@ -14,7 +14,5 @@
             <button class="btnAddCart btnYes">Tak</button>
             <button class="btnDelete btnNo">Nie</button>
         </div>
-
     </div>
-
 </div>
