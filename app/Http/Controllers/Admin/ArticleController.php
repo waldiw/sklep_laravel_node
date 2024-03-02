@@ -68,7 +68,9 @@ class ArticleController extends Controller
         $data['price'] = $temp;
 
         if (isset($data['image'])) {
-            $path = $request->file('image')->store('photos');
+            //$path = $request->file('image')->store('photos');
+            //$path = $request->file('image')->store('photos');
+            $path = Storage::disk('public_uploads')->put('', $request->file('image'));
             $data['image'] = $path;
         }
         $article = Article::create($data);
@@ -101,7 +103,8 @@ class ArticleController extends Controller
         $data['price'] = $temp;
 
         if(isset($data['image'])) {
-            $path = $request->file('image')->store('photos');
+            //$path = $request->file('image')->store('photos'); // zapis zdjęć w storage
+            $path = Storage::disk('public_uploads')->put('', $request->file('image')); // zapis zdjęć w public
             $data['image'] = $path;
         }
 
@@ -109,7 +112,8 @@ class ArticleController extends Controller
 
         // jeżeli w przesyłanych danych do zmiany jest zdjecie, to kasujemy stare
         if(isset($data['image'])) {
-            Storage::delete(($oldImage));
+            //Storage::delete($oldImage); // kasowawnie zdjęć ze storage
+            unlink(public_path('uploads/' . $oldImage)); // kasowanie zdjęć z public
         }
         return back()->with('message', 'Artykuł został zmieniony!');
     }

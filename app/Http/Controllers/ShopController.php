@@ -34,7 +34,8 @@ class ShopController extends Controller
         //     $path = $request->file('image')->store('photos');
         //     $article['image'] = $path;
         // }
-        $path = '/storage/' . $article['image'];
+        //$path = '/storage/' . $article['image'];
+        $path = 'uploads/' . $article['image'];
         $article['image'] = $path;
 
         return response()->json($article);
@@ -46,7 +47,7 @@ class ShopController extends Controller
         $temp = statute::all();
         if($temp->count() > 0)
         {
-            $statute = $temp[0]->contact;
+            $statute = $temp[0]->statute;
         }
         else
         {

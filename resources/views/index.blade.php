@@ -50,9 +50,17 @@
                         <div id="{{ $article->id }}" data-article="{{ route('showArticle', $article->id) }}"
                              class="showArticle">
                             <input type="hidden" class="productId" value="{{ $article->id }}">
-                            <div class="nazwaTowaru">{{ $article->name }}</div>
-                            <div class="foto"><img src="{{ $article->photo }}" alt="Cukierki" class="responsive"></div>
-                            <div class="cena">Cena: {{ numberFormat($article->price) }} zł</div>
+
+                            <div class="content">
+                                <div class="upper">
+                                    <div class="nazwaTowaru">{{ $article->name }}</div>
+                                    <div class="foto"><img src="{{ $article->photo }}" alt="Cukierki" class="responsive"></div>
+                                </div>
+                                <div class="bottom">
+                                    <div class="cena">Cena: {{ numberFormat($article->price) }} zł</div>
+                                </div>
+                            </div>
+
                         </div>
                         <button class="btnAddCart" onclick="">Dodaj do koszyka <i class="fa-solid fa-cart-shopping"
                                                                                   style="color: #ffffff;"></i></button>

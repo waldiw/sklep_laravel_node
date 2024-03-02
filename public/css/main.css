@@ -130,6 +130,19 @@ footer > div > a:hover {
     font-size: 0.8em;
 }
 
+.content {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 255px;
+}
+
+.content .upper {
+    justify-content: normal;
+}
+
+
+
 /*-------- button dodania artykułu ---------*/
 .addArticle {
     display: flex;

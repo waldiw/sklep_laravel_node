@@ -1,0 +1,22 @@
+w pliku filesystems.php z katalogu app/config dodajemy wpis
+
+'public_uploads' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads',
+        ],
+
+zdjęcia zapisywane będą w katalogu public/uploads
+
+w modelu Article.php w metodzie getPhotoAttribute() dodajemy kierowanie na katalog uploads:
+
+return 'uploads/' . $this->image;
+
+w kontrolerze ArticleController.php dodajemy zapis zdjęcia w katalogu public/uploads
+i dodajemy wygenerowaną nazwę zdjęcia do modelu do zapisania w bazie:
+
+$path = Storage::disk('public_uploads')->put('', $request->file('image'));
+$data['image'] = $path;
+
+zdjęcie kasujemy komendą php:
+
+unlink(public_path('uploads/' . $oldImage));
