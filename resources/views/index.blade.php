@@ -100,8 +100,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btnAddCart" onclick="">Dodaj do koszyka <i class="fa-solid fa-cart-shopping"
+                            <button class="btnAddCart" onclick="">Dodaj do koszyka <i class="fa-solid fa-cart-shopping"></i></button>
                         </div>
+
                     @endif
                 @endforeach
             </div>
