@@ -50,7 +50,6 @@
                         <div id="{{ $article->id }}" data-article="{{ route('showArticle', $article->id) }}"
                              class="showArticle">
                             <input type="hidden" class="productId" value="{{ $article->id }}">
-
                             <div class="content">
                                 <div class="upper">
                                     <div class="nazwaTowaru">{{ $article->name }}</div>
@@ -60,7 +59,6 @@
                                     <div class="cena">Cena: {{ numberFormat($article->price) }} zł</div>
                                 </div>
                             </div>
-
                         </div>
                         <button class="btnAddCart" onclick="">Dodaj do koszyka <i class="fa-solid fa-cart-shopping"
                                                                                   style="color: #ffffff;"></i></button>
@@ -71,7 +69,6 @@
         @else
             <h3>Brak artykułów</h3>
         @endif
-
         <div class="wrapW">
             <div class="nazwaTowaru">Cukierki Krówka reklamowe</div>
             <div class="foto"><img src="img/cukierki_reklamowe.jpg" alt="Cukierki" class="responsive"></div>
@@ -93,7 +90,6 @@
                             <div id="{{ $article->id }}" data-article="{{ route('showArticle', $article->id) }}"
                                  class="showArticle">
                                 <input type="hidden" class="productId" value="{{ $article->id }}">
-
                                 <div class="content">
                                     <div class="upper">
                                         <div class="nazwaTowaru">{{ $article->name }}</div>
@@ -103,10 +99,8 @@
                                         <div class="cena">Cena: {{ numberFormat($article->price) }} zł</div>
                                     </div>
                                 </div>
-
                             </div>
                             <button class="btnAddCart" onclick="">Dodaj do koszyka <i class="fa-solid fa-cart-shopping"
-                                                                                      style="color: #ffffff;"></i></button>
                         </div>
                     @endif
                 @endforeach
