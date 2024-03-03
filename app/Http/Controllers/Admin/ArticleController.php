@@ -33,6 +33,7 @@ class ArticleController extends Controller
             'description' => 'required',
             'price' => ['required', new Price],
             'image' => 'nullable|image|max:1024',
+            'category' => 'required',
             'active' => 'boolean',
         ])->validate();
 

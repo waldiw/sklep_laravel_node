@@ -1,4 +1,5 @@
 php artisan make:migration create_article_table
+php artisan make:migration add_category_fields_to_articles_table
 
 php artisan migrate
 
@@ -9,3 +10,5 @@ php artisan migrate:rollback
  $table->integer('price');
 
  $table->text('description')->nullable()->default('tekst');
+
+ $table->string('slug')->after('title');

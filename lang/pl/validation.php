@@ -156,6 +156,7 @@ return [
         'available'                => 'dostępny',
         'birthday'                 => 'urodziny',
         'body'                     => 'treść',
+        'category'                 => 'kategoria',
         'city'                     => 'miasto',
         'content'                  => 'zawartość',
         'country'                  => 'kraj',

@@ -24,6 +24,7 @@ class Article extends Model
         'description',
         'price',
         'image',
+        'category',
         'active',
     ];
 

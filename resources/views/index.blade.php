@@ -42,10 +42,10 @@
         <br>Skład: cukier, syrop glukozowy, śmietanka 16%, mleko w proszku.
     </div>
     <div class="containerWrap">
-
         @if($articles->count() > 0)
             <div class="containerWrap">
                 @foreach($articles as $article)
+                    @if($article->category === \App\Enums\Category::CUKIERKI)
                     <div class="wrapW articleDetails">
                         <div id="{{ $article->id }}" data-article="{{ route('showArticle', $article->id) }}"
                              class="showArticle">
@@ -65,6 +65,7 @@
                         <button class="btnAddCart" onclick="">Dodaj do koszyka <i class="fa-solid fa-cart-shopping"
                                                                                   style="color: #ffffff;"></i></button>
                     </div>
+                    @endif
                 @endforeach
             </div>
         @else
@@ -79,7 +80,44 @@
             <button class="btnContact" onclick="location.href = '{{ route('showContact') }}'">Kntakt z nami</button>
         </div>
     </div>
+
+    <div class="opis">
+        <h1>Inne artykuły</h1>
+    </div>
+    <div class="containerWrap">
+        @if($articles->count() > 0)
+            <div class="containerWrap">
+                @foreach($articles as $article)
+                    @if($article->category === \App\Enums\Category::INNE)
+                        <div class="wrapW articleDetails">
+                            <div id="{{ $article->id }}" data-article="{{ route('showArticle', $article->id) }}"
+                                 class="showArticle">
+                                <input type="hidden" class="productId" value="{{ $article->id }}">
+
+                                <div class="content">
+                                    <div class="upper">
+                                        <div class="nazwaTowaru">{{ $article->name }}</div>
+                                        <div class="foto"><img src="{{ $article->photo }}" alt="Cukierki" class="responsive"></div>
+                                    </div>
+                                    <div class="bottom">
+                                        <div class="cena">Cena: {{ numberFormat($article->price) }} zł</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button class="btnAddCart" onclick="">Dodaj do koszyka <i class="fa-solid fa-cart-shopping"
+                                                                                      style="color: #ffffff;"></i></button>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+        @else
+            <h3>Brak artykułów</h3>
+        @endif
+    </div>
 </div>
+
+
 
 <footer>
     @include('Components.footer')

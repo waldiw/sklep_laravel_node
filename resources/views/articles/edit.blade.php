@@ -29,6 +29,15 @@
                        value="{{ number_format($article->price / 100, 2, ',', ' ') }}" type="text" name="price"
                        placeholder="00,00">
             </div>
+            <div class="{{ $errors->has('category') ? ' is-invalid' : '' }}">
+                <label for="category" class="articleFormLabel">Kategoria:</label>
+                <select id="category" name="category">
+                    <option value="" disabled>Wybierz kategorię</option>
+                    @foreach(\App\Enums\Category::CATEGORY as $category)
+                        <option value="{{ $category }}"{{ $article->category === $category ? ' selected' : '' }}>{{ $category }}</option>
+                    @endforeach
+                </select>
+             </div>
             <div class="checkActive">
                 <input type="checkbox" id="checkActive" name="active"
                        value="1" {{ $article->active === 1 ? 'checked' : '' }}/>

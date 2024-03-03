@@ -25,6 +25,15 @@
                 <input id="price" class="@error('price') is-invalid error @enderror" value="{{ old('price') }}"
                        type="text" name="price" placeholder="00,00">
             </div>
+            <div id="typeSelect" class="form-select{{ $errors->has('category') ? ' is-invalid' : '' }}">
+                <label for="category" class="articleFormLabel">Kategoria:</label>
+                <select id="category" name="category">
+                    <option value="" disabled selected>Wybierz kategorię</option>
+                    @foreach(\App\Enums\Category::CATEGORY as $category)
+                        <option value="{{ $category }}" @selected(old('category') == $category)>{{ $category }}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="checkActive">
                 <input type="checkbox" id="checkActive" name="active" value="1" {{ old('active') ? 'checked' : '' }}/>
                 <label for="checkActive"> Aktywny</label>
