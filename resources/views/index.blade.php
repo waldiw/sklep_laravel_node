@@ -65,17 +65,18 @@
                     </div>
                     @endif
                 @endforeach
+                <div class="wrapW">
+                    <div class="nazwaTowaru">Cukierki Krówka reklamowe</div>
+                    <div class="foto"><img src="img/cukierki_reklamowe.jpg" alt="Cukierki" class="responsive"></div>
+                    <div class="opisTowaru">Cukierki Krówka zawijane w papierki z logo zamawiającego.<br>Zachęcamy do kontaktu.
+                    </div>
+                    <button class="btnContact" onclick="location.href = '{{ route('showContact') }}'">Kntakt z nami</button>
+                </div>
             </div>
         @else
             <h3>Brak artykułów</h3>
         @endif
-        <div class="wrapW">
-            <div class="nazwaTowaru">Cukierki Krówka reklamowe</div>
-            <div class="foto"><img src="img/cukierki_reklamowe.jpg" alt="Cukierki" class="responsive"></div>
-            <div class="opisTowaru">Cukierki Krówka zawijane w papierki z logo zamawiającego.<br>Zachęcamy do kontaktu.
-            </div>
-            <button class="btnContact" onclick="location.href = '{{ route('showContact') }}'">Kntakt z nami</button>
-        </div>
+        
     </div>
 
     <div class="opis">
