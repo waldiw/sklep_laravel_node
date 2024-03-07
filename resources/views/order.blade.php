@@ -137,7 +137,7 @@
             </form>
             <div class="confirmReg">
                 <p><input type="checkbox" id="checkReg" name="checkReg"/>
-                    <label for="checkReg"> Zapoznałem/am z <a href="regulamin.html">Regulaminem</a> sklepu OSM Olecko</label>
+                    <label for="checkReg"> Zapoznałem/am z <a href="{{ route('showStatute') }}">Regulaminem</a> sklepu OSM Olecko</label>
                 </p>
             </div>
             <div id="order" class="order">
