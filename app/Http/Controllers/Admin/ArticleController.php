@@ -46,7 +46,7 @@ class ArticleController extends Controller
      */
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $articles = Article::all();
+        $articles = Article::orderBy('name')->get();
         // $articles = Article::orderBy('nazwa', 'desc')->get(); // pobieranie wszystkich artukułow posortowanyc wg nazwy , dokumentacja - Database: Query Builder
         return view('articles.articles', compact('articles'));
     }
