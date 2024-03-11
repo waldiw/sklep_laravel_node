@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.shop')
 
 @section('title', 'E-sklep Regulamin')
 
@@ -6,5 +6,10 @@
     <div id="showStatute">
         {!! $statute !!}
     </div>
+@endsection
+
+
+@section('script')
+    @include('scripts.cartSum')
 @endsection
 

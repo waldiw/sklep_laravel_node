@@ -16,7 +16,7 @@
             <a href="{{ route('contact') }}">Kontakt</a>
         </li>
         <li>
-            <a class="koszyk" href="#" onclick="document.getElementById('logout-form').submit();" >{{ __('Logout') }}</a>
+            <a href="#" onclick="document.getElementById('logout-form').submit();" >{{ __('Logout') }}</a>
         </li>
     </ul>
 </nav>

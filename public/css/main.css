@@ -215,6 +215,7 @@ footer > div > a:hover {
 
 .btnDelete:hover, .btnDeleteCart:hover {
     background: #fc0028;
+    cursor: pointer;
 }
 
 .articleContent {
@@ -379,7 +380,6 @@ input[type=file]:hover {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7d7e7d', endColorstr='#0e0e0e', GradientType=0); /* IE6-9 */
     border-radius: 0px;
     border: 0px;
-    /* margin-bottom: 0px; */
     height: 40px;
     display: flex;
     justify-content: flex-end;
@@ -387,7 +387,6 @@ input[type=file]:hover {
     margin-top: -4px;
     position: -webkit-sticky;
     position: sticky;
-
 }
 
 .main-menu {
@@ -412,9 +411,23 @@ input[type=file]:hover {
 }
 
 .main-menu > ul > li > a:hover {
-    /* color: silver !important; */
     background: #0056b3;
     height: 40px;
+}
+
+.navbarShop {
+    background: #00458e; /* Old browsers */
+    background: -moz-linear-gradient(top, #00458e 0%, #0056b3 8%, #00254d 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #00458e), color-stop(8%, #0056b3), color-stop(100%, #00254d)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #00458e 0%, #0056b3 8%, #00254d 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #00458e 0%, #0056b3 8%, #00254d 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #00458e 0%, #0056b3 8%, #00254d 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #00458e 0%, #0056b3 8%, #00254d 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7d7e7d', endColorstr='#0e0e0e', GradientType=0); /* IE6-9 */
+    border-radius: 0px;
+    border: 0px;
+    height: 30px;
+    margin-top: -4px;
 }
 
 div.sticky {
@@ -424,52 +437,41 @@ div.sticky {
     padding: 5px;
 }
 
-.nav-shop {
-    height: 40px;
-}
-
 .nav-shop > ul {
     list-style-type: none;
-    /*display: flex;*/
-    /*justify-content: start;*/
-    /*padding: 0px;*/
-    /*margin: 0px;*/
-    height: 40px !important;
-
+    height: 30px;
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    /*background-color: #333;*/
 }
 
 .nav-shop > ul > li {
-    float: left !important;
+    float: left;
     border-right:1px solid #bbb;
+    height: 30px;
 }
 
 .nav-shop > ul > li:last-child {
     border-right: none;
-}
+    float: right;
+    text-align: center;
+ }
 
 .nav-shop > ul > li > a {
     color: white !important;
     text-decoration: none !important;
     padding: 5px 15px;
     display: inline-block;
-    height: 30px;
 }
 
-.nav-shop > ul > li > a:hover {
-    /* color: silver !important; */
+.nav-shop > ul > li > a:hover, .koszyk1:hover {
     background: #0056b3;
-    height: 30px;
 }
 
 .koszyk {
-    /*color: white !important;*/
     padding-right: 5%;
-    /* margin: 3px; */
+    width: 160px;
 }
 
 .basketItemCount {
@@ -482,43 +484,14 @@ div.sticky {
     text-decoration: none !important;
 }
 
-.koszyk > a:hover, .dodaj > a:hover {
+.dodaj > a:hover {
     color: silver !important;
-
 }
 
 .opis {
     text-align: justify;
     padding: 20px 10% 10px 10%;
 }
-
-
-/* .navbar-default .navbar-nav > li > a {
-  color: white;
-}
-
-.navbar li a:hover {
-  color: black;
-}
-
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover {
-  color: #79c3ff;
-  background: transparent;
-}
-.affix {
-  top:0;
-  width: 100%;
-  z-index: 9999 !important;
-}
-
-.affix ~ .container-fluid {
-  position: relative;
-  top: 50px;
-} */
-/*
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-color: #FF0000;  /*kolor po najechaniu*/
-
 
 /* ----------- end nawigacja ------------------- */
 
@@ -549,9 +522,6 @@ input:focus, textarea:focus {
     border-color: red !important;
 }
 
-/*input::before {*/
-/*    background-color: yellow;*/
-/*}*/
 
 /*---------------------------------------*/
 
@@ -604,11 +574,9 @@ input:focus, textarea:focus {
 .modalPhoto {
     margin-top: -40px;
     margin-left: -40px;
-
 }
 
 .modalImg {
-    /* box-shadow: 0 -5px 3px -3px black, 0 5px 3px -3px black; */
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.8);
 }
 
@@ -726,6 +694,7 @@ input:focus, textarea:focus {
 
 .btnContinueShopping:hover {
     background: #0056b3;
+    cursor: pointer;
 }
 
 /*-----------------------------------*/

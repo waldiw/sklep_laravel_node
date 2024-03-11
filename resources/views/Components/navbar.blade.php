@@ -6,7 +6,7 @@
 {{--    </div>--}}
 {{--</div>--}}
 
-<div class="navbarW sticky">
+<div class="navbarShop sticky">
     <nav class="nav-shop">
         <ul>
             <li>
@@ -21,12 +21,14 @@
             <li>
                 <a href="{{ route('shop') }}">Sklep</a>
             </li>
-            <li style="float:right">
+            <li class="koszyk1">
+                <a href="{{ route('cart') }}">
                     <div class="koszyk">
-                        <a href="{{ route('cart') }}">Koszyk</a>&nbsp;
+                        Koszyk&nbsp;
                         <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
                         <span class="basketItemCount"></span>
                     </div>
+                </a>
             </li>
         </ul>
     </nav>
