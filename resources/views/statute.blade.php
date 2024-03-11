@@ -8,7 +8,6 @@
     </div>
 @endsection
 
-
 @section('script')
     @include('scripts.cartSum')
 @endsection

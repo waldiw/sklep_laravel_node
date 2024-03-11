@@ -1,27 +1,9 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-sklep Koszyk</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{--        <link rel="stylesheet" href="css\main.css">--}}
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('css/iao-alert.min.css') }}" rel="stylesheet" type="text/css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-    {{--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>  --}}
-    <script src="https://kit.fontawesome.com/9449ff78fb.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="{{ asset('js/iao-alert.jquery.min.js') }}"></script>
+@extends('layouts.shop')
 
-</head>
-<body>
-<div class="containerW shadow">
-    <img src="img/baner1.jpg" alt="Nature" class="responsive">
-    @include('Components.navbar')
+@section('title', 'E-sklep Koszyk')
+
+@section('content')
+
     <div class="containerWrap">
         <div class="shoppingCart">
             <div class="">
@@ -85,120 +67,13 @@
         </div><!-- /.shopping-cart -->
         <br>
     </div>
-</div>
 
-<footer>
-    @include('Components.footer')
-</footer>
+@endsection
 
-@include('Components.confirm')
+@section('modal')
+    @include('Components.confirm')
+@endsection
 
-<script>
-    $(document).ready(function () {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        cartload();
-
-        $('.articleQuantity').change(function (e) {
-            e.preventDefault();
-
-            var productId = $(this).closest('tr').find('.productId').val();
-            var quantity = $(this).closest('tr').find('.articleQuantity').val();
-
-            $.ajax({
-                url: '/update-cart',
-                method: "POST",
-                data: {
-                    'quantity': quantity,
-                    'product_id': productId,
-                },
-                success: function (response) {
-                    var value = jQuery.parseJSON(response); //Single Data Viewing
-                    $('#' + value['id']).html(numberFormat(value['subtotal']) + ' zł');
-                    cartload();
-                },
-            });
-        });
-
-        $(document).on('click', '.deleteCartData', function (e) {
-            e.preventDefault();
-
-            var productId = $(this).closest('tr').find('.productId').val();
-
-            $.ajax({
-                url: '/delete-cart',
-                method: "post",
-                data: {
-                    'product_id': productId,
-                },
-                success: function () {
-                    $('#tr' + productId).remove();
-                    cartload();
-                }
-            });
-
-        });
-
-        var modal = document.getElementById("confirmModal");
-        var span = document.getElementsByClassName("close")[0];
-        var btnNo = document.getElementsByClassName("btnNo")[0];
-
-        $(document).on('click', '.btnDeleteCart', function (e) {
-            e.preventDefault();
-
-            modal.style.display = "block";
-        });
-
-        $(document).on('click', '.btnYes', function (e) {
-            e.preventDefault();
-
-            $.ajax({
-                url: '/clear-cart',
-                method: "post",
-                data: {},
-                success: function () {
-                    $('#tableBody').remove();
-                    $('#order').remove();
-                    cartload();
-                    modal.style.display = "none";
-                }
-            });
-        });
-
-        // When the user clicks anywhere outside of the modal or span, close it
-        window.onclick = function (event) {
-            if (event.target === modal || event.target === span || event.target === btnNo) {
-                modal.style.display = "none";
-            }
-        }
-
-        function cartload() {
-            $.ajax({
-                url: '/load-cart-data',
-                method: "GET"
-            }).done(function (response) {
-                var value = jQuery.parseJSON(response); //Single Data Viewing
-                var tfoot = document.getElementsByTagName("tfoot");
-                $('.basketItemCount').html(numberFormat(value['totalCart']) + ' zł');
-                $('.basketTotal').html(numberFormat(value['totalCart']) + ' zł');
-                if (value['totalCart'] === 0) {
-                    $(tfoot).remove();
-                    $('#order').remove();
-                }
-            });
-        }
-
-        function numberFormat($number) {
-            return ($number / 100).toLocaleString('pl-PL', {minimumFractionDigits: 2})
-        }
-
-    });
-</script>
-
-</body>
-
-</html>
+@section('script')
+    @include('scripts.cartShow')
+@endsection
