@@ -1,37 +1,8 @@
-<!DOCTYPE html>
-<html lang="pl">
+@extends('layouts.shop')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-sklep Zamówienie</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-{{--        <link rel="stylesheet" href="css\main.css">--}}
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css" >
-    <link href="{{ asset('css/iao-alert.min.css') }}" rel="stylesheet" type="text/css" >
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-    {{--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>  --}}
+@section('title', 'E-sklep Zamówienie')
 
-    <script src="https://kit.fontawesome.com/9449ff78fb.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="{{ asset('js/iao-alert.jquery.min.js') }}"></script>
-    <script type="text/javascript">
-        var perfEntries = performance.getEntriesByType("navigation");
-        if (perfEntries[0].type === "back_forward") {
-            location.reload(true);
-        }
-    </script>
-
-</head>
-
-<body>
-@include('Components.message')
-<div class="containerW shadow">
-    <img src="img/baner1.jpg" alt="Nature" class="responsive">
-    @include('Components.navbar')
+@section('content')
 
     <div class="containerOrder">
         <h2>Zamówienie:</h2>
@@ -148,93 +119,8 @@
     </div><!-- /.oontainerOrder -->
 </div>
 
-<footer>
-    @include('Components.footer')
-</footer>
+@endsection
 
-<script>
-    $(document).ready(function () {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        if ($('#check').is(':checked'))
-        {
-            $('#displayVat').removeClass('displayVat');
-        }
-        else {
-            $('#displayVat').addClass('displayVat');
-        }
-
-        cartload();
-
-        $(document).on('click', '.checkVat' ,function(e) {
-            if ($('#check').is(':checked'))
-            {
-                $('#displayVat').removeClass('displayVat');
-            }
-            else{
-                $('#displayVat').addClass('displayVat');
-                $('#nip').val('');
-                $('#vatName').val('');
-                $('#vatStreet').val('');
-                $('#vatCity').val('');
-                $('#vatPost').val('');
-            }
-
-        });
-
-        function cartload() {
-            $.ajax({
-                url: '/load-cart-data',
-                method: "GET"
-            }).done(function (response) {
-                var value = jQuery.parseJSON(response); //Single Data Viewing
-                var tfoot = document.getElementsByTagName("tfoot");
-                 $('.basketItemCount').html((value['totalCart'] / 100).toLocaleString('pl-PL', {minimumFractionDigits: 2}) + ' zł');
-                if (value['totalCart'] === 0)
-                {
-                    $('#orderTable').remove();
-                    $('#containerForm').remove();
-                }
-            });
-        }
-
-        $("input[type='radio']").click(function(){
-            var totalCart = $('.totalCart').val();
-             var shippingCost = $(this).closest('tr').find('.ship').val();
-            var total = parseInt(totalCart) + parseInt(shippingCost);
-            $('#toPay').html((total / 100).toLocaleString('pl-PL', {minimumFractionDigits: 2}) + ' zł');
-            $('.kolor').removeClass('enabled');
-            $(':radio').each(function () {
-                if ($(this).is(':checked'))
-                {
-                     $(this).closest('tr').find('.kolor').addClass('enabled');
-                }
-            });
-        });
-
-        $("#btnSubmit").click(function(){
-            if ($('#checkReg').is(':checked'))
-            {
-                $("#orderForm").submit();
-            }
-            else
-            {
-                $.iaoAlert({
-                    msg: "Proszę potwierdzić postaniowienia regulaminu.",
-                    mode: "dark",
-                    type:"error",
-                    position: 'top-left'
-                })
-            }
-        });
-
-    });
-</script>
-
-</body>
-
-</html>
+@section('script')
+    @include('scripts.order')
+@endsection

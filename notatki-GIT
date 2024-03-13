@@ -23,3 +23,7 @@ git pull
 
 przed pobraniem wersji z gta bez łączenia
 git reset --hard
+
+git branch -M main
+
+git push -f origin master

@@ -402,6 +402,14 @@ input[type=file]:hover {
     height: 40px !important;
 }
 
+.main-menu > ul > li {
+    border-right:1px solid #bbb;
+}
+
+.main-menu > ul > li:last-child {
+    border-right: none;
+}
+
 .main-menu > ul > li > a {
     color: white !important;
     text-decoration: none !important;

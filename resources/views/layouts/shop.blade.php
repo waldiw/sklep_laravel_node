@@ -21,10 +21,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script src="{{ asset('js/iao-alert.jquery.min.js') }}"></script>
+    <script type="text/javascript">
+        var perfEntries = performance.getEntriesByType("navigation");
+        if (perfEntries[0].type === "back_forward") {
+            location.reload(true);
+        }
+    </script>
 
 </head>
 
 <body>
+    @include('Components.message')
 <div class="containerW shadow">
 
     <img src="img/baner1.jpg" alt="Nature" class="responsive">
@@ -34,8 +41,6 @@
     @yield('content')
 </div>
 
-  
-
 <footer>
     @include('Components.footer')
 </footer>
@@ -43,124 +48,7 @@
 
 @yield('modal')
 
-{{--  <!-- The Modal -->
-<div id="myModal" class="modal">
-
-    <!-- Modal content -->
-    <div class="modalContent articleDetails">
-        <div class="modalHeader">
-            <div id="modalPhoto" class="modalPhoto"></div>
-            <div id="articleName"></div>
-            <span class="close">&times;</span>
-        </div>
-        <div class="modalBody">
-            <input id="articleId" type="hidden" class="productId" value="5">
-            <p id="articleDescription"></p>
-            <div id="articlePrice" class="cena"></div>
-        </div>
-        <div class="modalFooter">
-            <button class="btnAddCart">Dodaj do koszyka <i class="fa-solid fa-cart-shopping"
-                                                           style="color: #ffffff;"></i></button>
-        </div>
-    </div>
-</div>  --}}
-
 @yield('script')
-
-{{--  <script src="{{ asset('js/cookies.js') }}"></script>
-
-<script>
-    $(document).ready(function () {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        // Get the modal
-        var modal = document.getElementById("myModal");
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("articleBtn");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal
-        var art = document.getElementById('articleDescription');
-        var photo = document.getElementById('modalPhoto');
-        var artN = document.getElementById('articleName');
-        var artP = document.getElementById('articlePrice');
-
-        cartload();
-
-        $('.showArticle').click(function (e) {
-            e.preventDefault();
-
-            userURL = this.getAttribute('data-article');
-            $.ajax({
-                url: userURL,
-                method: "GET"
-            }).done(function (response) {
-                artN.innerHTML = response.name;
-                art.innerHTML = response.description;
-                var price = (response.price / 100).toLocaleString('pl-PL', {minimumFractionDigits: 2});
-                artP.innerHTML = "Cena: " + price + " zł";
-                $("#articleId").val(response.id);
-                photo.innerHTML = "<img src=\"" + response.image + "\" class=\"modalImg\">";
-                modal.style.display = "block";
-            });
-        });
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
-
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-
-            }
-        }
-
-        // click button add to cart
-        $('.btnAddCart').click(function (e) {
-            e.preventDefault();
-
-            var productId = $(this).closest('.articleDetails').find('.productId').val();
-            var quantity = 1;
-            $.ajax({
-                url: "/add-to-cart",
-                method: "POST",
-                data: {
-                    'quantity': quantity,
-                    'product_id': productId,
-                }
-            }).done(function (response) {
-                cartload();
-                $.iaoAlert({
-                    msg: "Produkt został dodany do koszyka.",
-                    mode: "dark",
-                    position: 'top-left'
-                })
-            });
-        });
-
-        function cartload() {
-
-            $.ajax({
-                url: '/load-cart-data',
-                method: "GET"
-            }).done(function (response) {
-                var value = jQuery.parseJSON(response); //Single Data Viewing
-                $('.basketItemCount').html((value['totalCart'] / 100).toLocaleString('pl-PL', {minimumFractionDigits: 2}) + " zł");
-
-            });
-        }
-    });
-</script>  --}}
 
 </body>
 
