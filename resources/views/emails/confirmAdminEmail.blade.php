@@ -49,14 +49,9 @@
 
 <body>
 <div class="container">
-
     <div class="message">
-
         <p>{!! $body !!}</p>
-
-
     </div>
-
 </div>
 </body>
 

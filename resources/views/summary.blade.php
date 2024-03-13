@@ -11,6 +11,5 @@
             {!! $summary !!}
         @endif
     </div>
-</div>
 
 @endsection

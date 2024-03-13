@@ -9,7 +9,7 @@
 
         {{ method_field('PUT') }}
 
-        <label for="statute"></label>
+        <label for="contact"></label>
         <textarea class="form-control" id="contact" placeholder="kontakt" name="contact">{{ $contact }}</textarea>
         <div class="btnAddArticle">
             <button type="submit" class="btnDodaj">Zapisz dane kontaktowe <i class="fa-regular fa-square-plus"

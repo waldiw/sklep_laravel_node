@@ -22,7 +22,6 @@ $(document).on('click', '.checkVat' ,function(e) {
         $('#vatCity').val('');
         $('#vatPost').val('');
     }
-
 });
 
 $("input[type='radio']").click(function(){

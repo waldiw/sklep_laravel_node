@@ -42,7 +42,6 @@
         </div>
         </div>
 
-
     <h4>Metody płatności:</h4>
     <div class="containerWrap">
     @if($shippings->count() > 0)
@@ -83,7 +82,6 @@
 
     @endif
     </div>
-
 
     <h4>Zamówienia:</h4>
     <div class="containerWrap">

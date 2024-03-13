@@ -23,8 +23,6 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
-
-{{--    @vite(['resources/sass/app.scss', 'resources/js/app.js'])--}}
 </head>
 <body>
 @include('Components.message')
@@ -34,7 +32,6 @@
 
     <div class="navbarW sticky">
         @auth
-
             @include('includes.nav')
         @endauth
             @guest
@@ -48,7 +45,6 @@
     <div class="opis">
 
         @yield('content')
-
 
     </div>
 

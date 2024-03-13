@@ -18,7 +18,6 @@
             }).done(function (response) {
                 var value = jQuery.parseJSON(response); //Single Data Viewing
                 $('.basketItemCount').html((value['totalCart'] / 100).toLocaleString('pl-PL', {minimumFractionDigits: 2}) + " zł");
-
             });
         }
     });
