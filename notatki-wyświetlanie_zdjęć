@@ -33,4 +33,6 @@ w modelu Article dodajemy
 
 konfigurujemy na serweze katalog do przechowywania zdjęć
 
-php artisan storage:link
+php artisan storage:link - nie działa
+
+ln -s ../storage/app/public storage - w konsoli ssh działa 

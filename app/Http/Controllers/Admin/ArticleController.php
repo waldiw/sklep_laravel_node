@@ -69,9 +69,8 @@ class ArticleController extends Controller
         $data['price'] = $temp;
 
         if (isset($data['image'])) {
-            //$path = $request->file('image')->store('photos');
-            //$path = $request->file('image')->store('photos');
-            $path = Storage::disk('public_uploads')->put('', $request->file('image'));
+            $path = $request->file('image')->store('photos');
+            //$path = Storage::disk('public_uploads')->put('', $request->file('image'));
             $data['image'] = $path;
         }
         $article = Article::create($data);
