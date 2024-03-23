@@ -34,8 +34,8 @@ class ShopController extends Controller
         //     $path = $request->file('image')->store('photos');
         //     $article['image'] = $path;
         // }
-        //$path = '/storage/' . $article['image'];
-        $path = 'uploads/' . $article['image'];
+        $path = '/storage/' . $article['image'];
+        //$path = 'uploads/' . $article['image'];
         $article['image'] = $path;
 
         return response()->json($article);
