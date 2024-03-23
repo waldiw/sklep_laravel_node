@@ -53,8 +53,6 @@
     <div class="message">
         <p>{!! $body !!}</p>
 
-        <p>Wiadomość wygenerowana automatycznie.</p>
-        <p>W razie pytań prosimy o kontakt e-mail: handel@osmolecko.pl.</p>
     </div>
 
 </div>

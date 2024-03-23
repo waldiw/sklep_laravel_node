@@ -132,7 +132,9 @@ function summaryAccount($uuid): string
     $summary = '<br><p>Należność za zamówienie prosimy przelać na konto Okręgowej Spóldzielni Mleczarskiej w Olecku:</p>
             <p>' . $account . '</p>
             <p>W tytule przelewu proszę wpisać: <b>Należność za zamówienie numer ' . $orderId . ' </b></p>
-            <p>Zamówienie zostanie zrealizowane po zaksięgowaniu należności na naszym koncie.</p>';
+            <p>Zamówienie zostanie zrealizowane po zaksięgowaniu należności na naszym koncie.</p>
+            <p>Wiadmość wygenerowana automatycznie.</p>
+            <p>W razie pytań prosimy o kontakt e-mail: ' . email() . '</p>';
 
     return $summary;
 }
@@ -141,7 +143,9 @@ function summaryCash($uuid): string
 {
     $order = Orders::where('uuid', $uuid)->first();
     $orderId = $order->id;
-    $summary = '<br><p>Zamówienie numer <b>' . $orderId . '</b> zostało przyjęte w e-sklepie OSM Olecko.</p>';
+    $summary = '<br><p>Zamówienie numer <b>' . $orderId . '</b> zostało przyjęte w e-sklepie OSM Olecko.</p>
+            <p>Wiadmość wygenerowana automatycznie.</p>
+            <p>W razie pytań prosimy o kontakt e-mail: ' . email() . '</p>';
 
     return $summary;
 }
